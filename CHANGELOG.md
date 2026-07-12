@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 - `pmatrix` now renders with parentheses `( )` instead of square brackets `[ ]`, matching LaTeX (the square-bracket variant is `bmatrix`).
+- Matrix cells of differing heights within a row now share a common baseline instead of each being vertically centred, so short glyphs (e.g. `a`) no longer float above taller ones (e.g. `b`). Affects `\matrix`/`\pmatrix`/`\cases`/`align` and the matrix-based commands.
 
 ## [2.1.0] - 2023-07-15
 ### Changed
