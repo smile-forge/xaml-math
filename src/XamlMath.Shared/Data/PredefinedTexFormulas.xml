@@ -124,6 +124,28 @@
     <Return name="f" />
   </Formula>
 
+  <Formula name="quad" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="18" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="qquad" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="36" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
   <!-- Composed TeX symbols -->
 
   <Formula name="ne" enabled="true">
@@ -477,6 +499,285 @@
   <Formula name="iff" enabled="true">
     <CreateFormula name="f">
       <Argument type="string" value="\thickspace\Longleftrightarrow\thickspace" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <!-- amssymb negated relations. The dedicated AMS glyphs live in the msbm font, which is not
+       bundled, so these overlay the base relation with the zero-width 
+ot slash. -->
+
+  <Formula name="nless" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not&lt;" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ngtr" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not&gt;" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nleq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\leq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ngeq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\geq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nleqslant" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\leqslant" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ngeqslant" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\geqslant" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nleqq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\leqq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ngeqq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\geqq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nprec" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\prec" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nsucc" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\succ" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="npreceq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\preceq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nsucceq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\succeq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nsim" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\sim" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ncong" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\cong" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nvdash" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\vdash" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nvDash" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\vDash" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nVdash" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\Vdash" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nmid" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\mid" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nparallel" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\parallel" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nsubseteq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\subseteq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nsupseteq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\supseteq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nsubseteqq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\subseteqq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nsupseteqq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\supseteqq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ntriangleleft" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\vartriangleleft" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ntriangleright" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\vartriangleright" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ntrianglelefteq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\trianglelefteq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="ntrianglerighteq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\trianglerighteq" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nleftarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\leftarrow" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\rightarrow" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nLeftarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\Leftarrow" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nRightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\Rightarrow" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nleftrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\leftrightarrow" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nLeftrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\Leftrightarrow" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <!-- amssymb synonyms for symbols that already have a glyph. -->
+
+  <Formula name="doublecup" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\Cup" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="doublecap" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\Cap" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="restriction" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\upharpoonright" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="Doteq" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\doteqdot" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="llless" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\lll" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="gggtr" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\ggg" />
     </CreateFormula>
     <Return name="f" />
   </Formula>

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO.Pipes;
 using XamlMath.Atoms;
 using XamlMath.Boxes;
+using XamlMath.Exceptions;
 using XamlMath.Parsers.Matrices;
 
 namespace XamlMath.Parsers;
@@ -76,6 +78,64 @@ internal static class StandardCommands
             var atomSource = context.CommandSource.Segment(start, position - start);
             var atom = new DotsAtom(atomSource, _shape);
             return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \hspace{<length>} inserts horizontal space of an explicit length, e.g. \hspace{2em} or \hspace{-3pt}.
+    private sealed class HspaceCommand : ICommandParser
+    {
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+
+            // \hspace* behaves identically here (there is no line breaking to make the space removable).
+            if (position < source.Length && source[position] == '*')
+                position++;
+
+            var afterArg = TexFormulaParser.ReadElement(source, position);
+            position = afterArg.position;
+            var (unit, value) = ParseLength(afterArg.source.ToString());
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+            var atom = new SpaceAtom(atomSource, unit, value, 0, 0);
+            return new CommandProcessingResult(atom, position);
+        }
+
+        private static (TexUnit unit, double value) ParseLength(string text)
+        {
+            text = text.Trim();
+            var splitIndex = text.Length;
+            for (var i = 0; i < text.Length; i++)
+            {
+                if (char.IsLetter(text[i]))
+                {
+                    splitIndex = i;
+                    break;
+                }
+            }
+
+            var numberPart = text.Substring(0, splitIndex).Trim();
+            var unitPart = text.Substring(splitIndex).Trim().ToLowerInvariant();
+            if (!double.TryParse(numberPart, NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
+                throw new TexParseException($"Invalid \\hspace length: \"{text}\".");
+
+            // The engine natively supports em/ex/mu/pt/pc/px; absolute units are converted to points.
+            return unitPart switch
+            {
+                "em" => (TexUnit.Em, value),
+                "ex" => (TexUnit.Ex, value),
+                "mu" => (TexUnit.Mu, value),
+                "pt" => (TexUnit.Point, value),
+                "pc" => (TexUnit.Pica, value),
+                "px" => (TexUnit.Pixel, value),
+                "bp" => (TexUnit.Point, value * 72.27 / 72.0),
+                "in" => (TexUnit.Point, value * 72.27),
+                "cm" => (TexUnit.Point, value * 72.27 / 2.54),
+                "mm" => (TexUnit.Point, value * 72.27 / 25.4),
+                _ => throw new TexParseException($"Unsupported \\hspace unit: \"{unitPart}\".")
+            };
         }
     }
 
@@ -206,6 +266,7 @@ internal static class StandardCommands
             ["overleftarrow"] = OverArrowCommand.Left,
             ["vdots"] = DotsCommand.Vertical,
             ["ddots"] = DotsCommand.Diagonal,
+            ["hspace"] = new HspaceCommand(),
             ["begin"] = new ProcessEnvironmentCommand()
         };
 
