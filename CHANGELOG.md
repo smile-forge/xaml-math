@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased] (3.0.0)
 ### Added
 - New matrix delimiter environments `bmatrix` (`[ ]`), `Bmatrix` (`{ }`), `vmatrix` (`| |`), and `Vmatrix` (`‖ ‖`), each usable both as a command (e.g. `\bmatrix{…}`) and as an environment (e.g. `\begin{bmatrix}…\end{bmatrix}`).
+- A batch of common LaTeX symbols and commands, all backed by the already-bundled fonts (no new font files):
+  - accent `\mathring`;
+  - stretchy over-arrow accents `\overrightarrow` and `\overleftarrow` (drawn to the width of their argument);
+  - arrows `\mapsto`, `\longrightarrow`, `\longleftarrow`, `\hookrightarrow`, `\Longrightarrow`, `\Longleftrightarrow`, and the building blocks `\lhook`/`\rhook`;
+  - dots `\vdots`, `\ddots`, and `\dots` (an alias of `\ldots`);
+  - symbols `\S`, `\P`, `\notin`, `\nexists`, `\implies`, and `\iff`.
+  - `\varnothing` is provided as an alias of the `\emptyset` glyph, since the AMS `msbm` font (which carries a distinct glyph) is not bundled.
 
 ### Removed
 - **(Breaking change!)** Support for .NET 6 and 7. The new list of supported frameworks:

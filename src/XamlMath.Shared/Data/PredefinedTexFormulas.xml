@@ -274,6 +274,213 @@
     <Return name="f" />
   </Formula>
 
+  <!-- Additional LaTeX symbols composed from existing glyphs -->
+
+  <Formula name="dots" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\ldots" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="notin" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\in" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="nexists" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\not\exists" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="mapsto" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\vert" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\rightarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-5" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="longrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\minus" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\rightarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="longleftarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\leftarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\minus" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="hookrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\lhook" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\rightarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="Longrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\equals" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\Rightarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="Longleftrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\Leftarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\Rightarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="implies" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\thickspace\Longrightarrow\thickspace" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="iff" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\thickspace\Longleftrightarrow\thickspace" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
   <!-- Trigonometric Functions -->
 
   <Formula name="cos" enabled="true">
