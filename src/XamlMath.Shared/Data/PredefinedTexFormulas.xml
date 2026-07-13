@@ -782,6 +782,86 @@ ot slash. -->
     <Return name="f" />
   </Formula>
 
+  <!-- Multiple integrals, composed from \int / \oint tightened with negative thin spaces. -->
+
+  <Formula name="iint" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\int\!\!\!\int" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="BigOperator" />
+      <Argument type="AtomType" value="BigOperator" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="iiint" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\int\!\!\!\int\!\!\!\int" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="BigOperator" />
+      <Argument type="AtomType" value="BigOperator" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="iiiint" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\int\!\!\!\int\!\!\!\int\!\!\!\int" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="BigOperator" />
+      <Argument type="AtomType" value="BigOperator" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="idotsint" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\int\!\cdots\!\int" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="BigOperator" />
+      <Argument type="AtomType" value="BigOperator" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="oiint" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\oint\!\!\!\oint" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="BigOperator" />
+      <Argument type="AtomType" value="BigOperator" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="oiiint" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\oint\!\!\!\oint\!\!\!\oint" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="BigOperator" />
+      <Argument type="AtomType" value="BigOperator" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <!-- \bmod: "mod" as a binary operator (a \bmod b). -->
+  <Formula name="bmod" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\mathrm{mod}" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="BinaryOperator" />
+      <Argument type="AtomType" value="BinaryOperator" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
   <!-- Trigonometric Functions -->
 
   <Formula name="cos" enabled="true">

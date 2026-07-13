@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
   Not added, because they require the AMS `msbm` font (not bundled): blackboard-bold `\mathbb`/`\Bbbk`, the Hebrew letters `\beth`/`\gimel`/`\daleth`, `\digamma`/`\varkappa`, `\mho`, `\hslash`, `\eth`, `\backepsilon`, `\smallsetminus`, `\diagup`/`\diagdown`, and the negations/inequalities that have their own combined glyph rather than a `\not` overlay (`\subsetneq`, `\supsetneq`, `\lneqq`, `\gneqq`, `\lvertneqq`, `\gvertneqq`, `\precnsim`, `\lnsim`, `\varsubsetneq`, …).
 - Fraction commands: `\dfrac` and `\tfrac` (force display / text style), `\cfrac[l|c|r]{…}{…}` (continued fractions — nested levels stay full size), and the inline slash fractions `\nicefrac{…}{…}` and `\sfrac{…}{…}`.
+- Multiple integrals `\iint`, `\iiint`, `\iiiint`, `\idotsint`, `\oiint`, and `\oiiint` (composed from `\int`/`\oint` tightened with negative spacing), and the modulo operators `\bmod`, `\pmod{…}`, and `\pod{…}`.
 
 ### Removed
 - **(Breaking change!)** Support for .NET 6 and 7. The new list of supported frameworks:

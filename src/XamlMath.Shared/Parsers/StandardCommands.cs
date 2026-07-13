@@ -218,6 +218,37 @@ internal static class StandardCommands
         }
     }
 
+    // \pmod{n} -> "(mod n)" after a wide space; \pod{n} -> "(n)". Used as e.g. a \equiv b \pmod{n}.
+    private sealed class ParenModCommand : ICommandParser
+    {
+        public static ParenModCommand Pmod { get; } = new(withMod: true);
+        public static ParenModCommand Pod { get; } = new(withMod: false);
+
+        private readonly bool _withMod;
+
+        private ParenModCommand(bool withMod)
+        {
+            _withMod = withMod;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+            var afterArg = TexFormulaParser.ReadElement(source, position);
+            position = afterArg.position;
+            var argument = afterArg.source.ToString();
+
+            var body = _withMod
+                ? $@"\quad(\mathrm{{mod}}\;{{{argument}}})"
+                : $@"\quad({{{argument}}})";
+            var bodySpan = new SourceSpan("pmod", body, 0, body.Length);
+            var formula = context.Parser.Parse(
+                bodySpan, context.Formula.TextStyle, context.Environment.CreateChildEnvironment());
+            return new CommandProcessingResult(formula.RootAtom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -347,6 +378,8 @@ internal static class StandardCommands
             ["cfrac"] = new CfracCommand(),
             ["nicefrac"] = new SlashFractionCommand(),
             ["sfrac"] = new SlashFractionCommand(),
+            ["pmod"] = ParenModCommand.Pmod,
+            ["pod"] = ParenModCommand.Pod,
             ["begin"] = new ProcessEnvironmentCommand()
         };
 
