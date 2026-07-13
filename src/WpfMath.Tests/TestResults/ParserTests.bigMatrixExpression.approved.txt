@@ -486,6 +486,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "KeepContentStyle": false,
                         "Numerator": {
                           "[AtomType]": "CharAtom",
                           "Character": "1",
@@ -500,6 +501,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "OverrideStyle": null,
                         "Source": {
                           "End": 127,
                           "Length": 10,
@@ -541,6 +543,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "KeepContentStyle": false,
                         "Numerator": {
                           "[AtomType]": "CharAtom",
                           "Character": "1",
@@ -555,6 +558,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "OverrideStyle": null,
                         "Source": {
                           "End": 146,
                           "Length": 10,
@@ -965,6 +969,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "KeepContentStyle": false,
                         "Numerator": {
                           "[AtomType]": "CharAtom",
                           "Character": "1",
@@ -979,6 +984,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "OverrideStyle": null,
                         "Source": {
                           "End": 225,
                           "Length": 10,
@@ -1146,6 +1152,7 @@
                           },
                           "Type": "Ordinary"
                         },
+                        "KeepContentStyle": false,
                         "Numerator": {
                           "[AtomType]": "CharAtom",
                           "Character": "1",
@@ -1160,6 +1167,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "OverrideStyle": null,
                         "Source": {
                           "End": 259,
                           "Length": 21,
@@ -1187,6 +1195,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "KeepContentStyle": false,
                         "Numerator": {
                           "[AtomType]": "CharAtom",
                           "Character": "1",
@@ -1201,6 +1210,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "OverrideStyle": null,
                         "Source": {
                           "End": 274,
                           "Length": 10,
@@ -1338,6 +1348,7 @@
                           },
                           "Type": "Ordinary"
                         },
+                        "KeepContentStyle": false,
                         "Numerator": {
                           "[AtomType]": "CharAtom",
                           "Character": "1",
@@ -1352,6 +1363,7 @@
                           "TextStyle": null,
                           "Type": "Ordinary"
                         },
+                        "OverrideStyle": null,
                         "Source": {
                           "End": 299,
                           "Length": 21,

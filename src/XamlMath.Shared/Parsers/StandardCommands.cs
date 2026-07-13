@@ -95,7 +95,7 @@ internal static class StandardCommands
 
             var afterArg = TexFormulaParser.ReadElement(source, position);
             position = afterArg.position;
-            var (unit, value) = ParseLength(afterArg.source.ToString());
+            ParseLength(afterArg.source.ToString(), out var unit, out var value);
 
             var start = context.CommandNameStartPosition;
             var atomSource = source.Segment(start, position - start);
@@ -103,7 +103,7 @@ internal static class StandardCommands
             return new CommandProcessingResult(atom, position);
         }
 
-        private static (TexUnit unit, double value) ParseLength(string text)
+        private static void ParseLength(string text, out TexUnit unit, out double value)
         {
             text = text.Trim();
             var splitIndex = text.Length;
@@ -118,24 +118,103 @@ internal static class StandardCommands
 
             var numberPart = text.Substring(0, splitIndex).Trim();
             var unitPart = text.Substring(splitIndex).Trim().ToLowerInvariant();
-            if (!double.TryParse(numberPart, NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(numberPart, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
                 throw new TexParseException($"Invalid \\hspace length: \"{text}\".");
 
             // The engine natively supports em/ex/mu/pt/pc/px; absolute units are converted to points.
-            return unitPart switch
+            switch (unitPart)
             {
-                "em" => (TexUnit.Em, value),
-                "ex" => (TexUnit.Ex, value),
-                "mu" => (TexUnit.Mu, value),
-                "pt" => (TexUnit.Point, value),
-                "pc" => (TexUnit.Pica, value),
-                "px" => (TexUnit.Pixel, value),
-                "bp" => (TexUnit.Point, value * 72.27 / 72.0),
-                "in" => (TexUnit.Point, value * 72.27),
-                "cm" => (TexUnit.Point, value * 72.27 / 2.54),
-                "mm" => (TexUnit.Point, value * 72.27 / 25.4),
-                _ => throw new TexParseException($"Unsupported \\hspace unit: \"{unitPart}\".")
+                case "em": unit = TexUnit.Em; break;
+                case "ex": unit = TexUnit.Ex; break;
+                case "mu": unit = TexUnit.Mu; break;
+                case "pt": unit = TexUnit.Point; break;
+                case "pc": unit = TexUnit.Pica; break;
+                case "px": unit = TexUnit.Pixel; break;
+                case "bp": unit = TexUnit.Point; value *= 72.27 / 72.0; break;
+                case "in": unit = TexUnit.Point; value *= 72.27; break;
+                case "cm": unit = TexUnit.Point; value *= 72.27 / 2.54; break;
+                case "mm": unit = TexUnit.Point; value *= 72.27 / 25.4; break;
+                default: throw new TexParseException($"Unsupported \\hspace unit: \"{unitPart}\".");
+            }
+        }
+    }
+
+    /// <summary>Reads one <c>{…}</c> (or single-token) argument as a formula and advances <paramref name="position"/>.</summary>
+    private static TexFormula ReadArgument(CommandContext context, ref int position)
+    {
+        var after = TexFormulaParser.ReadElement(context.CommandSource, position);
+        position = after.position;
+        return context.Parser.Parse(after.source, context.Formula.TextStyle, context.Environment.CreateChildEnvironment());
+    }
+
+    // \dfrac and \tfrac: \frac forced into display or text style respectively.
+    private sealed class FracStyleCommand : ICommandParser
+    {
+        public static FracStyleCommand Dfrac { get; } = new(TexStyle.Display);
+        public static FracStyleCommand Tfrac { get; } = new(TexStyle.Text);
+
+        private readonly TexStyle _style;
+
+        private FracStyleCommand(TexStyle style)
+        {
+            _style = style;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var numerator = ReadArgument(context, ref position);
+            var denominator = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new FractionAtom(atomSource, numerator.RootAtom, denominator.RootAtom, true)
+            {
+                OverrideStyle = _style
             };
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \cfrac[l|c|r]{a}{b}: a continued-fraction fraction — display style throughout (nested \cfrac stays
+    // full size) with an optional numerator alignment.
+    private sealed class CfracCommand : ICommandParser
+    {
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+
+            var numeratorAlignment = TexAlignment.Center;
+            var optional = TexFormulaParser.ReadElementGroupOptional(source, ref position, '[', ']')?.ToString().Trim();
+            if (optional == "l") numeratorAlignment = TexAlignment.Left;
+            else if (optional == "r") numeratorAlignment = TexAlignment.Right;
+
+            var numerator = ReadArgument(context, ref position);
+            var denominator = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+            var atom = new FractionAtom(
+                atomSource, numerator.RootAtom, denominator.RootAtom, true, numeratorAlignment, TexAlignment.Center)
+            {
+                OverrideStyle = TexStyle.Display,
+                KeepContentStyle = true
+            };
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \nicefrac{a}{b} and \sfrac{a}{b}: an inline "slash" fraction (raised numerator / lowered denominator).
+    private sealed class SlashFractionCommand : ICommandParser
+    {
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var numerator = ReadArgument(context, ref position);
+            var denominator = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new SlashFractionAtom(atomSource, numerator.RootAtom, denominator.RootAtom);
+            return new CommandProcessingResult(atom, position);
         }
     }
 
@@ -267,6 +346,11 @@ internal static class StandardCommands
             ["vdots"] = DotsCommand.Vertical,
             ["ddots"] = DotsCommand.Diagonal,
             ["hspace"] = new HspaceCommand(),
+            ["dfrac"] = FracStyleCommand.Dfrac,
+            ["tfrac"] = FracStyleCommand.Tfrac,
+            ["cfrac"] = new CfracCommand(),
+            ["nicefrac"] = new SlashFractionCommand(),
+            ["sfrac"] = new SlashFractionCommand(),
             ["begin"] = new ProcessEnvironmentCommand()
         };
 

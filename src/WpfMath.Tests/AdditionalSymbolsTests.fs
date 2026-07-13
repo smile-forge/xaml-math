@@ -138,3 +138,21 @@ type AdditionalSymbolsTests() =
     [<InlineData(@"\gggtr")>]
     member _.``amssymb symbols parse to a non-null root atom``(markup: string) =
         Assert.NotNull(parseRoot markup)
+
+    // Fraction commands.
+    [<Theory>]
+    [<InlineData(@"\dfrac{a}{b}")>]
+    [<InlineData(@"\tfrac{a}{b}")>]
+    [<InlineData(@"\cfrac{a}{b}")>]
+    [<InlineData(@"\cfrac[l]{a}{b}")>]
+    [<InlineData(@"\cfrac[r]{a}{b}")>]
+    [<InlineData(@"\cfrac{1}{2+\cfrac{1}{3}}")>]
+    member _.``dfrac tfrac cfrac are parsed as a FractionAtom``(markup: string) =
+        Assert.IsType<FractionAtom>(parseRoot markup) |> ignore
+
+    [<Theory>]
+    [<InlineData(@"\nicefrac{a}{b}")>]
+    [<InlineData(@"\sfrac{a}{b}")>]
+    [<InlineData(@"\nicefrac{1}{2}")>]
+    member _.``nicefrac and sfrac are parsed as a SlashFractionAtom``(markup: string) =
+        Assert.IsType<SlashFractionAtom>(parseRoot markup) |> ignore
