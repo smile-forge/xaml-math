@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] (3.0.0)
+### Added
+- A batch of common LaTeX symbols and commands, all backed by the already-bundled fonts (no new font files):
+  - accent `\mathring`;
+  - stretchy over-arrow accents `\overrightarrow` and `\overleftarrow` (drawn to the width of their argument);
+  - arrows `\mapsto`, `\longrightarrow`, `\longleftarrow`, `\hookrightarrow`, `\Longrightarrow`, `\Longleftrightarrow`, and the building blocks `\lhook`/`\rhook`;
+  - dots `\vdots`, `\ddots`, and `\dots` (an alias of `\ldots`);
+  - symbols `\S`, `\P`, `\notin`, `\nexists`, `\implies`, and `\iff`.
+  - `\varnothing` is provided as an alias of the `\emptyset` glyph, since the AMS `msbm` font (which carries a distinct glyph) is not bundled.
+
 ### Removed
 - **(Breaking change!)** Support for .NET 6 and 7. The new list of supported frameworks:
   - for **WPF-Math**: **.NET Framework 4.6.2** or later, **.NET 8** or later;

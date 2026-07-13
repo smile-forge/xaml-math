@@ -109,6 +109,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
     <SymbolMapping name="dot" ch="95" fontId="1"/>
     <SymbolMapping name="widehat" ch="98" fontId="2"/>
     <SymbolMapping name="widetilde" ch="101" fontId="2"/>
+    <SymbolMapping name="mathring" ch="186" fontId="1"/>
 
     <!-- delimiters that can change size -->
     <SymbolMapping name="{" ch="102" fontId="3"/>
@@ -198,6 +199,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
     <SymbolMapping name="infty" ch="49" fontId="3"/>
     <SymbolMapping name="prime" ch="48" fontId="3"/>
     <SymbolMapping name="emptyset" ch="59" fontId="3"/>
+    <SymbolMapping name="varnothing" ch="59" fontId="3"/>
     <SymbolMapping name="nabla" ch="114" fontId="3"/>
     <SymbolMapping name="surdsign" ch="112" fontId="3"/>
     <SymbolMapping name="top" ch="62" fontId="3"/>
@@ -218,6 +220,8 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
     <SymbolMapping name="spadesuit" ch="127" fontId="3"/>
     <SymbolMapping name="lacc" ch="102" fontId="3"/>
     <SymbolMapping name="racc" ch="103" fontId="3"/>
+    <SymbolMapping name="S" ch="120" fontId="3"/>
+    <SymbolMapping name="P" ch="123" fontId="3"/>
 
     <!-- "large" operators -->
 
@@ -336,6 +340,8 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
     <SymbolMapping name="leftharpoondown" ch="41" fontId="0"/>
     <SymbolMapping name="rightharpoonup" ch="42" fontId="0"/>
     <SymbolMapping name="rightharpoondown" ch="43" fontId="0"/>
+    <SymbolMapping name="lhook" ch="44" fontId="0"/>
+    <SymbolMapping name="rhook" ch="45" fontId="0"/>
 
     <!-- jlm_msam1 -->
 

@@ -1,0 +1,71 @@
+namespace WpfMath.Tests
+
+open Xunit
+
+open WpfMath.Parsers
+open WpfMath.Tests.Utils
+open XamlMath.Atoms
+
+// Tests for the LaTeX symbols/commands added on top of the JMathTeX symbol set:
+//   accents   : \mathring
+//   over-arrows: \overrightarrow, \overleftarrow
+//   arrows     : \mapsto, \longrightarrow, \longleftarrow, \hookrightarrow, \Longrightarrow, \Longleftrightarrow
+//   dots       : \vdots, \ddots, \dots
+//   symbols    : \S, \P, \notin, \varnothing, \nexists, \implies, \iff, \lhook, \rhook
+type AdditionalSymbolsTests() =
+    static do initializeFontResourceLoading()
+
+    static let parseRoot (markup: string) =
+        WpfTeXFormulaParser.Instance.Parse(markup).RootAtom
+
+    [<Theory>]
+    [<InlineData(@"\mathring{a}")>]
+    [<InlineData(@"\overrightarrow{AB}")>]
+    [<InlineData(@"\overleftarrow{AB}")>]
+    [<InlineData(@"\mapsto")>]
+    [<InlineData(@"a \mapsto b")>]
+    [<InlineData(@"\longrightarrow")>]
+    [<InlineData(@"\longleftarrow")>]
+    [<InlineData(@"\hookrightarrow")>]
+    [<InlineData(@"\Longrightarrow")>]
+    [<InlineData(@"\Longleftrightarrow")>]
+    [<InlineData(@"\vdots")>]
+    [<InlineData(@"\ddots")>]
+    [<InlineData(@"\dots")>]
+    [<InlineData(@"\S")>]
+    [<InlineData(@"\P")>]
+    [<InlineData(@"\notin")>]
+    [<InlineData(@"\varnothing")>]
+    [<InlineData(@"\nexists")>]
+    [<InlineData(@"\implies")>]
+    [<InlineData(@"\iff")>]
+    [<InlineData(@"\lhook")>]
+    [<InlineData(@"\rhook")>]
+    [<InlineData(@"\begin{pmatrix}a & \cdots & b \\ \vdots & \ddots & \vdots \\ c & \cdots & d\end{pmatrix}")>]
+    member _.``Command parses to a non-null root atom``(markup: string) =
+        Assert.NotNull(parseRoot markup)
+
+    [<Fact>]
+    member _.``mathring is parsed as an accent``() =
+        Assert.IsType<AccentedAtom>(parseRoot @"\mathring{a}") |> ignore
+
+    [<Theory>]
+    [<InlineData(@"\overrightarrow{AB}")>]
+    [<InlineData(@"\overleftarrow{AB}")>]
+    member _.``over-arrows are parsed as an OverArrowAtom``(markup: string) =
+        Assert.IsType<OverArrowAtom>(parseRoot markup) |> ignore
+
+    [<Theory>]
+    [<InlineData(@"\vdots")>]
+    [<InlineData(@"\ddots")>]
+    member _.``vertical and diagonal dots are parsed as a DotsAtom``(markup: string) =
+        Assert.IsType<DotsAtom>(parseRoot markup) |> ignore
+
+    [<Theory>]
+    [<InlineData(@"\S")>]
+    [<InlineData(@"\P")>]
+    [<InlineData(@"\varnothing")>]
+    [<InlineData(@"\lhook")>]
+    [<InlineData(@"\rhook")>]
+    member _.``glyph-backed symbols are parsed as a SymbolAtom``(markup: string) =
+        Assert.IsType<SymbolAtom>(parseRoot markup) |> ignore

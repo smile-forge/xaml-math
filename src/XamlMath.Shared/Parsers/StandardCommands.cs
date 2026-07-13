@@ -27,6 +27,58 @@ internal static class StandardCommands
         }
     }
 
+    private sealed class OverArrowCommand : ICommandParser
+    {
+        public static OverArrowCommand Right { get; } = new(pointsRight: true);
+        public static OverArrowCommand Left { get; } = new(pointsRight: false);
+
+        private readonly bool _pointsRight;
+
+        private OverArrowCommand(bool pointsRight)
+        {
+            _pointsRight = pointsRight;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+            var afterFormula = TexFormulaParser.ReadElement(source, position);
+            position = afterFormula.position;
+            var baseFormula = context.Parser.Parse(
+                afterFormula.source,
+                context.Formula.TextStyle,
+                context.Environment.CreateChildEnvironment());
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+            var atom = new OverArrowAtom(atomSource, baseFormula.RootAtom, _pointsRight);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \vdots and \ddots take no argument; they just emit a fixed run of dots.
+    private sealed class DotsCommand : ICommandParser
+    {
+        public static DotsCommand Vertical { get; } = new(DotsAtom.DotsShape.Vertical);
+        public static DotsCommand Diagonal { get; } = new(DotsAtom.DotsShape.Diagonal);
+
+        private readonly DotsAtom.DotsShape _shape;
+
+        private DotsCommand(DotsAtom.DotsShape shape)
+        {
+            _shape = shape;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var start = context.CommandNameStartPosition;
+            var position = context.ArgumentsStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new DotsAtom(atomSource, _shape);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -146,6 +198,10 @@ internal static class StandardCommands
             ["matrix"] = MatrixCommandParser.Matrix,
             ["pmatrix"] = MatrixCommandParser.PMatrix,
             ["underline"] = new UnderlineCommand(),
+            ["overrightarrow"] = OverArrowCommand.Right,
+            ["overleftarrow"] = OverArrowCommand.Left,
+            ["vdots"] = DotsCommand.Vertical,
+            ["ddots"] = DotsCommand.Diagonal,
             ["begin"] = new ProcessEnvironmentCommand()
         };
 

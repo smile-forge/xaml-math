@@ -61,6 +61,7 @@
   <Symbol name="dot" type="acc"/>
   <Symbol name="widehat" type="acc"/>
   <Symbol name="widetilde" type="acc"/>
+  <Symbol name="mathring" type="acc"/>
 
   <!-- delimiters that can change size -->
 
@@ -148,6 +149,7 @@
   <Symbol name="infty" type="ord"/>
   <Symbol name="prime" type="ord"/>
   <Symbol name="emptyset" type="ord"/>
+  <Symbol name="varnothing" type="ord"/>
   <Symbol name="nabla" type="ord"/>
   <Symbol name="surdsign" type="ord"/>
   <Symbol name="top" type="ord"/>
@@ -168,6 +170,8 @@
   <Symbol name="spadesuit" type="ord"/>
   <Symbol name="lacc" type="ord"/>
   <Symbol name="racc" type="ord"/>
+  <Symbol name="S" type="ord"/>
+  <Symbol name="P" type="ord"/>
 
   <!-- "large" operators -->
 
@@ -287,6 +291,8 @@
   <Symbol name="leftharpoondown" type="rel"/>
   <Symbol name="rightharpoonup" type="rel"/>
   <Symbol name="rightharpoondown" type="rel"/>
+  <Symbol name="lhook" type="rel"/>
+  <Symbol name="rhook" type="rel"/>
 
   <!-- jlm_msam10 -->
 
