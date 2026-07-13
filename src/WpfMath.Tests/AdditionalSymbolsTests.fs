@@ -156,3 +156,18 @@ type AdditionalSymbolsTests() =
     [<InlineData(@"\nicefrac{1}{2}")>]
     member _.``nicefrac and sfrac are parsed as a SlashFractionAtom``(markup: string) =
         Assert.IsType<SlashFractionAtom>(parseRoot markup) |> ignore
+
+    // Multiple integrals and modulo operators.
+    [<Theory>]
+    [<InlineData(@"\iint")>]
+    [<InlineData(@"\iiint")>]
+    [<InlineData(@"\iiiint")>]
+    [<InlineData(@"\idotsint")>]
+    [<InlineData(@"\oiint")>]
+    [<InlineData(@"\oiiint")>]
+    [<InlineData(@"\iint_D f")>]
+    [<InlineData(@"a \bmod b")>]
+    [<InlineData(@"a \equiv b \pmod{n}")>]
+    [<InlineData(@"x \pod{p}")>]
+    member _.``integrals and modulo parse to a non-null root atom``(markup: string) =
+        Assert.NotNull(parseRoot markup)
