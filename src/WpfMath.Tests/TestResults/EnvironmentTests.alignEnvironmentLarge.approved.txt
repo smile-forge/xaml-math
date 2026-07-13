@@ -334,6 +334,7 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
+              "KeepContentStyle": false,
               "Numerator": {
                 "[AtomType]": "CharAtom",
                 "Character": "b",
@@ -348,6 +349,7 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
+              "OverrideStyle": null,
               "Source": {
                 "End": 64,
                 "Length": 10,

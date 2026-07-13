@@ -317,7 +317,7 @@ public class TexFormulaParser
     }
 
     /// <summary>Reads a char-delimited element group if it exists; returns <c>null</c> if it isn't.</summary>
-    private static SourceSpan? ReadElementGroupOptional(
+    internal static SourceSpan? ReadElementGroupOptional(
         SourceSpan value,
         ref int position,
         char openChar,

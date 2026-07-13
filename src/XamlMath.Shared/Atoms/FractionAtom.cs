@@ -95,8 +95,19 @@ internal sealed record FractionAtom : Atom
 
     public Atom? Denominator { get; }
 
+    /// <summary>Forces the fraction to be laid out in this style regardless of the surrounding one
+    /// (e.g. <c>\dfrac</c> = <see cref="TexStyle.Display"/>, <c>\tfrac</c> = <see cref="TexStyle.Text"/>).</summary>
+    public TexStyle? OverrideStyle { get; init; }
+
+    /// <summary>When true, the numerator and denominator keep the fraction's own (cramped) style instead of
+    /// shrinking to numerator/denominator style — so nested continued fractions (<c>\cfrac</c>) stay full size.</summary>
+    public bool KeepContentStyle { get; init; }
+
     protected override Box CreateBoxCore(TexEnvironment environment)
     {
+        if (this.OverrideStyle is { } forced)
+            environment = environment with { Style = forced };
+
         LineThicknessAndHeight lineStyle = GetEffectiveLineHeight(environment);
         NumeratorDenominatorAtoms n_d_atoms = CreateNumeratorAndDenominatorAtoms(environment); // Of equal width
         ShiftUpDown preliminaryShifts = CreatePreliminaryShiftUpDown(environment, lineStyle);
@@ -209,12 +220,15 @@ internal sealed record FractionAtom : Atom
     private NumeratorDenominatorAtoms CreateNumeratorAndDenominatorAtoms(TexEnvironment environment)
     {
         // Create boxes for numerator and demoninator atoms, and make them of equal width.
+        // \cfrac keeps its content in the fraction's own (cramped) style so nested fractions stay full size.
+        var numeratorStyle = this.KeepContentStyle ? environment.GetCrampedStyle() : environment.GetNumeratorStyle();
+        var denominatorStyle = this.KeepContentStyle ? environment.GetCrampedStyle() : environment.GetDenominatorStyle();
         var numeratorBox = this.Numerator == null
             ? StrutBox.Empty
-            : Numerator.CreateBox(environment.GetNumeratorStyle());
+            : Numerator.CreateBox(numeratorStyle);
         var denominatorBox = this.Denominator == null
             ? StrutBox.Empty
-            : Denominator.CreateBox(environment.GetDenominatorStyle());
+            : Denominator.CreateBox(denominatorStyle);
 
         if (numeratorBox.Width < denominatorBox.Width)
         {
