@@ -124,6 +124,28 @@
     <Return name="f" />
   </Formula>
 
+  <Formula name="quad" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="18" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="qquad" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="36" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
   <!-- Composed TeX symbols -->
 
   <Formula name="ne" enabled="true">

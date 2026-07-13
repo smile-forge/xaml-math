@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - dots `\vdots`, `\ddots`, and `\dots` (an alias of `\ldots`);
   - symbols `\S`, `\P`, `\notin`, `\nexists`, `\implies`, and `\iff`.
   - `\varnothing` is provided as an alias of the `\emptyset` glyph, since the AMS `msbm` font (which carries a distinct glyph) is not bundled.
+- Horizontal spacing commands: `\quad`, `\qquad`, the control space `\ `, the tie `~`, and `\hspace{<length>}` (accepting `em`, `ex`, `mu`, `pt`, `pc`, `px`, `bp`, `in`, `cm`, and `mm`).
 
 ### Removed
 - **(Breaking change!)** Support for .NET 6 and 7. The new list of supported frameworks:

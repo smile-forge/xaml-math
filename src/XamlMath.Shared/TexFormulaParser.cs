@@ -28,6 +28,7 @@ public class TexFormulaParser
     private const char subScriptChar = '_';
     private const char superScriptChar = '^';
     private const char primeChar = '\'';
+    private const char tieChar = '~';
 
     /// <summary>
     /// A set of names of the commands that are embedded in the parser itself, <see cref="ProcessCommand"/>.
@@ -252,6 +253,12 @@ public class TexFormulaParser
                     var scriptsAtom = this.AttachScripts(formula, value, ref position, new RowAtom(value), true, environment);
                     formula.Add(scriptsAtom, value.Segment(initialPosition, position));
                 }
+            }
+            else if (ch == tieChar)
+            {
+                // '~' is a tie: a non-breaking inter-word space.
+                formula.Add(new SpaceAtom(source), source);
+                position++;
             }
             else
             {
@@ -618,9 +625,9 @@ public class TexFormulaParser
             var atom = AttachScripts(formula, value, ref position, predefinedFormula!.RootAtom!, true, environment); // Nullable TODO: This might need null checking
             formula.Add(atom, formulaSource);
         }
-        else if (command.Equals("nbsp"))
+        else if (command.Equals("nbsp") || command.Equals(" "))
         {
-            // Space was found.
+            // A space was found: '\nbsp', or the control space '\ ' (a normal inter-word space).
             var atom = AttachScripts(formula, value, ref position, new SpaceAtom(formulaSource), true, environment);
             formula.Add(atom, formulaSource);
         }
