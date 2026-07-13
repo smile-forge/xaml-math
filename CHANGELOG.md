@@ -13,6 +13,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - symbols `\S`, `\P`, `\notin`, `\nexists`, `\implies`, and `\iff`.
   - `\varnothing` is provided as an alias of the `\emptyset` glyph, since the AMS `msbm` font (which carries a distinct glyph) is not bundled.
 - Horizontal spacing commands: `\quad`, `\qquad`, the control space `\ `, the tie `~`, and `\hspace{<length>}` (accepting `em`, `ex`, `mu`, `pt`, `pc`, `px`, `bp`, `in`, `cm`, and `mm`).
+- A batch of `amssymb` relations: the negations `\nless`, `\ngtr`, `\nleq`, `\ngeq`, `\nleqslant`, `\ngeqslant`, `\nleqq`, `\ngeqq`, `\nprec`, `\nsucc`, `\npreceq`, `\nsucceq`, `\nsim`, `\ncong`, `\nvdash`, `\nvDash`, `\nVdash`, `\nmid`, `\nparallel`, `\nsubseteq`, `\nsupseteq`, `\nsubseteqq`, `\nsupseteqq`, `\ntriangleleft`, `\ntriangleright`, `\ntrianglelefteq`, `\ntrianglerighteq`, `\nleftarrow`, `\nrightarrow`, `\nLeftarrow`, `\nRightarrow`, `\nleftrightarrow`, and `\nLeftrightarrow` (each overlays the base relation with the zero-width `\not`, since the dedicated AMS glyphs live in the unbundled `msbm` font), plus the synonyms `\doublecup`, `\doublecap`, `\restriction`, `\Doteq`, `\llless`, and `\gggtr`.
+
+  Not added, because they require the AMS `msbm` font (not bundled): blackboard-bold `\mathbb`/`\Bbbk`, the Hebrew letters `\beth`/`\gimel`/`\daleth`, `\digamma`/`\varkappa`, `\mho`, `\hslash`, `\eth`, `\backepsilon`, `\smallsetminus`, `\diagup`/`\diagdown`, and the negations/inequalities that have their own combined glyph rather than a `\not` overlay (`\subsetneq`, `\supsetneq`, `\lneqq`, `\gneqq`, `\lvertneqq`, `\gvertneqq`, `\precnsim`, `\lnsim`, `\varsubsetneq`, …).
 
 ### Removed
 - **(Breaking change!)** Support for .NET 6 and 7. The new list of supported frameworks:
