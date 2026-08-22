@@ -183,6 +183,58 @@ type AmsSymbolFontTests() =
         renders @"\mathscr{l}"
         renders @"\mathscr{1}"
 
+    // ── the Computer Modern and Euler alphabets ──────────────────────────────────
+
+    [<Theory>]
+    [<InlineData(@"\mathbf{Abc123}")>]
+    [<InlineData(@"\textbf{Abc 123}")>]
+    [<InlineData(@"\mathsf{Abc123}")>]
+    [<InlineData(@"\textsf{Abc 123}")>]
+    [<InlineData(@"\mathtt{Abc123}")>]
+    [<InlineData(@"\texttt{Abc 123}")>]
+    [<InlineData(@"\textit{Abc 123}")>]
+    [<InlineData(@"\textsc{Abc 123}")>]
+    [<InlineData(@"\mathfrak{ABCabc}")>]
+    [<InlineData(@"\mathrm{Abc}")>]
+    [<InlineData(@"\textrm{Abc}")>]
+    member _.``the alphabets render``(markup: string) = renders markup
+
+    [<Theory>]
+    [<InlineData(@"\mathbf{Hamburgefons}")>]
+    [<InlineData(@"\mathsf{Hamburgefons}")>]
+    [<InlineData(@"\mathtt{Hamburgefons}")>]
+    [<InlineData(@"\mathfrak{Hamburgefons}")>]
+    member _.``each alphabet has its own face, not a roman stand-in``(markup: string) =
+        // Every one of these used to be mapped onto plain roman, so they all drew the same thing.
+        // Different faces set the same word to different widths.
+        let roman = (parse @"\mathrm{Hamburgefons}").RootAtom.CreateBox(environment)
+        let box = (parse markup).RootAtom.CreateBox(environment)
+        Assert.NotEqual(roman.Width, box.Width)
+
+    [<Fact>]
+    member _.``italic text is the text italic face, not the maths one``() =
+        // \textit had been pointed at cmmi10 - maths italic, which spaces letters as though each
+        // were a separate variable.
+        let textIt = (parse @"\textit{difference}").RootAtom.CreateBox(environment)
+        let mathIt = (parse @"\mathit{difference}").RootAtom.CreateBox(environment)
+        Assert.NotEqual(mathIt.Width, textIt.Width)
+
+    [<Fact>]
+    member _.``small caps really are small capitals``() =
+        // cmcsc10 keeps its small capitals in the lowercase slots, so lowercase input comes out as
+        // capitals that are shorter than the real ones.
+        let small = (parse @"\textsc{a}").RootAtom.CreateBox(environment)
+        let capital = (parse @"\textsc{A}").RootAtom.CreateBox(environment)
+        Assert.True(small.Height < capital.Height, "small caps should be shorter than capitals")
+        Assert.True(small.Height > (parse @"\textrm{a}").RootAtom.CreateBox(environment).Height,
+                    "small caps should be taller than lowercase roman")
+
+    [<Fact>]
+    member _.``typewriter is monospaced``() =
+        let narrow = (parse @"\mathtt{iii}").RootAtom.CreateBox(environment)
+        let wide = (parse @"\mathtt{mmm}").RootAtom.CreateBox(environment)
+        Assert.Equal(wide.Width, narrow.Width, 6)
+
     // ── msam10: names that were always available, just never mapped ──────────────
 
     [<Theory>]
