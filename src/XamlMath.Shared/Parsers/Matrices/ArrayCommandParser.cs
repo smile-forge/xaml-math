@@ -47,6 +47,9 @@ internal sealed class ArrayCommandParser : IEnvironmentParser
             context.EnvironmentSource,
             rows,
             MatrixCellAlignment.Center,
+            // An array keeps its outer gaps, unlike a matrix: that is the space you see inside the
+            // brackets of \left[\begin{array}{cc|c} … \right].
+            horizontalPadding: MatrixAtom.DefaultColumnGap,
             columnSpec: spec,
             horizontalRules: hlines);
         return new EnvironmentProcessingResult(atom);

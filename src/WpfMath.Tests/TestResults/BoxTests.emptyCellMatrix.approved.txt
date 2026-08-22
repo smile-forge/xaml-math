@@ -14,8 +14,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.0,
+          "Width": 0.0
         },
         {
           "Background": null,
@@ -98,8 +98,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.5,
+          "Width": 0.5
         },
         {
           "Background": null,
@@ -111,8 +111,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.5,
+          "Width": 0.5
         },
         {
           "Background": null,
@@ -195,8 +195,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.0,
+          "Width": 0.0
         }
       ],
       "Depth": 0.0,
@@ -206,8 +206,8 @@
       "Shift": 0.0,
       "Source": null,
       "TotalHeight": 1.033332,
-      "TotalWidth": 2.208512,
-      "Width": 2.208512
+      "TotalWidth": 2.508512,
+      "Width": 2.508512
     },
     {
       "Background": null,
@@ -222,8 +222,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.0,
+          "Width": 0.0
         },
         {
           "Background": null,
@@ -306,8 +306,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.5,
+          "Width": 0.5
         },
         {
           "Background": null,
@@ -319,8 +319,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.5,
+          "Width": 0.5
         },
         {
           "Background": null,
@@ -403,8 +403,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.0,
+          "Width": 0.0
         }
       ],
       "Depth": 0.0,
@@ -414,8 +414,8 @@
       "Shift": 0.0,
       "Source": null,
       "TotalHeight": 1.033332,
-      "TotalWidth": 2.208512,
-      "Width": 2.208512
+      "TotalWidth": 2.508512,
+      "Width": 2.508512
     },
     {
       "Background": null,
@@ -430,8 +430,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.550001,
-          "Width": 0.550001
+          "TotalWidth": 0.375001,
+          "Width": 0.375001
         },
         {
           "Background": null,
@@ -496,8 +496,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.550001,
-          "Width": 0.550001
+          "TotalWidth": 0.875001,
+          "Width": 0.875001
         },
         {
           "Background": null,
@@ -509,8 +509,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.5,
+          "Width": 0.5
         },
         {
           "Background": null,
@@ -593,8 +593,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.0,
-          "TotalWidth": 0.175,
-          "Width": 0.175
+          "TotalWidth": 0.0,
+          "Width": 0.0
         }
       ],
       "Depth": 0.0,
@@ -604,8 +604,8 @@
       "Shift": 0.0,
       "Source": null,
       "TotalHeight": 1.033332,
-      "TotalWidth": 2.208512,
-      "Width": 2.208512
+      "TotalWidth": 2.508512,
+      "Width": 2.508512
     }
   ],
   "Depth": 1.299998,
@@ -621,6 +621,6 @@
     "Start": 1
   },
   "TotalHeight": 3.099996,
-  "TotalWidth": 2.208512,
-  "Width": 2.208512
+  "TotalWidth": 2.508512,
+  "Width": 2.508512
 }

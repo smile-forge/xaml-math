@@ -28,7 +28,7 @@
         },
         "Type": "BigOperator",
         "UpperLimitAtom": null,
-        "UseVerticalLimits": null
+        "UseVerticalLimits": false
       },
       {
         "[AtomType]": "CharAtom",

@@ -54,6 +54,25 @@ public class TexFormulaParser
     /// Text styles whose argument is ordinary text rather than a formula: the spaces in it are kept and the
     /// characters are not treated as math symbols. <c>\text</c> and the <c>\text*</c> font-switching family.
     /// </summary>
+    /// <summary>
+    /// The big operators whose limits go beside them rather than above and below, in every style:
+    /// the integrals. TeX gives <c>\intop</c> <c>\nolimits</c> by default and <c>\sum</c>
+    /// <c>\limits</c>, which is why an integral's bounds sit at its side in every published paper.
+    /// <c>\limits</c> after one still stacks them.
+    /// </summary>
+    private static readonly HashSet<string> sideLimitOperators = new()
+    {
+        "int",
+        "intop",
+        "iint",
+        "iiint",
+        "iiiint",
+        "idotsint",
+        "oint",
+        "oiint",
+        "oiiint",
+    };
+
     private static readonly HashSet<string> rawTextStyles = new()
     {
         TexUtilities.TextStyleName,
@@ -418,7 +437,23 @@ public class TexFormulaParser
         ref int position,
         ICommandEnvironment environment)
     {
+        var start = WithSkippedWhiteSpace(value, position);
         var afterScript = ReadElement(value, position);
+
+        // A font command as a script takes its argument with it. TeX reads a single token after ^ or _,
+        // and the macro then grabs its own argument, so `m_\mathrm{el}` sets "el" in roman - whereas
+        // reading only the token leaves \mathrm as the whole script with its argument stranded after
+        // it, and a \mathrm with nothing to style is an error.
+        if (afterScript.source.Length > 1
+            && afterScript.source[0] == escapeChar
+            && textStyles.Contains(afterScript.source.Segment(1).ToString()))
+        {
+            var afterArgument = ReadElement(value, afterScript.position);
+            afterScript = new AfterReadingInfo(
+                value.Segment(start, afterArgument.position - start),
+                afterArgument.position);
+        }
+
         position = afterScript.position;
         return Parse(afterScript.source, formula.TextStyle, environment.CreateChildEnvironment());
     }
@@ -629,13 +664,24 @@ public class TexFormulaParser
 
             if (symbolAtom.Type == TexAtomType.Accent)
             {
-                var helper = new TexFormulaHelper(formula, formulaSource, _brushFactory, predefinedFormulas);
                 TexFormula accentFormula = ReadScript(formula, value, ref position, environment);
-                helper.AddAccent(accentFormula, symbolAtom.Name);
+
+                // A script after an accent belongs to the accented atom: \dot{C}^\mu is a superscript
+                // on the accented C, so it clears the dot. Without attaching it here the script falls
+                // through to the parser's "no base to hand" path, which hangs it off an empty box and
+                // sets it at the height of nothing at all.
+                Atom accented = new AccentedAtom(formulaSource, accentFormula.RootAtom, symbolAtom.Name);
+                formula.Add(
+                    AttachScripts(formula, value, ref position, accented, true, environment),
+                    formulaSource);
             }
             else if (symbolAtom.Type == TexAtomType.BigOperator)
             {
-                var opAtom = new BigOperatorAtom(formulaSource, symbolAtom, null, null);
+                // \sum and \prod stack their limits in display style; an integral never does, whatever
+                // the style, which is why \int_0^\infty reads the way it does in every paper. \limits
+                // is there for anyone who wants the other.
+                var limits = sideLimitOperators.Contains(symbolAtom.Name) ? false : (bool?)null;
+                var opAtom = new BigOperatorAtom(formulaSource, symbolAtom, null, null, limits);
                 formula.Add(AttachScripts(formula, value, ref position, opAtom, true, environment), formulaSource);
             }
             else
@@ -648,7 +694,14 @@ public class TexFormulaParser
         {
             // Predefined formula was found.
             var predefinedFormula = factory(formulaSource);
-            var atom = AttachScripts(formula, value, ref position, predefinedFormula!.RootAtom!, true, environment); // Nullable TODO: This might need null checking
+            Atom root = predefinedFormula!.RootAtom!; // Nullable TODO: This might need null checking
+
+            // The multiple integrals are built out of \int rather than being symbols of their own, so
+            // they have to be told where their limits go in the same breath.
+            if (sideLimitOperators.Contains(command))
+                root = new BigOperatorAtom(formulaSource, root, null, null, false);
+
+            var atom = AttachScripts(formula, value, ref position, root, true, environment);
             formula.Add(atom, formulaSource);
         }
         else if (command.Equals("nbsp") || command.Equals(" "))

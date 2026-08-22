@@ -65,7 +65,9 @@ let ``RowAtom creates boxes with proper sources``() =
 
 [<Fact>]
 let ``BigOperatorAtom creates a box with proper sources``() =
-    let source = @"\int_a^b"
+    // A sum rather than an integral: an integral sets its limits beside it, so its box is a
+    // horizontal one. The offsets are the same either way - both names are three letters.
+    let source = @"\sum_a^b"
     let src = src source
     let parser = WpfTeXFormulaParser.Instance
     let formula = parser.Parse source

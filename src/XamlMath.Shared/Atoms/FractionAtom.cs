@@ -103,6 +103,20 @@ internal sealed record FractionAtom : Atom
     /// shrinking to numerator/denominator style — so nested continued fractions (<c>\cfrac</c>) stay full size.</summary>
     public bool KeepContentStyle { get; init; }
 
+    /// <summary>
+    /// Set where delimiters are being wrapped around the fraction, as in <c>\binom</c>: they stand
+    /// where <see cref="NullDelimiterSpace"/> otherwise goes, so it would be counted twice.
+    /// </summary>
+    public bool SuppressNullDelimiterSpace { get; init; }
+
+    /// <summary>
+    /// TeX's <c>\nulldelimiterspace</c>, 1.2pt: the space a fraction carries on each side in place of
+    /// the delimiters it has not got (rule 15e). Without it a fraction butts straight up against
+    /// whatever stands next to it - <c>\frac{dt}{2t}(8\pi^2t)</c> runs the closing 2t into the
+    /// opening bracket.
+    /// </summary>
+    private const double NullDelimiterSpace = 0.12;
+
     protected override Box CreateBoxCore(TexEnvironment environment)
     {
         if (this.OverrideStyle is { } forced)
@@ -111,7 +125,15 @@ internal sealed record FractionAtom : Atom
         LineThicknessAndHeight lineStyle = GetEffectiveLineHeight(environment);
         NumeratorDenominatorAtoms n_d_atoms = CreateNumeratorAndDenominatorAtoms(environment); // Of equal width
         ShiftUpDown preliminaryShifts = CreatePreliminaryShiftUpDown(environment, lineStyle);
-        return CreateResultBox(environment, lineStyle, n_d_atoms, preliminaryShifts);
+        var fraction = CreateResultBox(environment, lineStyle, n_d_atoms, preliminaryShifts);
+        if (this.SuppressNullDelimiterSpace)
+            return fraction;
+
+        var padded = new HorizontalBox();
+        padded.Add(new StrutBox(NullDelimiterSpace, 0, 0, 0));
+        padded.Add(fraction);
+        padded.Add(new StrutBox(NullDelimiterSpace, 0, 0, 0));
+        return padded;
     }
 
     private static Box CreateResultBox(TexEnvironment environment, LineThicknessAndHeight lineStyle, NumeratorDenominatorAtoms n_d_atoms, ShiftUpDown preliminaryShifts)

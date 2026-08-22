@@ -57,8 +57,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.0,
+              "Width": 0.0
             },
             {
               "Background": null,
@@ -141,8 +141,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.5,
+              "Width": 0.5
             },
             {
               "Background": null,
@@ -154,8 +154,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.5,
+              "Width": 0.5
             },
             {
               "Background": null,
@@ -238,8 +238,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.0,
+              "Width": 0.0
             }
           ],
           "Depth": 0.0,
@@ -249,8 +249,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.994444,
-          "TotalWidth": 1.700004,
-          "Width": 1.700004
+          "TotalWidth": 2.000004,
+          "Width": 2.000004
         },
         {
           "Background": null,
@@ -265,8 +265,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.0,
+              "Width": 0.0
             },
             {
               "Background": null,
@@ -349,8 +349,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.5,
+              "Width": 0.5
             },
             {
               "Background": null,
@@ -362,8 +362,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.5,
+              "Width": 0.5
             },
             {
               "Background": null,
@@ -446,8 +446,8 @@
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
-              "TotalWidth": 0.175,
-              "Width": 0.175
+              "TotalWidth": 0.0,
+              "Width": 0.0
             }
           ],
           "Depth": 0.0,
@@ -457,8 +457,8 @@
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.994444,
-          "TotalWidth": 1.700004,
-          "Width": 1.700004
+          "TotalWidth": 2.000004,
+          "Width": 2.000004
         }
       ],
       "Depth": 0.744444,
@@ -474,8 +474,8 @@
         "Start": 1
       },
       "TotalHeight": 1.988888,
-      "TotalWidth": 1.700004,
-      "Width": 1.700004
+      "TotalWidth": 2.000004,
+      "Width": 2.000004
     },
     {
       "Background": null,
@@ -531,6 +531,6 @@
     "Start": 1
   },
   "TotalHeight": 1.988888,
-  "TotalWidth": 2.644452,
-  "Width": 2.644452
+  "TotalWidth": 2.944452,
+  "Width": 2.944452
 }

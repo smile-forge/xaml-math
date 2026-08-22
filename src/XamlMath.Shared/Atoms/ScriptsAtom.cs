@@ -57,13 +57,7 @@ internal sealed record ScriptsAtom : Atom
         var delta = 0d;
         double shiftUp, shiftDown;
 
-        if (this.BaseAtom is AccentedAtom accentedAtom && accentedAtom.BaseAtom != null)
-        {
-            var accentedBox = accentedAtom.BaseAtom.CreateBox(environment.GetCrampedStyle());
-            shiftUp = accentedBox.Height - texFont.GetSupDrop(superscriptStyle.Style);
-            shiftDown = accentedBox.Depth + texFont.GetSubDrop(subscriptStyle.Style);
-        }
-        else if (this.BaseAtom is SymbolAtom symbolAtom && this.BaseAtom.Type == TexAtomType.BigOperator)
+        if (this.BaseAtom is SymbolAtom symbolAtom && this.BaseAtom.Type == TexAtomType.BigOperator)
         {
             var charInfo = texFont.GetCharInfo(symbolAtom.Name, style).Value;
             if (style < TexStyle.Text && texFont.HasNextLarger(charInfo))
@@ -98,6 +92,9 @@ internal sealed record ScriptsAtom : Atom
         }
         else
         {
+            // Anything that is not a single character is measured as the box it came out as.
+            // That is what lifts a script clear of an accent: the accent belongs to the nucleus,
+            // so the exponent of \dot{C} lines up with the dot rather than with the C beneath it.
             shiftUp = baseBox.Height - texFont.GetSupDrop(superscriptStyle.Style);
             shiftDown = baseBox.Depth + texFont.GetSubDrop(subscriptStyle.Style);
         }

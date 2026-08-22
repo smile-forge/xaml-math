@@ -250,6 +250,14 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
     <SymbolMapping name="Psi" ch="170" fontId="1"/>
     <SymbolMapping name="Omega" ch="173" fontId="1"/>
 
+    <!-- Quotation marks. A paper writes them as `` and '' or ", and the corpus is full of
+         quoted kets; without these the formula around them is rejected over the quote. -->
+
+    <SymbolMapping name="lq" ch="96" fontId="1"/>
+    <SymbolMapping name="rq" ch="39" fontId="1"/>
+    <SymbolMapping name="lqq" ch="92" fontId="1"/>
+    <SymbolMapping name="rqq" ch="34" fontId="1"/>
+
     <!-- The italic capitals amsmath calls \varGamma and friends. Same codes as the
          upright ones above, taken from the maths italic rather than the roman. -->
 

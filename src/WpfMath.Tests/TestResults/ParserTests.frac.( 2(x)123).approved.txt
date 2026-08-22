@@ -41,6 +41,7 @@
           "SourceName": "User input",
           "Start": 1
         },
+        "SuppressNullDelimiterSpace": false,
         "Type": "Inner"
       },
       {

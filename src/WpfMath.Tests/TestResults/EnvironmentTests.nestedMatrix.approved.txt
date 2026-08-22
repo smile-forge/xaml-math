@@ -4,7 +4,7 @@
     "BaseAtom": {
       "[AtomType]": "MatrixAtom",
       "ColumnSpec": null,
-      "HorizontalPadding": 0.35,
+      "HorizontalPadding": 1.0,
       "HorizontalRules": null,
       "MatrixCellAlignment": "Center",
       "MatrixCells": [
@@ -100,7 +100,7 @@
             "BaseAtom": {
               "[AtomType]": "MatrixAtom",
               "ColumnSpec": null,
-              "HorizontalPadding": 0.35,
+              "HorizontalPadding": 1.0,
               "HorizontalRules": null,
               "MatrixCellAlignment": "Center",
               "MatrixCells": [
@@ -282,6 +282,7 @@
                 "SourceName": "User input",
                 "Start": 24
               },
+              "SuppressOuterPadding": true,
               "Type": "Ordinary",
               "VerticalPadding": 0.35
             },
@@ -319,6 +320,7 @@
         "SourceName": "User input",
         "Start": 1
       },
+      "SuppressOuterPadding": true,
       "Type": "Ordinary",
       "VerticalPadding": 0.35
     },

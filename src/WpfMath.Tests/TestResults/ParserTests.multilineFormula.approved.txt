@@ -266,6 +266,7 @@
       ]
     ],
     "Source": null,
+    "SuppressOuterPadding": false,
     "Type": "Ordinary",
     "VerticalPadding": 0.35
   },

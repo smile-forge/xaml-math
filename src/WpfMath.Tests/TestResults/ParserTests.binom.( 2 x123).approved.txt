@@ -43,6 +43,7 @@
             "SourceName": "User input",
             "Start": 1
           },
+          "SuppressNullDelimiterSpace": true,
           "Type": "Inner"
         },
         "LeftDelimeter": {

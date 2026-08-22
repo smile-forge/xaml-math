@@ -21,6 +21,13 @@ internal sealed record MatrixAtom : Atom
     private const double AlignGroupLeftPadding = 4;
     public const double DefaultPadding = 0.35;
 
+    /// <summary>
+    /// The space between two columns of a matrix or an array: TeX's 2 x rraycolsep, 10pt. Half of
+    /// it sits on each side of a cell, so a matrix that suppresses its outer half-gaps still has the
+    /// full amount between its columns.
+    /// </summary>
+    public const double DefaultColumnGap = 1.0;
+
     public MatrixAtom(
         SourceSpan? source,
         IEnumerable<IEnumerable<Atom?>> cells,
@@ -28,7 +35,8 @@ internal sealed record MatrixAtom : Atom
         double verticalPadding = DefaultPadding,
         double horizontalPadding = DefaultPadding,
         ArrayColumnSpec? columnSpec = null,
-        IReadOnlyCollection<int>? horizontalRules = null) : base(source)
+        IReadOnlyCollection<int>? horizontalRules = null,
+        bool suppressOuterPadding = false) : base(source)
     {
         MatrixCells = ToImmutableCollection(cells.Select(ToImmutableCollection));
         MatrixCellAlignment = matrixCellAlignment;
@@ -36,6 +44,7 @@ internal sealed record MatrixAtom : Atom
         HorizontalPadding = horizontalPadding;
         ColumnSpec = columnSpec;
         HorizontalRules = horizontalRules;
+        SuppressOuterPadding = suppressOuterPadding;
     }
 
     /// <summary>Per-column alignment and vertical rules, for an <c>array</c>; null for everything else.</summary>
@@ -51,6 +60,13 @@ internal sealed record MatrixAtom : Atom
     public double HorizontalPadding { get; }
 
     public MatrixCellAlignment MatrixCellAlignment { get; }
+
+    /// <summary>
+    /// Whether the outer half-gaps go. A matrix has none - amsmath sets one with
+    /// <c>\hskip -rraycolsep</c> at each end - while an array keeps them, which is the gap you see
+    /// inside the brackets of <c>\left[egin{array}...</c>.
+    /// </summary>
+    public bool SuppressOuterPadding { get; }
 
     protected override Box CreateBoxCore(TexEnvironment environment)
     {
@@ -158,19 +174,38 @@ internal sealed record MatrixAtom : Atom
                     width += left + columnWidths[covered] + right;
                 }
 
-                laidOut.Add(new PlacedCell(spanning.CreateSpanningBox(environment, width), 0.0, 0.0));
+                // The cell absorbs the columns' gaps into its own width, so the outer ones have to be
+                // taken off here too - otherwise a spanning row comes out wider than the rows that
+                // decided the columns, and the matrix grows to fit it.
+                var (spanLeft, spanRight) = OuterAdjustment(column, column + span - 1, columnCount);
+                laidOut.Add(new PlacedCell(
+                    spanning.CreateSpanningBox(environment, width + spanLeft + spanRight), 0.0, 0.0));
                 column += span;
             }
             else
             {
                 var box = column < boxes.Count ? boxes[column] ?? StrutBox.Empty : StrutBox.Empty;
                 var (left, right) = GetLeftRightGap(columnWidths[column] - box.TotalWidth, column);
-                laidOut.Add(new PlacedCell(box, left, right));
+                var (outerLeft, outerRight) = OuterAdjustment(column, column, columnCount);
+                laidOut.Add(new PlacedCell(box, left + outerLeft, right + outerRight));
                 column++;
             }
         }
 
         return laidOut;
+    }
+
+    /// <summary>
+    /// What to take off the gaps at the two ends of a cell covering columns
+    /// <paramref name="first"/> to <paramref name="last"/>, when the outer half-gaps are suppressed.
+    /// </summary>
+    private SurroundingGap OuterAdjustment(int first, int last, int columnCount)
+    {
+        if (!this.SuppressOuterPadding)
+            return new SurroundingGap(0, 0);
+
+        var half = this.HorizontalPadding / 2;
+        return new SurroundingGap(first == 0 ? -half : 0, last == columnCount - 1 ? -half : 0);
     }
 
     private Box? CreateRulesBox(
