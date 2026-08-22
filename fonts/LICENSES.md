@@ -119,4 +119,10 @@ FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 ```
 
+## `jlm_rsfs10.ttf`
+
+This software contains the font file `jlm_rsfs10.ttf` - Ralph Smith's Formal Script - ([taken from JLaTeXMath project][jlatexmath.fonts]). The original `rsfs` fonts are by Ralph Smith, released for free use and redistribution; [they are distributed from CTAN][ctan.rsfs] under the terms reproduced there. The converted file carries the `jlm_` prefix rather than the original name.
+
+[ctan.rsfs]: https://ctan.org/pkg/rsfs
+
 [jlatexmath.fonts]: https://github.com/opencollab/jlatexmath/tree/af77a8e80d41ff67dfe2f42f14b41f6860dfeeec/jlatexmath/src/main/resources/org/scilab/forge/jlatexmath/fonts/maths

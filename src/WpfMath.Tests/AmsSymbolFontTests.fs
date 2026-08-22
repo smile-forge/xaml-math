@@ -161,6 +161,28 @@ type AmsSymbolFontTests() =
         renders @"\mathbb{r}"
         renders @"\mathbb{1}"
 
+    // ── rsfs10: the formal script alphabet ───────────────────────────────────────
+
+    [<Theory>]
+    [<InlineData(@"\mathscr{L}")>]
+    [<InlineData(@"\mathscr{F}")>]
+    [<InlineData(@"\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}")>]
+    member _.``formal script renders``(markup: string) = renders markup
+
+    [<Fact>]
+    member _.``formal script is a different alphabet from calligraphic``() =
+        // \mathscr used to be pointed at the symbol font's calligraphic capitals, i.e. at \mathcal.
+        // Ralph Smith's Formal Script is its own face.
+        let scr = (parse @"\mathscr{L}").RootAtom.CreateBox(environment)
+        let cal = (parse @"\mathcal{L}").RootAtom.CreateBox(environment)
+        Assert.NotEqual(cal.Width, scr.Width)
+
+    [<Fact>]
+    member _.``formal script has capitals only``() =
+        // rsfs10 carries no lowercase or digits; those fall through to the default mapping.
+        renders @"\mathscr{l}"
+        renders @"\mathscr{1}"
+
     // ── msam10: names that were always available, just never mapped ──────────────
 
     [<Theory>]
