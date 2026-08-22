@@ -539,4 +539,22 @@
   <Symbol name="arrowaxisleft" type="ord"/>
   <Symbol name="circledR" type="ord"/>
 
+  <!-- amsmath: italic capital Greek, and the one-sided vertical bars. -->
+
+  <Symbol name="varGamma" type="ord"/>
+  <Symbol name="varDelta" type="ord"/>
+  <Symbol name="varTheta" type="ord"/>
+  <Symbol name="varLambda" type="ord"/>
+  <Symbol name="varXi" type="ord"/>
+  <Symbol name="varPi" type="ord"/>
+  <Symbol name="varSigma" type="ord"/>
+  <Symbol name="varUpsilon" type="ord"/>
+  <Symbol name="varPhi" type="ord"/>
+  <Symbol name="varPsi" type="ord"/>
+  <Symbol name="varOmega" type="ord"/>
+  <Symbol name="lvert" type="open" del="true"/>
+  <Symbol name="rvert" type="close" del="true"/>
+  <Symbol name="lVert" type="open" del="true"/>
+  <Symbol name="rVert" type="close" del="true"/>
+
 </TeXSymbols>

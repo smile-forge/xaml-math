@@ -29,16 +29,25 @@ internal static class StandardCommands
         }
     }
 
+    // The stretchy arrow accents: an arrow drawn to the width of its argument, above or below it.
     private sealed class OverArrowCommand : ICommandParser
     {
-        public static OverArrowCommand Right { get; } = new(pointsRight: true);
-        public static OverArrowCommand Left { get; } = new(pointsRight: false);
+        public static OverArrowCommand Right { get; } = new(ArrowDecoration.HeadRight, over: true);
+        public static OverArrowCommand Left { get; } = new(ArrowDecoration.HeadLeft, over: true);
+        public static OverArrowCommand Both { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.HeadRight, over: true);
+        public static OverArrowCommand UnderRight { get; } = new(ArrowDecoration.HeadRight, over: false);
+        public static OverArrowCommand UnderLeft { get; } = new(ArrowDecoration.HeadLeft, over: false);
+        public static OverArrowCommand UnderBoth { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.HeadRight, over: false);
 
-        private readonly bool _pointsRight;
+        private readonly ArrowDecoration _decoration;
+        private readonly bool _over;
 
-        private OverArrowCommand(bool pointsRight)
+        private OverArrowCommand(ArrowDecoration decoration, bool over)
         {
-            _pointsRight = pointsRight;
+            _decoration = decoration;
+            _over = over;
         }
 
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -53,7 +62,7 @@ internal static class StandardCommands
                 context.Environment.CreateChildEnvironment());
             var start = context.CommandNameStartPosition;
             var atomSource = source.Segment(start, position - start);
-            var atom = new OverArrowAtom(atomSource, baseFormula.RootAtom, _pointsRight);
+            var atom = new OverArrowAtom(atomSource, baseFormula.RootAtom, _decoration, _over);
             return new CommandProcessingResult(atom, position);
         }
     }
@@ -542,6 +551,16 @@ internal static class StandardCommands
 
     private class BinomCommand : ICommandParser
     {
+        public static BinomCommand Display { get; } = new(TexStyle.Display);
+        public static BinomCommand Text { get; } = new(TexStyle.Text);
+
+        private readonly TexStyle? _style;
+
+        public BinomCommand(TexStyle? style = null)
+        {
+            _style = style;
+        }
+
         public CommandProcessingResult ProcessCommand(CommandContext context)
         {
             var source = context.CommandSource;
@@ -566,7 +585,9 @@ internal static class StandardCommands
             var matrixAtom = new MatrixAtom(atomSource, atoms, MatrixCellAlignment.Center);
             var left = new SymbolAtom(atomSource, "(", TexAtomType.Opening, true);
             var right = new SymbolAtom(atomSource, ")", TexAtomType.Closing, true);
-            var fencedAtom = new FencedAtom(atomSource, matrixAtom, left, right);
+            Atom fencedAtom = new FencedAtom(atomSource, matrixAtom, left, right);
+            if (_style is { } style)
+                fencedAtom = new StyleAtom(atomSource, fencedAtom, style);
             return new CommandProcessingResult(fencedAtom, position);
         }
     }
@@ -652,6 +673,8 @@ internal static class StandardCommands
         {
             [@"\"] = new NewLineCommand(),
             ["binom"] = new BinomCommand(),
+            ["dbinom"] = BinomCommand.Display,
+            ["tbinom"] = BinomCommand.Text,
             ["cancel"] = CancelCommand.Cancel,
             ["bcancel"] = CancelCommand.BCancel,
             ["xcancel"] = CancelCommand.XCancel,
@@ -665,6 +688,10 @@ internal static class StandardCommands
             ["underline"] = new UnderlineCommand(),
             ["overrightarrow"] = OverArrowCommand.Right,
             ["overleftarrow"] = OverArrowCommand.Left,
+            ["overleftrightarrow"] = OverArrowCommand.Both,
+            ["underrightarrow"] = OverArrowCommand.UnderRight,
+            ["underleftarrow"] = OverArrowCommand.UnderLeft,
+            ["underleftrightarrow"] = OverArrowCommand.UnderBoth,
             ["vdots"] = DotsCommand.Vertical,
             ["ddots"] = DotsCommand.Diagonal,
             ["hspace"] = new HspaceCommand(),
@@ -686,6 +713,7 @@ internal static class StandardCommands
             ["operatorname"] = new OperatorNameCommand(),
             ["boldsymbol"] = new BoldSymbolCommand(),
             ["bm"] = new BoldSymbolCommand(),
+            ["pmb"] = new BoldSymbolCommand(),
             ["boxed"] = new BoxedCommand(),
             ["fbox"] = new BoxedCommand(),
             ["phantom"] = PhantomCommand.Both,
