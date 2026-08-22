@@ -49,6 +49,21 @@ public class TexFormulaParser
     private static readonly IReadOnlyList<string> delimeters;
     private static readonly HashSet<string> textStyles;
 
+    /// <summary>
+    /// Text styles whose argument is ordinary text rather than a formula: the spaces in it are kept and the
+    /// characters are not treated as math symbols. <c>	ext</c> and the <c>	ext*</c> font-switching family.
+    /// </summary>
+    private static readonly HashSet<string> rawTextStyles = new()
+    {
+        TexUtilities.TextStyleName,
+        "textbf",
+        "textit",
+        "textrm",
+        "textsc",
+        "textsf",
+        "texttt",
+    };
+
     // TODO[#339]: Architectural solution to make this work faster.
     private readonly IReadOnlyDictionary<string, Func<SourceSpan, TexFormula?>> predefinedFormulas;
 
@@ -108,7 +123,7 @@ public class TexFormulaParser
     private static bool IsWhiteSpace(char ch)
         => ch is ' ' or '\t' or '\n' or '\r';
 
-    private static bool ShouldSkipWhiteSpace(string? style) => style != TexUtilities.TextStyleName;
+    private static bool ShouldSkipWhiteSpace(string? style) => style == null || !rawTextStyles.Contains(style);
 
     /// <summary>A registry for additional commands.</summary>
     private readonly IReadOnlyDictionary<string, ICommandParser> _commandRegistry;
@@ -636,15 +651,12 @@ public class TexFormulaParser
             // Text style was found.
             position = WithSkippedWhiteSpace(value, position);
 
-            var afterRead =
-                command == TexUtilities.TextStyleName
-                ? ReadElement(value, position)
-                : ReadElement(value, position);
+            var afterRead = ReadElement(value, position);
 
             position = afterRead.position;
 
             TexFormula styledFormula =
-                command == TexUtilities.TextStyleName
+                rawTextStyles.Contains(command)
                 ? ConvertRawText(afterRead.source, command)
                 : Parse(afterRead.source, command, environment.CreateChildEnvironment());
 

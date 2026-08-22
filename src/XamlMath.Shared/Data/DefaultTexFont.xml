@@ -64,6 +64,78 @@
     <TextStyleMapping name="mathcal">
       <MapRange code="capitals" fontId="3" start="65"/>
     </TextStyleMapping>
+
+    <!-- The font families below have no Computer Modern face in the five fonts this library ships (there is no
+    bold, sans, monospace, blackboard-bold or Fraktur one), so they are mapped to the closest face that does
+    exist. They render as upright roman rather than as the requested family: a formula using \mathbb{R} or
+    \textbf{x} then reads correctly even though it is not set in the right face, which beats failing to parse
+    the formula at all. Point them at a real face if one is ever added. -->
+
+    <TextStyleMapping name="mathbf">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="mathbb">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="mathsf">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="mathtt">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="mathfrak">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+
+    <!-- \mathscr is the same calligraphic alphabet as \mathcal, which the symbol font does have. -->
+
+    <TextStyleMapping name="mathscr">
+      <MapRange code="capitals" fontId="3" start="65"/>
+    </TextStyleMapping>
+
+    <TextStyleMapping name="textrm">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="textbf">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="textit">
+      <MapRange code="numbers" fontId="0" start="48"/>
+      <MapRange code="capitals" fontId="0" start="65"/>
+      <MapRange code="small" fontId="0" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="textsf">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+    <TextStyleMapping name="texttt">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="97"/>
+    </TextStyleMapping>
+
+    <!-- Small caps really are capitals here: lowercase letters are mapped onto the uppercase range. -->
+
+    <TextStyleMapping name="textsc">
+      <MapRange code="numbers" fontId="1" start="48"/>
+      <MapRange code="capitals" fontId="1" start="65"/>
+      <MapRange code="small" fontId="1" start="65"/>
+    </TextStyleMapping>
   </TextStyleMappings>
 
   <!-- the default text style mappings, used when no text style is specified or when a specific mapping
