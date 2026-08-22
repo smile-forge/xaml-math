@@ -45,3 +45,25 @@ type GeometryElementRendererTests() =
     member _.``GeometryElementRenderer.RenderTransformed adds a GeometryGroup``() : unit =
         renderer.RenderTransformed(HorizontalBox(), [| Transformation.Translate(1.0, 1.0) |], 0.0, 0.0)
         Assert.IsType<GeometryGroup>(Seq.exactlyOne geometry.Children) |> ignore
+
+    [<Fact>]
+    member _.``GeometryElementRenderer.RenderTransformed applies the transformations``() : unit =
+        // Matrix is a struct, so the transformations have to be assigned back to the geometry rather
+        // than applied to the copy Transform.Value hands out — they used to be dropped silently.
+        renderer.RenderTransformed(HorizontalBox(), [| Transformation.Translate(3.0, 4.0) |], 0.0, 0.0)
+        let group = Seq.exactlyOne geometry.Children :?> GeometryGroup
+        Assert.Equal(System.Windows.Point(3.0, 4.0), group.Transform.Value.Transform(System.Windows.Point(0.0, 0.0)))
+
+    [<Fact>]
+    member _.``GeometryElementRenderer.RenderTransformed rotates before it translates``() : unit =
+        // The drawing-context renderer pushes the transformations in this order, and there the last
+        // one pushed is the first the content sees; the geometry has to agree with it.
+        renderer.RenderTransformed(
+            HorizontalBox(),
+            [| Transformation.Translate(10.0, 0.0); Transformation.Rotate(90.0) |],
+            0.0,
+            0.0)
+        let group = Seq.exactlyOne geometry.Children :?> GeometryGroup
+        let moved: System.Windows.Point = group.Transform.Value.Transform(System.Windows.Point(1.0, 0.0))
+        Assert.Equal(10.0, moved.X, 6)
+        Assert.Equal(1.0, moved.Y, 6)

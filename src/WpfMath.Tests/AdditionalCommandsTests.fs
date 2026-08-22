@@ -26,6 +26,13 @@ type AdditionalCommandsTests() =
 
     static let environment = WpfTeXEnvironment.Create()
 
+    static let renderBounds (markup: string) =
+        let box = (parseRoot markup).CreateBox(environment)
+        let geometry = System.Windows.Media.GeometryGroup()
+        let renderer = GeometryElementRenderer(geometry, 1.0) :> IElementRenderer
+        renderer.RenderElement(box, 0.0, 0.0)
+        box, geometry
+
     [<Theory>]
     [<InlineData(@"\displaystyle x")>]
     [<InlineData(@"\textstyle x")>]
@@ -127,11 +134,25 @@ type AdditionalCommandsTests() =
     [<Fact>]
     member _.``a brace with no label renders``() =
         // The delimiter can stand alone, and the script box it does not have must not be reached for.
-        let box = (parseRoot @"\overbrace{a+b}").CreateBox(environment)
-        let geometry = System.Windows.Media.GeometryGroup()
-        let renderer = GeometryElementRenderer(geometry, 1.0) :> IElementRenderer
-        renderer.RenderElement(box, 0.0, 0.0)
+        let _, geometry = renderBounds @"\overbrace{a+b}"
         Assert.NotEmpty(geometry.Children)
+
+    [<Theory>]
+    [<InlineData(@"\overbrace{a+b+c}^{\text{three terms}}")>]
+    [<InlineData(@"\underbrace{d+e}_{\text{two more}}")>]
+    [<InlineData(@"\overbrace{a+b}")>]
+    member _.``a brace is drawn across its base, not beside it``(markup: string) =
+        // A label wider than the base widens the whole atom, and the brace is centred in it. The
+        // delimiter is padded to reach that width — with the leftover, not with the width itself,
+        // which would push the brace half a width to the right and out of its own box.
+        let box, geometry = renderBounds markup
+        // A brace overhangs its span a little by design, so the bound is loose; the bug it guards
+        // against slid the brace by half a width, which is nowhere near this.
+        let tolerance = box.Width * 0.25
+        Assert.True(geometry.Bounds.Left > -tolerance,
+                    $"ink starts at {geometry.Bounds.Left}, left of the box (width {box.Width})")
+        Assert.True(geometry.Bounds.Right < box.Width + tolerance,
+                    $"ink reaches {geometry.Bounds.Right}, past the box width {box.Width}")
 
     [<Theory>]
     [<InlineData(@"\substack{a \\ b}")>]
