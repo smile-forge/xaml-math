@@ -25,6 +25,17 @@ internal abstract record CharSymbol : Atom
     {
         var font = this.GetStyledFont(environment);
         var charInfo = this.GetCharInfo(font, environment.Style);
+
+        // Every character goes through here, which is what lets oldsymbol reach the ones that are
+        // chosen by name rather than by text style - Greek letters and symbols. A font with no bold
+        // companion, or one lacking this particular character, leaves it as it is.
+        if (environment.IsBold && charInfo.IsSuccess)
+        {
+            var bold = font.GetBoldCharInfo(charInfo.Value, environment.Style);
+            if (bold.IsSuccess)
+                charInfo = bold;
+        }
+
         return new CharBox(environment, charInfo.Value);
     }
 

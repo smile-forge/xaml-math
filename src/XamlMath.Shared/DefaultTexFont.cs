@@ -167,6 +167,16 @@ internal sealed class DefaultTexFont : ITeXFont
         return metrics.Map(m => new CharInfo(charFont.Character, fontInfo.Font, size, charFont.FontId, m));
     }
 
+    public Result<CharInfo> GetBoldCharInfo(CharInfo charInfo, TexStyle style)
+    {
+        var boldFontId = fontInfoList[charInfo.FontId].BoldFontId;
+        if (boldFontId == TexFontUtilities.NoFontId)
+            return Result.Error<CharInfo>(new TexCharacterMappingNotFoundException(
+                $"Font {charInfo.FontId} has no bold companion"));
+
+        return GetCharInfo(new CharFont(charInfo.Character, boldFontId), style);
+    }
+
     public double GetKern(CharFont leftCharFont, CharFont rightCharFont, TexStyle style)
     {
         if (leftCharFont.FontId != rightCharFont.FontId)

@@ -31,6 +31,7 @@ internal sealed class TexFontInfo
         this.Space = space;
         this.Quad = quad;
         this.SkewCharacter = (char)1;
+        this.BoldFontId = TexFontUtilities.NoFontId;
     }
 
     public int FontId { get; }
@@ -65,6 +66,9 @@ internal sealed class TexFontInfo
     {
         this.extensions[character] = extensions;
     }
+
+    /// <summary>The font to take characters from under oldsymbol, or NoFontId if there is none.</summary>
+    public int BoldFontId { get; set; }
 
     public void SetMetrics(char character, double[] metrics)
     {

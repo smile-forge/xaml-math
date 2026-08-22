@@ -25,6 +25,8 @@ type AmsSymbolFontTests() =
         Assert.NotNull(root)
         Assert.NotNull(root.CreateBox(environment))
 
+    static let widthOf (markup: string) = (parse markup).RootAtom.CreateBox(environment).Width
+
     // ── msbm10: the negated relations, previously overlaid with \not ──────────────
 
     [<Theory>]
@@ -234,6 +236,49 @@ type AmsSymbolFontTests() =
         let narrow = (parse @"\mathtt{iii}").RootAtom.CreateBox(environment)
         let wide = (parse @"\mathtt{mmm}").RootAtom.CreateBox(environment)
         Assert.Equal(wide.Width, narrow.Width, 6)
+
+    // ── \boldsymbol ──────────────────────────────────────────────────────────────
+
+    [<Theory>]
+    [<InlineData(@"\boldsymbol{x}")>]
+    [<InlineData(@"\boldsymbol{\alpha}")>]
+    [<InlineData(@"\boldsymbol{\Gamma}")>]
+    [<InlineData(@"\boldsymbol{\nabla}")>]
+    [<InlineData(@"\boldsymbol{abc + \beta\gamma}")>]
+    [<InlineData(@"\bm{\theta}")>]
+    [<InlineData(@"\boldsymbol{\frac{\alpha}{\beta}}")>]
+    [<InlineData(@"\boldsymbol{x}^{\boldsymbol{2}}")>]
+    member _.``boldsymbol renders``(markup: string) = renders markup
+
+    [<Theory>]
+    [<InlineData(@"x")>]                 // a Latin variable, from the maths italic
+    [<InlineData(@"\alpha")>]            // a Greek letter, chosen by name
+    [<InlineData(@"\beta")>]
+    [<InlineData(@"\nabla")>]            // a symbol, from the symbol font
+    [<InlineData(@"\infty")>]
+    member _.``boldsymbol reaches characters a text style could not``(markup: string) =
+        // The point of the flag: Greek letters and symbols are resolved by name out of the maths and
+        // symbol fonts, so no text style could ever have made them bold. Each has to come out wider
+        // than its plain form, because it now comes from the bold companion font.
+        Assert.True(widthOf (@"\boldsymbol{" + markup + "}") > widthOf markup,
+                    $"{markup} did not get any bolder")
+
+    [<Fact>]
+    member _.``boldsymbol applies to the whole subtree``() =
+        // Not just the first character: the flag travels down the environment.
+        Assert.True(widthOf @"\boldsymbol{\alpha\beta\gamma}" > widthOf @"\alpha\beta\gamma")
+
+    [<Fact>]
+    member _.``boldsymbol ends with its argument``() =
+        Assert.Equal(widthOf @"\boldsymbol{\alpha}\beta", widthOf @"\boldsymbol{\alpha}" + widthOf @"\beta", 6)
+
+    [<Fact>]
+    member _.``a character with no bold companion is left as it is``() =
+        // The AMS symbol fonts have no bold face, so \boldsymbol has to leave them alone rather than
+        // fail to find a glyph.
+        renders @"\boldsymbol{\subsetneq}"
+        renders @"\boldsymbol{\mathbb{R}}"
+        Assert.Equal(widthOf @"\boldsymbol{\subsetneq}", widthOf @"\subsetneq", 6)
 
     // ── msam10: names that were always available, just never mapped ──────────────
 

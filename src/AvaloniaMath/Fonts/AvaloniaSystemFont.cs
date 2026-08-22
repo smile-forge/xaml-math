@@ -45,6 +45,10 @@ internal sealed class AvaloniaSystemFont : ITeXFont
     public Result<CharInfo> GetCharInfo(string name, TexStyle style) =>
         Result.Error<CharInfo>(MethodNotSupported(nameof(GetCharInfo)));
 
+    // A system font has no bold companion to switch to: the caller keeps the character it had.
+    public Result<CharInfo> GetBoldCharInfo(CharInfo charInfo, TexStyle style) =>
+        Result.Error<CharInfo>(MethodNotSupported(nameof(GetBoldCharInfo)));
+
     public double GetKern(CharFont leftChar, CharFont rightChar, TexStyle style) => 0.0;
 
     public double GetQuad(int fontId, TexStyle style) => throw MethodNotSupported(nameof(GetQuad));

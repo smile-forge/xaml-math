@@ -11,6 +11,14 @@ public sealed record TexEnvironment(
     IBrush? Background = null,
     IBrush? Foreground = null)
 {
+    /// <summary>
+    /// Whether characters should be taken from the bold companion of the font that would otherwise
+    /// carry them (oldsymbol). It is a property of the environment rather than of the atom because
+    /// it has to reach every character underneath, symbols and Greek letters included - those come
+    /// from the font by name, so nothing an atom could do to its own text style would affect them.
+    /// </summary>
+    public bool IsBold { get; init; }
+
     // ID of font that was last used.
     private int lastFontId = TexFontUtilities.NoFontId;
 

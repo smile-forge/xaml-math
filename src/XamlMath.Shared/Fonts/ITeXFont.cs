@@ -24,6 +24,13 @@ public interface ITeXFont
 
     Result<CharInfo> GetCharInfo(string name, TexStyle style);
 
+    /// <summary>
+    /// The same character taken from the bold companion of the font it is currently in, for
+    /// <c>oldsymbol</c>. Fails when there is no bold companion or it has no such character, in
+    /// which case the caller keeps what it had.
+    /// </summary>
+    Result<CharInfo> GetBoldCharInfo(CharInfo charInfo, TexStyle style);
+
     double GetKern(CharFont leftChar, CharFont rightChar, TexStyle style);
 
     double GetQuad(int fontId, TexStyle style);
