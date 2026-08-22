@@ -349,12 +349,21 @@ public class TexFormulaParser
         return afterGroupRead.source;
     }
 
-    private static SymbolAtom ParseDelimiter(SourceSpan value, int start, ref int position)
+    internal static SymbolAtom ParseDelimiter(SourceSpan value, int start, ref int position)
     {
         var afterDelimiter = ReadElement(value, position);
         position = afterDelimiter.position;
-        var delimiter = afterDelimiter.source;
+        var delimiterSource = value.Segment(start, position - start); // maps the whole "\left(" to the delimiter atom
+        return GetDelimiterAtom(afterDelimiter.source, delimiterSource);
+    }
 
+    /// <summary>
+    /// Resolves the text of a delimiter argument - <c>(</c>, <c>\{</c>, <c>\lVert</c> - to its symbol.
+    /// </summary>
+    /// <param name="delimiter">The argument itself.</param>
+    /// <param name="delimiterSource">What to record as the resulting atom's source.</param>
+    internal static SymbolAtom GetDelimiterAtom(SourceSpan delimiter, SourceSpan delimiterSource)
+    {
         string delimiterName;
         if (delimiter.Length == 1)
             delimiterName = GetDelimeterMapping(delimiter[0]);
@@ -370,7 +379,6 @@ public class TexFormulaParser
                 delimiterName = GetDelimeterMapping(delimiterName[0]);
         }
 
-        var delimiterSource = value.Segment(start, position - start); // will map the whole "\left(" to a delimiter atom created
         if (delimiterName == null || !SymbolAtom.TryGetAtom(delimiterName, delimiterSource, out var atom) || !atom.IsDelimeter)
             throw new TexParseException($"Cannot find delimiter {delimiter}");
 
@@ -957,7 +965,11 @@ public class TexFormulaParser
         var start = position;
         while (position < value.Length && !(value[position] == closeChar && group == 0))
         {
-            if (value[position] == openChar)
+            // An escaped brace is a character, not a nesting level: the { of \{ opens nothing and
+            // the } of \} closes nothing, so the escape carries its follower past the count.
+            if (value[position] == escapeChar && position + 1 < value.Length)
+                position++;
+            else if (value[position] == openChar)
                 group++;
             else if (value[position] == closeChar)
                 group--;

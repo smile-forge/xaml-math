@@ -10,8 +10,9 @@ open XamlMath.Exceptions
 open XamlMath.Rendering
 
 // The rest of what the amsmath survey (tools/amsmath-coverage) turned up: the document-level
-// constructs, which are read and dropped rather than rejected; the limit controls; and \hdotsfor,
-// the one cell in a matrix that is drawn to a width instead of setting one.
+// constructs, which are read and dropped rather than rejected; the limit controls; \hdotsfor, the
+// one cell in a matrix that is drawn to a width instead of setting one; the \big family of set-size
+// delimiters; and \genfrac, the general fraction the others are spelled with.
 type AmsMathDisplayTests() =
     static do initializeFontResourceLoading()
 
@@ -28,6 +29,19 @@ type AmsMathDisplayTests() =
         let renderer = GeometryElementRenderer(geometry, 1.0) :> IElementRenderer
         renderer.RenderElement(boxOf markup, 0.0, 0.0)
         geometry.Bounds
+
+    /// How many rules a formula draws: they are the only rectangles in one.
+    static let ruleCount (markup: string) =
+        let geometry = System.Windows.Media.GeometryGroup()
+        let renderer = GeometryElementRenderer(geometry, 1.0) :> IElementRenderer
+        renderer.RenderElement(boxOf markup, 0.0, 0.0)
+        geometry.Children
+        |> Seq.filter (fun g -> g :? System.Windows.Media.RectangleGeometry)
+        |> Seq.length
+
+    static let renders (markup: string) =
+        Assert.NotNull((parse markup).RootAtom)
+        Assert.NotNull(boxOf markup)
 
     // ── document-level commands ──────────────────────────────────────────────────
 
@@ -172,3 +186,97 @@ type AmsMathDisplayTests() =
         Assert.Equal(widthOf @"\hdotsfor{3}", widthOf @"\hdotsfor[4]{3}", 6)
         Assert.True((inkBounds @"\hdotsfor[2]{3}").Width < (inkBounds @"\hdotsfor{3}").Width)
         Assert.True((inkBounds @"\hdotsfor[4]{3}").Width < (inkBounds @"\hdotsfor[2]{3}").Width)
+
+    // ── \big, \Big, \bigg, \Bigg ─────────────────────────────────────────────────
+
+    [<Theory>]
+    [<InlineData(@"\bigl( x \bigr)")>]
+    [<InlineData(@"\Bigl[ x \Bigr]")>]
+    [<InlineData(@"\biggl\{ x \biggr\}")>]
+    [<InlineData(@"\Biggl\langle x \Biggr\rangle")>]
+    [<InlineData(@"\big| x \big|")>]
+    [<InlineData(@"x \bigm| y")>]
+    member _.``the sized delimiters render``(markup: string) = renders markup
+
+    [<Fact>]
+    member _.``the four sizes step up, starting above the plain delimiter``() =
+        let sizes = [ @"\big("; @"\Big("; @"\bigg("; @"\Bigg(" ] |> List.map heightOf
+        Assert.True(List.head sizes > heightOf @"(", "\\big should be taller than a plain (")
+        Assert.Equal<double list>(List.sort sizes, sizes)
+        Assert.Equal(4, sizes |> List.distinct |> List.length)
+
+    [<Fact>]
+    member _.``a sized delimiter does not shrink with the style``() =
+        // TeX gives \big and its friends absolute lengths rather than sizes relative to the style, so
+        // a \Big( inside a script is the delimiter it was outside one.
+        Assert.True(heightOf @"\scriptstyle(" < heightOf @"(", "a plain delimiter does shrink")
+        Assert.True(heightOf @"\scriptstyle\Big(" >= heightOf @"\Big(", "a \\Big one should not")
+
+    [<Fact>]
+    member _.``the m spelling spaces as a relation``() =
+        // Same delimiter at the same size either way; what the l/r/m spellings change is the atom
+        // type, and so the space around it.
+        Assert.Equal(heightOf @"\bigl(", heightOf @"\bigr(", 6)
+        Assert.True(widthOf @"x \bigm| y" > widthOf @"x \big| y", "a relation takes more space around it")
+
+    [<Fact>]
+    member _.``a sized delimiter needs something that is a delimiter``() =
+        Assert.Throws<TexParseException>(fun () -> parse @"\big x" |> ignore) |> ignore
+
+    // ── \genfrac ─────────────────────────────────────────────────────────────────
+
+    [<Fact>]
+    member _.``genfrac with nothing asked for is frac``() =
+        Assert.Equal(widthOf @"\frac{n}{k}", widthOf @"\genfrac{}{}{}{}{n}{k}", 6)
+        Assert.Equal(heightOf @"\frac{n}{k}", heightOf @"\genfrac{}{}{}{}{n}{k}", 6)
+
+    [<Fact>]
+    member _.``genfrac in parentheses with no rule is binom``() =
+        // Which is exactly how amsmath spells \binom, \dbinom and \tbinom, so they have to agree.
+        Assert.Equal(widthOf @"\binom{n}{k}", widthOf @"\genfrac{(}{)}{0pt}{}{n}{k}", 6)
+        Assert.Equal(heightOf @"\binom{n}{k}", heightOf @"\genfrac{(}{)}{0pt}{}{n}{k}", 6)
+        Assert.Equal(widthOf @"\dbinom{n}{k}", widthOf @"\genfrac{(}{)}{0pt}{0}{n}{k}", 6)
+        Assert.Equal(widthOf @"\tbinom{n}{k}", widthOf @"\genfrac{(}{)}{0pt}{1}{n}{k}", 6)
+
+    [<Fact>]
+    member _.``the genfrac thickness is the rule that gets drawn``() =
+        // 0pt is how \binom asks for no rule at all; a thicker one pushes the two halves apart.
+        Assert.Equal(1, ruleCount @"\genfrac{}{}{}{}{n}{k}")
+        Assert.Equal(0, ruleCount @"\genfrac{}{}{0pt}{}{n}{k}")
+        Assert.True(heightOf @"\genfrac{}{}{}{}{n}{k}" < heightOf @"\genfrac{}{}{3pt}{}{n}{k}")
+
+    [<Fact>]
+    member _.``the genfrac style number picks the size``() =
+        let widths = [ "0"; "1"; "2"; "3" ] |> List.map (fun n ->
+            widthOf (@"\genfrac{(}{)}{0pt}{" + n + @"}{n}{k}"))
+        match widths with
+        | [ display; text; script; scriptScript ] ->
+            Assert.True(display > text, "display should be larger than text")
+            Assert.True(text > script, "text should be larger than script")
+            // Script and scriptscript come out the same: a fraction sets both halves in
+            // scriptscript either way, so with no rule to move there is nothing left to shrink.
+            Assert.True(scriptScript <= script)
+        | _ -> failwith "expected four widths"
+
+    [<Theory>]
+    [<InlineData(@"\genfrac{(}{)}{0pt}{4}{n}{k}")>]
+    [<InlineData(@"\genfrac{(}{)}{banana}{}{n}{k}")>]
+    [<InlineData(@"\genfrac{(}{)}{1}{}{n}{k}")>]
+    member _.``genfrac says what it could not read``(markup: string) =
+        Assert.Throws<TexParseException>(fun () -> parse markup |> ignore) |> ignore
+
+    // ── escaped braces inside a group ────────────────────────────────────────────
+
+    [<Theory>]
+    [<InlineData(@"{\{}")>]
+    [<InlineData(@"\frac{\{}{x}")>]
+    [<InlineData(@"\text{\{}")>]
+    [<InlineData(@"\genfrac{\{}{\}}{0pt}{}{n}{k}")>]
+    member _.``an escaped brace inside a group is a character, not a nesting level``(markup: string) =
+        // \genfrac{\{}{\}} is what turned this up: the } of \} was closing the group it sat in, so
+        // every one of these was an "Illegal end, missing '}'".
+        renders markup
+
+    [<Fact>]
+    member _.``an escaped brace does not close the group around it``() =
+        Assert.Equal(widthOf @"\{", widthOf @"{\{}", 6)

@@ -104,47 +104,48 @@ internal static class StandardCommands
 
             var afterArg = TexFormulaParser.ReadElement(source, position);
             position = afterArg.position;
-            ParseLength(afterArg.source.ToString(), out var unit, out var value);
+            ParseLength(afterArg.source.ToString(), @"\hspace", out var unit, out var value);
 
             var start = context.CommandNameStartPosition;
             var atomSource = source.Segment(start, position - start);
             var atom = new SpaceAtom(atomSource, unit, value, 0, 0);
             return new CommandProcessingResult(atom, position);
         }
+    }
 
-        private static void ParseLength(string text, out TexUnit unit, out double value)
+    /// <summary>Reads a LaTeX length - "2em", "-3pt", "0pt" - into the unit and value the engine takes.</summary>
+    private static void ParseLength(string text, string command, out TexUnit unit, out double value)
+    {
+        text = text.Trim();
+        var splitIndex = text.Length;
+        for (var i = 0; i < text.Length; i++)
         {
-            text = text.Trim();
-            var splitIndex = text.Length;
-            for (var i = 0; i < text.Length; i++)
+            if (char.IsLetter(text[i]))
             {
-                if (char.IsLetter(text[i]))
-                {
-                    splitIndex = i;
-                    break;
-                }
+                splitIndex = i;
+                break;
             }
+        }
 
-            var numberPart = text.Substring(0, splitIndex).Trim();
-            var unitPart = text.Substring(splitIndex).Trim().ToLowerInvariant();
-            if (!double.TryParse(numberPart, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
-                throw new TexParseException($"Invalid \\hspace length: \"{text}\".");
+        var numberPart = text.Substring(0, splitIndex).Trim();
+        var unitPart = text.Substring(splitIndex).Trim().ToLowerInvariant();
+        if (!double.TryParse(numberPart, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+            throw new TexParseException($"Invalid {command} length: \"{text}\".");
 
-            // The engine natively supports em/ex/mu/pt/pc/px; absolute units are converted to points.
-            switch (unitPart)
-            {
-                case "em": unit = TexUnit.Em; break;
-                case "ex": unit = TexUnit.Ex; break;
-                case "mu": unit = TexUnit.Mu; break;
-                case "pt": unit = TexUnit.Point; break;
-                case "pc": unit = TexUnit.Pica; break;
-                case "px": unit = TexUnit.Pixel; break;
-                case "bp": unit = TexUnit.Point; value *= 72.27 / 72.0; break;
-                case "in": unit = TexUnit.Point; value *= 72.27; break;
-                case "cm": unit = TexUnit.Point; value *= 72.27 / 2.54; break;
-                case "mm": unit = TexUnit.Point; value *= 72.27 / 25.4; break;
-                default: throw new TexParseException($"Unsupported \\hspace unit: \"{unitPart}\".");
-            }
+        // The engine natively supports em/ex/mu/pt/pc/px; absolute units are converted to points.
+        switch (unitPart)
+        {
+            case "em": unit = TexUnit.Em; break;
+            case "ex": unit = TexUnit.Ex; break;
+            case "mu": unit = TexUnit.Mu; break;
+            case "pt": unit = TexUnit.Point; break;
+            case "pc": unit = TexUnit.Pica; break;
+            case "px": unit = TexUnit.Pixel; break;
+            case "bp": unit = TexUnit.Point; value *= 72.27 / 72.0; break;
+            case "in": unit = TexUnit.Point; value *= 72.27; break;
+            case "cm": unit = TexUnit.Point; value *= 72.27 / 2.54; break;
+            case "mm": unit = TexUnit.Point; value *= 72.27 / 25.4; break;
+            default: throw new TexParseException($"Unsupported {command} unit: \"{unitPart}\".");
         }
     }
 
@@ -549,46 +550,36 @@ internal static class StandardCommands
         }
     }
 
-    private class BinomCommand : ICommandParser
+    // inom{n}{k}, and \dbinom / 	binom which force display or text style. amsmath spells all
+    // three as \genfrac{(}{)}{0pt}{}: a fraction with no rule drawn, inside parentheses.
+    private sealed class BinomCommand : ICommandParser
     {
+        public static BinomCommand Plain { get; } = new(null);
         public static BinomCommand Display { get; } = new(TexStyle.Display);
         public static BinomCommand Text { get; } = new(TexStyle.Text);
 
         private readonly TexStyle? _style;
 
-        public BinomCommand(TexStyle? style = null)
+        private BinomCommand(TexStyle? style)
         {
             _style = style;
         }
 
         public CommandProcessingResult ProcessCommand(CommandContext context)
         {
-            var source = context.CommandSource;
             var position = context.ArgumentsStartPosition;
-            var afterTop = TexFormulaParser.ReadElement(source, position);
-            position = afterTop.position;
-            var topFormula = context.Parser.Parse(
-                        afterTop.source,
-                        context.Formula.TextStyle,
-                        context.Environment.CreateChildEnvironment());
-            var afterBottom = TexFormulaParser.ReadElement(source, position);
-            position = afterBottom.position;
-            var bottomFormula = context.Parser.Parse(
-                        afterBottom.source,
-                        context.Formula.TextStyle,
-                        context.Environment.CreateChildEnvironment());
+            var top = ReadArgument(context, ref position);
+            var bottom = ReadArgument(context, ref position);
             var start = context.CommandNameStartPosition;
-            var atomSource = source.Segment(start, position - start);
-            var topAtom = new List<Atom?> { topFormula.RootAtom };
-            var bottomAtom = new List<Atom?> { bottomFormula.RootAtom };
-            var atoms = new List<List<Atom?>> { topAtom, bottomAtom };
-            var matrixAtom = new MatrixAtom(atomSource, atoms, MatrixCellAlignment.Center);
+            var atomSource = context.CommandSource.Segment(start, position - start);
+
+            var fraction = new FractionAtom(atomSource, top.RootAtom, bottom.RootAtom, TexUnit.Point, 0);
+            if (_style is { } style)
+                fraction = fraction with { OverrideStyle = style };
+
             var left = new SymbolAtom(atomSource, "(", TexAtomType.Opening, true);
             var right = new SymbolAtom(atomSource, ")", TexAtomType.Closing, true);
-            Atom fencedAtom = new FencedAtom(atomSource, matrixAtom, left, right);
-            if (_style is { } style)
-                fencedAtom = new StyleAtom(atomSource, fencedAtom, style);
-            return new CommandProcessingResult(fencedAtom, position);
+            return new CommandProcessingResult(new FencedAtom(atomSource, fraction, left, right), position);
         }
     }
 
@@ -666,6 +657,114 @@ internal static class StandardCommands
             var position = source.Length; // we always parse the provided source until the end
             return new CommandProcessingResult(atom, position, AtomAppendMode.Replace);
         }
+    }
+
+    // \big, \Big, \bigg and \Bigg, with their l/r/m variants: a delimiter at a set size, rather than
+    // one grown to fit what it stands beside. TeX builds them by fencing an empty box 8.5, 11.5, 14.5
+    // or 17.5pt tall, and \left's sizing rule turns those into delimiters of 1.15, 1.75, 2.35 and
+    // 2.95 em - an arithmetic progression, since both the struts and the rule are linear in the size.
+    // Those lengths are absolute in TeX, so unlike almost everything else here they do not shrink
+    // with the style: \big( is the same delimiter inside a subscript as outside one.
+    private sealed class BigDelimiterCommand : ICommandParser
+    {
+        private const double SmallestHeight = 1.15;
+        private const double HeightStep = 0.6;
+
+        private readonly int _size;
+        private readonly TexAtomType _type;
+
+        public BigDelimiterCommand(int size, TexAtomType type)
+        {
+            _size = size;
+            _type = type;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var start = context.CommandNameStartPosition;
+            var position = context.ArgumentsStartPosition;
+            var delimiter = TexFormulaParser.ParseDelimiter(source, start, ref position);
+
+            var atomSource = source.Segment(start, position - start);
+            var atom = new BigDelimiterAtom(
+                atomSource,
+                delimiter.Name,
+                SmallestHeight + HeightStep * _size,
+                _type);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \genfrac{ldelim}{rdelim}{thickness}{style}{numerator}{denominator}: the general fraction that
+    // every other one in amsmath is spelled with. An empty delimiter argument means no delimiter on
+    // that side, an empty thickness means the default rule, and an empty style means whatever the
+    // surrounding one would have given.
+    private sealed class GenFracCommand : ICommandParser
+    {
+        public static GenFracCommand Instance { get; } = new();
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+
+            var left = ReadDelimiter(source, ref position);
+            var right = ReadDelimiter(source, ref position);
+            var thickness = ReadLiteral(source, ref position);
+            var style = ReadLiteral(source, ref position);
+            var numerator = ReadArgument(context, ref position);
+            var denominator = ReadArgument(context, ref position);
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+
+            FractionAtom fraction;
+            if (thickness.Length == 0)
+            {
+                fraction = new FractionAtom(atomSource, numerator.RootAtom, denominator.RootAtom, true);
+            }
+            else
+            {
+                // A thickness of 0pt is how \binom is written: a fraction with no rule drawn.
+                ParseLength(thickness, @"\genfrac", out var unit, out var value);
+                fraction = new FractionAtom(atomSource, numerator.RootAtom, denominator.RootAtom, unit, value);
+            }
+
+            if (style.Length > 0)
+                fraction = fraction with { OverrideStyle = ParseStyle(style) };
+
+            Atom atom = left == null && right == null
+                ? fraction
+                : new FencedAtom(atomSource, fraction, left, right);
+            return new CommandProcessingResult(atom, position);
+        }
+
+        private static SymbolAtom? ReadDelimiter(SourceSpan source, ref int position)
+        {
+            var after = TexFormulaParser.ReadElement(source, position);
+            position = after.position;
+            return after.source.ToString().Trim().Length == 0
+                ? null
+                : TexFormulaParser.GetDelimiterAtom(after.source, after.source);
+        }
+
+        /// <summary>Reads an argument that is a length or a digit, not maths.</summary>
+        private static string ReadLiteral(SourceSpan source, ref int position)
+        {
+            var after = TexFormulaParser.ReadElement(source, position);
+            position = after.position;
+            return after.source.ToString().Trim();
+        }
+
+        private static TexStyle ParseStyle(string text) => text switch
+        {
+            "0" => TexStyle.Display,
+            "1" => TexStyle.Text,
+            "2" => TexStyle.Script,
+            "3" => TexStyle.ScriptScript,
+            _ => throw new TexParseException($"\\genfrac takes a style of 0 to 3, not \"{text}\"."),
+        };
     }
 
     // \hdotsfor[spacing]{n}: a run of dots across n columns of a matrix, standing in for a row of
@@ -808,7 +907,7 @@ internal static class StandardCommands
         new Dictionary<string, ICommandParser>
         {
             [@"\"] = new NewLineCommand(),
-            ["binom"] = new BinomCommand(),
+            ["binom"] = BinomCommand.Plain,
             ["dbinom"] = BinomCommand.Display,
             ["tbinom"] = BinomCommand.Text,
             ["cancel"] = CancelCommand.Cancel,
@@ -847,6 +946,23 @@ internal static class StandardCommands
             ["underbrace"] = BraceCommand.Under,
             ["substack"] = MatrixCommandParser.SubStack,
             ["hdotsfor"] = HDotsForCommand.Instance,
+            ["genfrac"] = GenFracCommand.Instance,
+            ["big"] = new BigDelimiterCommand(0, TexAtomType.Ordinary),
+            ["bigl"] = new BigDelimiterCommand(0, TexAtomType.Opening),
+            ["bigr"] = new BigDelimiterCommand(0, TexAtomType.Closing),
+            ["bigm"] = new BigDelimiterCommand(0, TexAtomType.Relation),
+            ["Big"] = new BigDelimiterCommand(1, TexAtomType.Ordinary),
+            ["Bigl"] = new BigDelimiterCommand(1, TexAtomType.Opening),
+            ["Bigr"] = new BigDelimiterCommand(1, TexAtomType.Closing),
+            ["Bigm"] = new BigDelimiterCommand(1, TexAtomType.Relation),
+            ["bigg"] = new BigDelimiterCommand(2, TexAtomType.Ordinary),
+            ["biggl"] = new BigDelimiterCommand(2, TexAtomType.Opening),
+            ["biggr"] = new BigDelimiterCommand(2, TexAtomType.Closing),
+            ["biggm"] = new BigDelimiterCommand(2, TexAtomType.Relation),
+            ["Bigg"] = new BigDelimiterCommand(3, TexAtomType.Ordinary),
+            ["Biggl"] = new BigDelimiterCommand(3, TexAtomType.Opening),
+            ["Biggr"] = new BigDelimiterCommand(3, TexAtomType.Closing),
+            ["Biggm"] = new BigDelimiterCommand(3, TexAtomType.Relation),
             ["operatorname"] = new OperatorNameCommand(),
             ["boldsymbol"] = new BoldSymbolCommand(),
             ["bm"] = new BoldSymbolCommand(),

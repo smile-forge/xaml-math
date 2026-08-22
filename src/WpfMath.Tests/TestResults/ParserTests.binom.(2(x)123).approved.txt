@@ -5,45 +5,37 @@
       {
         "[AtomType]": "FencedAtom",
         "BaseAtom": {
-          "[AtomType]": "MatrixAtom",
-          "ColumnSpec": null,
-          "HorizontalPadding": 0.35,
-          "HorizontalRules": null,
-          "MatrixCellAlignment": "Center",
-          "MatrixCells": [
-            [
-              {
-                "[AtomType]": "CharAtom",
-                "Character": "2",
-                "IsTextSymbol": false,
-                "Source": {
-                  "End": 7,
-                  "Length": 1,
-                  "Source": "\\binom2{x}123",
-                  "SourceName": "User input",
-                  "Start": 6
-                },
-                "TextStyle": null,
-                "Type": "Ordinary"
-              }
-            ],
-            [
-              {
-                "[AtomType]": "CharAtom",
-                "Character": "x",
-                "IsTextSymbol": false,
-                "Source": {
-                  "End": 9,
-                  "Length": 1,
-                  "Source": "\\binom2{x}123",
-                  "SourceName": "User input",
-                  "Start": 8
-                },
-                "TextStyle": null,
-                "Type": "Ordinary"
-              }
-            ]
-          ],
+          "[AtomType]": "FractionAtom",
+          "Denominator": {
+            "[AtomType]": "CharAtom",
+            "Character": "x",
+            "IsTextSymbol": false,
+            "Source": {
+              "End": 9,
+              "Length": 1,
+              "Source": "\\binom2{x}123",
+              "SourceName": "User input",
+              "Start": 8
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "KeepContentStyle": false,
+          "Numerator": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Source": {
+              "End": 7,
+              "Length": 1,
+              "Source": "\\binom2{x}123",
+              "SourceName": "User input",
+              "Start": 6
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "OverrideStyle": null,
           "Source": {
             "End": 10,
             "Length": 9,
@@ -51,8 +43,7 @@
             "SourceName": "User input",
             "Start": 1
           },
-          "Type": "Ordinary",
-          "VerticalPadding": 0.35
+          "Type": "Inner"
         },
         "LeftDelimeter": {
           "[AtomType]": "SymbolAtom",

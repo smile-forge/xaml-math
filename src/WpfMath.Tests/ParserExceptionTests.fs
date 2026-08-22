@@ -110,5 +110,7 @@ let ``Invalid color numbers throw exceptions``(formula: string, colorModel: stri
 
 [<Fact>]
 let ``Invalid delimiter test``(): unit =
+    // \left takes a delimiter, and { is not one - \{ is. The \} at the end is an escaped brace, so
+    // nothing closes the { that \left was handed, and an unclosed group is what the parser reports.
     let ex = assertParseThrows<TexParseException> @"\left{2+2\right\}"
-    Assert.Contains(@"A delimiter should start from \, but got 2+2\right\", ex.Message)
+    Assert.Contains("missing '}'", ex.Message)
