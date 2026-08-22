@@ -56,33 +56,46 @@ internal sealed record MatrixAtom : Atom
     {
         Box CreateCell(Atom? atom) => atom is null ? StrutBox.Empty : atom.CreateBox(environment);
 
-        var cells = MatrixCells.Select(row => row.Select(CreateCell).ToArray()).ToArray();
+        var atomRows = MatrixCells.Select(row => row.ToArray()).ToArray();
+        var columnCount = atomRows.Length == 0 ? 0 : atomRows.Max(row => row.Length);
+
+        // A cell that spans several columns is drawn to their combined width, so it cannot be one of
+        // the cells deciding that width. It is left out of the measuring pass and built afterwards,
+        // once there is a width to hand it.
+        var cells = atomRows
+            .Select(row => row.Select(atom => atom is ISpanningMatrixCell ? null : CreateCell(atom)).ToArray())
+            .ToArray();
+
+        var columnWidths = new double[columnCount];
+        foreach (var row in cells)
+            for (var j = 0; j < row.Length; j++)
+                if (row[j] is { } box)
+                    columnWidths[j] = Math.Max(columnWidths[j], box.TotalWidth);
+
         var columnEdges = new List<double>();
         var rowHeights = new List<double>();
-        var columnCount = MatrixCells.Max(row => row.Count);
-        var columnWidths = Enumerable.Range(0, columnCount)
-                                     .Select(i => cells.Where(row => i < row.Length)
-                                     .Max(row => row[i].TotalWidth))
-                                     .ToArray();
-
         var rowsContainer = new VerticalBox();
-        foreach (var row in cells)
+
+        for (var r = 0; r < cells.Length; r++)
         {
-            var rowContainer = new HorizontalBox();
+            var laidOut = LayOutRow(environment, atomRows[r], cells[r], columnWidths, columnCount);
+
             // Align cells on a common baseline within the row (LaTeX behaviour): the row is made
             // tall enough for the largest ascent and deepest descent it contains, but every cell
             // sits on the same baseline rather than being vertically centred (which would raise
             // short glyphs like "a" above taller ones like "b").
-            var columnEdgeX = 0.0;
-            var rowAscent = row.Length > 0 ? row.Max(cell => cell.Height) : 0.0;
-            var rowDescent = row.Length > 0 ? row.Max(cell => cell.Depth) : 0.0;
+            var rowAscent = laidOut.Count > 0 ? laidOut.Max(cell => cell.Box.Height) : 0.0;
+            var rowDescent = laidOut.Count > 0 ? laidOut.Max(cell => cell.Box.Depth) : 0.0;
             var halfVPadding = VerticalPadding / 2;
 
-            for (var j = 0; j < columnCount; ++j)
-            {
-                var cell = row[j];
-                var columnWidth = columnWidths[j];
+            // Column edges - where a vertical rule goes - only make sense from a row that has one
+            // cell per column, so a row carrying a spanning cell is not asked for them.
+            var edgesFromThisRow = columnEdges.Count == 0 && laidOut.Count == columnCount;
+            var columnEdgeX = 0.0;
 
+            var rowContainer = new HorizontalBox();
+            foreach (var (cell, lGap, rGap) in laidOut)
+            {
                 var topGap = rowAscent - cell.Height + halfVPadding;
                 var bottomGap = rowDescent - cell.Depth + halfVPadding;
                 var cellContainer = new VerticalBox();
@@ -92,16 +105,13 @@ internal sealed record MatrixAtom : Atom
                 cellContainer.Height = cellContainer.TotalHeight;
                 cellContainer.Depth = 0;
 
-
-                var hFreeSpace = columnWidth - cell.TotalWidth;
-                var (lGap, rGap) = GetLeftRightGap(hFreeSpace, j);
                 rowContainer.Add(new StrutBox(lGap, 0.0, 0.0, 0.0));
                 rowContainer.Add(cellContainer);
                 rowContainer.Add(new StrutBox(rGap, 0.0, 0.0, 0.0));
 
-                if (columnEdges.Count == j)
+                if (edgesFromThisRow)
                     columnEdges.Add(columnEdgeX);
-                columnEdgeX += lGap + columnWidth + rGap;
+                columnEdgeX += lGap + cell.TotalWidth + rGap;
             }
 
             rowHeights.Add(rowContainer.TotalHeight);
@@ -113,7 +123,7 @@ internal sealed record MatrixAtom : Atom
         rowsContainer.Depth = containerHeight / 2 - axis;
         rowsContainer.Height = containerHeight / 2 + axis;
 
-        var rules = CreateRulesBox(environment, rowsContainer, columnEdges, columnEdgeXTotal(), rowHeights);
+        var rules = CreateRulesBox(environment, rowsContainer, columnEdges, rowsContainer.Width, rowHeights);
         if (rules == null)
             return rowsContainer;
 
@@ -124,8 +134,43 @@ internal sealed record MatrixAtom : Atom
         layered.Depth = rowsContainer.Depth;
         layered.Width = rowsContainer.Width;
         return layered;
+    }
 
-        double columnEdgeXTotal() => rowsContainer.Width;
+    /// <summary>Places one row's boxes into columns, giving a spanning cell the width of all it covers.</summary>
+    private List<PlacedCell> LayOutRow(
+        TexEnvironment environment,
+        IReadOnlyList<Atom?> atoms,
+        IReadOnlyList<Box?> boxes,
+        IReadOnlyList<double> columnWidths,
+        int columnCount)
+    {
+        var laidOut = new List<PlacedCell>();
+        var column = 0;
+        while (column < columnCount)
+        {
+            if (column < atoms.Count && atoms[column] is ISpanningMatrixCell spanning)
+            {
+                var span = Math.Max(1, Math.Min(spanning.ColumnSpan, columnCount - column));
+                var width = 0.0;
+                for (var covered = column; covered < column + span; covered++)
+                {
+                    var (left, right) = GetLeftRightGap(0.0, covered);
+                    width += left + columnWidths[covered] + right;
+                }
+
+                laidOut.Add(new PlacedCell(spanning.CreateSpanningBox(environment, width), 0.0, 0.0));
+                column += span;
+            }
+            else
+            {
+                var box = column < boxes.Count ? boxes[column] ?? StrutBox.Empty : StrutBox.Empty;
+                var (left, right) = GetLeftRightGap(columnWidths[column] - box.TotalWidth, column);
+                laidOut.Add(new PlacedCell(box, left, right));
+                column++;
+            }
+        }
+
+        return laidOut;
     }
 
     private Box? CreateRulesBox(
@@ -201,6 +246,9 @@ internal sealed record MatrixAtom : Atom
             _ => throw new ArgumentOutOfRangeException()
         };
     }
+
+    /// <summary>One cell as it sits in a row: its box, and the space either side of it.</summary>
+    private readonly record struct PlacedCell(Box Box, double LeftGap, double RightGap);
 
     private static IReadOnlyCollection<T> ToImmutableCollection<T>(IEnumerable<T> s) => s.ToList().AsReadOnly();
 }

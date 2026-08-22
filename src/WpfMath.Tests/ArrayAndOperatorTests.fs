@@ -26,6 +26,18 @@ type ArrayAndOperatorTests() =
 
     static let widthOf (markup: string) = (parse markup).RootAtom.CreateBox(environment).Width
 
+    /// The x offset of every rule an array draws: the rules are the only rectangles in one.
+    static let ruleOffsets (markup: string) =
+        let geometry = System.Windows.Media.GeometryGroup()
+        let renderer = GeometryElementRenderer(geometry, 1.0) :> IElementRenderer
+        renderer.RenderElement((parse markup).RootAtom.CreateBox(environment), 0.0, 0.0)
+        geometry.Children
+        |> Seq.choose (fun g ->
+            match g with
+            | :? System.Windows.Media.RectangleGeometry as r -> Some r.Rect.Left
+            | _ -> None)
+        |> List.ofSeq
+
     // ── array ────────────────────────────────────────────────────────────────────
 
     [<Theory>]
@@ -132,3 +144,19 @@ type ArrayAndOperatorTests() =
     [<Fact>]
     member _.``mbox keeps its spaces``() =
         Assert.True(widthOf @"\mbox{a b}" > widthOf @"\mbox{ab}")
+
+    // ── where a vertical rule lands ──────────────────────────────────────────────
+
+    [<Fact>]
+    member _.``a vertical rule sits on the column boundary, whichever row is widest``() =
+        // The rule is placed from the first row, but a column is as wide as its widest cell in any
+        // row. A first row that is not the widest must not drag the rule off the boundary with it.
+        let narrowFirst = ruleOffsets @"\begin{array}{c|c} a & b \\ xxxx & d \end{array}"
+        let widestFirst = ruleOffsets @"\begin{array}{c|c} xxxx & b \\ a & d \end{array}"
+
+        Assert.Equal(1, narrowFirst.Length)
+        Assert.Equal(widestFirst.Head, narrowFirst.Head, 6)
+        Assert.InRange(
+            narrowFirst.Head,
+            widthOf @"xxxx",
+            widthOf @"\begin{array}{c|c} a & b \\ xxxx & d \end{array}")

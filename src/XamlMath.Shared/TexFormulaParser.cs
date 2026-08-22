@@ -738,6 +738,11 @@ public class TexFormulaParser
         if (position == value.Length)
             return atom;
 
+        // The limit controls follow the operator whose scripts they place. Only an operator can
+        // carry them, so anywhere else they stay unknown commands rather than being swallowed.
+        if (atom.GetRightType() == TexAtomType.BigOperator)
+            atom = ReadLimitControls(value, ref position, atom);
+
         // Check for prime marks.
         var primesRowAtom = new RowAtom(new SourceSpan(value.SourceName, value.Source, position, 0));
         int i = position;
@@ -828,6 +833,37 @@ public class TexFormulaParser
                 initialPosition,
                 position - initialPosition);
             return new ScriptsAtom(source, atom, subscriptAtom, superscriptAtom);
+        }
+    }
+
+    /// <summary>
+    /// Reads the run of <c>\limits</c>, <c>\nolimits</c> and <c>\displaylimits</c> that may follow an
+    /// operator, and hands the operator back carrying the placement the last of them asked for.
+    /// </summary>
+    private static Atom ReadLimitControls(SourceSpan value, ref int position, Atom atom)
+    {
+        while (true)
+        {
+            var start = WithSkippedWhiteSpace(value, position);
+            if (start + 1 >= value.Length || value[start] != escapeChar)
+                return atom;
+
+            var afterCommand = ReadEscapeSequence(value, start);
+            bool? useVerticalLimits;
+            switch (afterCommand.source.Segment(1).ToString())
+            {
+                case "limits": useVerticalLimits = true; break;
+                case "nolimits": useVerticalLimits = false; break;
+                // \displaylimits asks for whatever the current style would have chosen anyway.
+                case "displaylimits": useVerticalLimits = null; break;
+                default: return atom;
+            }
+
+            // TeX lets them pile up and the last one wins, so keep reading.
+            position = afterCommand.position;
+            atom = atom is BigOperatorAtom bigOperator
+                ? bigOperator with { UseVerticalLimits = useVerticalLimits }
+                : new BigOperatorAtom(atom.Source, atom, null, null, useVerticalLimits);
         }
     }
 
