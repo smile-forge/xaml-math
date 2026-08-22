@@ -316,17 +316,6 @@
     <Return name="f" />
   </Formula>
 
-  <Formula name="nexists" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\exists" />
-    </CreateFormula>
-    <MethodInvocation name="SetFixedTypes" formula="f">
-      <Argument type="AtomType" value="Ordinary" />
-      <Argument type="AtomType" value="Ordinary" />
-    </MethodInvocation>
-    <Return name="f" />
-  </Formula>
-
   <Formula name="mapsto" enabled="true">
     <CreateFormula name="f">
       <Argument type="string" value="\vert" />
@@ -539,237 +528,6 @@
 
   <!-- amssymb negated relations. The dedicated AMS glyphs live in the msbm font, which is not
        bundled, so these overlay the base relation with the zero-width \not slash. -->
-
-  <Formula name="nless" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not&lt;" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ngtr" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not&gt;" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nleq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\leq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ngeq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\geq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nleqslant" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\leqslant" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ngeqslant" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\geqslant" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nleqq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\leqq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ngeqq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\geqq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nprec" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\prec" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nsucc" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\succ" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="npreceq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\preceq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nsucceq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\succeq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nsim" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\sim" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ncong" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\cong" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nvdash" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\vdash" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nvDash" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\vDash" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nVdash" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\Vdash" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nmid" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\mid" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nparallel" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\parallel" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nsubseteq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\subseteq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nsupseteq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\supseteq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nsubseteqq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\subseteqq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nsupseteqq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\supseteqq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ntriangleleft" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\vartriangleleft" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ntriangleright" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\vartriangleright" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ntrianglelefteq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\trianglelefteq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="ntrianglerighteq" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\trianglerighteq" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nleftarrow" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\leftarrow" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nrightarrow" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\rightarrow" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nLeftarrow" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\Leftarrow" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nRightarrow" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\Rightarrow" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nleftrightarrow" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\leftrightarrow" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
-
-  <Formula name="nLeftrightarrow" enabled="true">
-    <CreateFormula name="f">
-      <Argument type="string" value="\not\Leftrightarrow" />
-    </CreateFormula>
-    <Return name="f" />
-  </Formula>
 
   <!-- amssymb synonyms for symbols that already have a glyph. -->
 
@@ -1266,6 +1024,41 @@
     <MethodInvocation name="AddOperator" formula="f">
       <Argument type="string" value="\mathrm{cth}" />
       <Argument type="bool" value="false" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <!-- amssymb builds the dashed arrows by repeating a short axis piece. -->
+
+  <Formula name="dashrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\axisshort\axisshort\arrowaxisright" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="dashleftarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\arrowaxisleft\axisshort\axisshort" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="dasharrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\axisshort\axisshort\arrowaxisright" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Relation" />
     </MethodInvocation>
     <Return name="f" />
   </Formula>

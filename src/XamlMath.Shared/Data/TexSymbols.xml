@@ -149,7 +149,6 @@
   <Symbol name="infty" type="ord"/>
   <Symbol name="prime" type="ord"/>
   <Symbol name="emptyset" type="ord"/>
-  <Symbol name="varnothing" type="ord"/>
   <Symbol name="nabla" type="ord"/>
   <Symbol name="surdsign" type="ord"/>
   <Symbol name="top" type="ord"/>
@@ -436,4 +435,108 @@
   <Symbol name="circledcirc" type="bin"/>
   <Symbol name="circledast" type="bin"/>
   <Symbol name="circleddash" type="bin"/>
+  <!-- jlm_msbm10 (AMS symbols B). Names and atom types follow amssymb.
+       The negated relations here replace \not overlays: these are real glyphs. -->
+
+  <Symbol name="Bbbk" type="ord"/>
+  <Symbol name="Finv" type="ord"/>
+  <Symbol name="Game" type="ord"/>
+  <Symbol name="approxeq" type="rel"/>
+  <Symbol name="backepsilon" type="rel"/>
+  <Symbol name="beth" type="ord"/>
+  <Symbol name="curvearrowleft" type="rel"/>
+  <Symbol name="curvearrowright" type="rel"/>
+  <Symbol name="daleth" type="ord"/>
+  <Symbol name="diagdown" type="ord"/>
+  <Symbol name="diagup" type="ord"/>
+  <Symbol name="digamma" type="ord"/>
+  <Symbol name="divideontimes" type="bin"/>
+  <Symbol name="eqsim" type="rel"/>
+  <Symbol name="eth" type="ord"/>
+  <Symbol name="gimel" type="ord"/>
+  <Symbol name="gnapprox" type="rel"/>
+  <Symbol name="gneq" type="rel"/>
+  <Symbol name="gneqq" type="rel"/>
+  <Symbol name="gnsim" type="rel"/>
+  <Symbol name="gtrdot" type="bin"/>
+  <Symbol name="gvertneqq" type="rel"/>
+  <Symbol name="hslash" type="ord"/>
+  <Symbol name="lessdot" type="bin"/>
+  <Symbol name="lnapprox" type="rel"/>
+  <Symbol name="lneq" type="rel"/>
+  <Symbol name="lneqq" type="rel"/>
+  <Symbol name="lnsim" type="rel"/>
+  <Symbol name="ltimes" type="bin"/>
+  <Symbol name="lvertneqq" type="rel"/>
+  <Symbol name="mho" type="ord"/>
+  <Symbol name="nLeftarrow" type="rel"/>
+  <Symbol name="nLeftrightarrow" type="rel"/>
+  <Symbol name="nRightarrow" type="rel"/>
+  <Symbol name="nVDash" type="rel"/>
+  <Symbol name="nVdash" type="rel"/>
+  <Symbol name="ncong" type="rel"/>
+  <Symbol name="nexists" type="ord"/>
+  <Symbol name="ngeq" type="rel"/>
+  <Symbol name="ngeqq" type="rel"/>
+  <Symbol name="ngeqslant" type="rel"/>
+  <Symbol name="ngtr" type="rel"/>
+  <Symbol name="nleftarrow" type="rel"/>
+  <Symbol name="nleftrightarrow" type="rel"/>
+  <Symbol name="nleq" type="rel"/>
+  <Symbol name="nleqq" type="rel"/>
+  <Symbol name="nleqslant" type="rel"/>
+  <Symbol name="nless" type="rel"/>
+  <Symbol name="nmid" type="rel"/>
+  <Symbol name="nparallel" type="rel"/>
+  <Symbol name="nprec" type="rel"/>
+  <Symbol name="npreceq" type="rel"/>
+  <Symbol name="nrightarrow" type="rel"/>
+  <Symbol name="nshortmid" type="rel"/>
+  <Symbol name="nshortparallel" type="rel"/>
+  <Symbol name="nsim" type="rel"/>
+  <Symbol name="nsubseteq" type="rel"/>
+  <Symbol name="nsubseteqq" type="rel"/>
+  <Symbol name="nsucc" type="rel"/>
+  <Symbol name="nsucceq" type="rel"/>
+  <Symbol name="nsupseteq" type="rel"/>
+  <Symbol name="nsupseteqq" type="rel"/>
+  <Symbol name="ntriangleleft" type="rel"/>
+  <Symbol name="ntrianglelefteq" type="rel"/>
+  <Symbol name="ntriangleright" type="rel"/>
+  <Symbol name="ntrianglerighteq" type="rel"/>
+  <Symbol name="nvDash" type="rel"/>
+  <Symbol name="nvdash" type="rel"/>
+  <Symbol name="precapprox" type="rel"/>
+  <Symbol name="precnapprox" type="rel"/>
+  <Symbol name="precneqq" type="rel"/>
+  <Symbol name="precnsim" type="rel"/>
+  <Symbol name="rtimes" type="bin"/>
+  <Symbol name="shortmid" type="rel"/>
+  <Symbol name="shortparallel" type="rel"/>
+  <Symbol name="smallsetminus" type="bin"/>
+  <Symbol name="subsetneq" type="rel"/>
+  <Symbol name="subsetneqq" type="rel"/>
+  <Symbol name="succapprox" type="rel"/>
+  <Symbol name="succnapprox" type="rel"/>
+  <Symbol name="succneqq" type="rel"/>
+  <Symbol name="succnsim" type="rel"/>
+  <Symbol name="supsetneq" type="rel"/>
+  <Symbol name="supsetneqq" type="rel"/>
+  <Symbol name="thickapprox" type="rel"/>
+  <Symbol name="thicksim" type="rel"/>
+  <Symbol name="varkappa" type="ord"/>
+  <Symbol name="varnothing" type="ord"/>
+  <Symbol name="varsubsetneq" type="rel"/>
+  <Symbol name="varsubsetneqq" type="rel"/>
+  <Symbol name="varsupsetneq" type="rel"/>
+  <Symbol name="varsupsetneqq" type="rel"/>
+
+  <!-- jlm_msam10 pieces the dashed arrows are built from, and the registered sign,
+       which amssymb declares outside \DeclareMathSymbol. -->
+
+  <Symbol name="axisshort" type="ord"/>
+  <Symbol name="arrowaxisright" type="ord"/>
+  <Symbol name="arrowaxisleft" type="ord"/>
+  <Symbol name="circledR" type="ord"/>
+
 </TeXSymbols>

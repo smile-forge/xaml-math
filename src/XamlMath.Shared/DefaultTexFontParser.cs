@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Xml.Linq;
 using XamlMath.Data;
 using XamlMath.Fonts;
@@ -13,7 +14,6 @@ internal sealed class DefaultTexFontParser
 {
     private static readonly string resourceName = TexUtilities.ResourcesDataDirectory + "DefaultTexFont.xml";
 
-    private const int fontIdCount = 5;
 
     private static readonly IReadOnlyDictionary<string, int> rangeTypeMappings;
     private static readonly IReadOnlyDictionary<string, ICharChildParser> charChildParsers;
@@ -55,32 +55,33 @@ internal sealed class DefaultTexFontParser
 
     public IReadOnlyList<TexFontInfo> GetFontDescriptions()
     {
-        var result = new TexFontInfo[fontIdCount];
-
         var fontDescriptions = rootElement.Element("FontDescriptions");
-        if (fontDescriptions != null)
+        var fonts = fontDescriptions?.Elements("Font").ToList() ?? new List<XElement>();
+
+        // Sized to the ids the data actually declares: a hard-coded count silently means an
+        // IndexOutOfRange the moment a font is added.
+        var result = new TexFontInfo[fonts.Count == 0 ? 0 : fonts.Max(f => f.AttributeInt32Value("id")) + 1];
+
+        foreach (var fontElement in fonts)
         {
-            foreach (var fontElement in fontDescriptions.Elements("Font"))
-            {
-                var fontName = fontElement.AttributeValue("name");
-                var fontId = fontElement.AttributeInt32Value("id");
-                var space = fontElement.AttributeDoubleValue("space");
-                var xHeight = fontElement.AttributeDoubleValue("xHeight");
-                var quad = fontElement.AttributeDoubleValue("quad");
-                var skewChar = fontElement.AttributeInt32Value("skewChar", -1);
+            var fontName = fontElement.AttributeValue("name");
+            var fontId = fontElement.AttributeInt32Value("id");
+            var space = fontElement.AttributeDoubleValue("space");
+            var xHeight = fontElement.AttributeDoubleValue("xHeight");
+            var quad = fontElement.AttributeDoubleValue("quad");
+            var skewChar = fontElement.AttributeInt32Value("skewChar", -1);
 
-                var font = _fontProvider.ReadFontFile(fontName);
-                var fontInfo = new TexFontInfo(fontId, font, xHeight, space, quad);
-                if (skewChar != -1)
-                    fontInfo.SkewCharacter = (char)skewChar;
+            var font = _fontProvider.ReadFontFile(fontName);
+            var fontInfo = new TexFontInfo(fontId, font, xHeight, space, quad);
+            if (skewChar != -1)
+                fontInfo.SkewCharacter = (char)skewChar;
 
-                foreach (var charElement in fontElement.Elements("Char"))
-                    ProcessCharElement(charElement, fontInfo);
+            foreach (var charElement in fontElement.Elements("Char"))
+                ProcessCharElement(charElement, fontInfo);
 
-                if (result[fontId] != null)
-                    throw new InvalidOperationException($"Multiple entries for font with ID {fontId}.");
-                result[fontId] = fontInfo;
-            }
+            if (result[fontId] != null)
+                throw new InvalidOperationException($"Multiple entries for font with ID {fontId}.");
+            result[fontId] = fontInfo;
         }
 
         return result;

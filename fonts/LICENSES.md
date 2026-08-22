@@ -14,9 +14,9 @@ The files are distributed under the terms of the Knuth License, reproduced below
 
 [ctan.cm]: https://ctan.org/tex-archive/fonts/cm
 
-## `jlm_msam10.ttf`
+## `jlm_msam10.ttf` and `jlm_msbm10.ttf`
 
-This software contains the font file `jlm_msam10.ttf` ([taken from JLaTeXMath project][jlatexmath.fonts]) that is licensed under the Open Font License, reproduced below.
+This software contains the font files `jlm_msam10.ttf` and `jlm_msbm10.ttf` ([taken from JLaTeXMath project][jlatexmath.fonts]) that are licensed under the Open Font License, reproduced below. The licence text names `msam10` and `msbm10` among its Reserved Font Names, which is why the converted files carry the `jlm_` prefix.
 
 ```
 Copyright (c) 1997, 2009, American Mathematical Society (http://www.ams.org).
