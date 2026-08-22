@@ -121,7 +121,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 ## The `xm_*.ttf` faces
 
-This software contains six font files converted from the Type 1 outlines in [the AMS `amsfonts` distribution][ctan.amsfonts]:
+This software contains eight font files converted from the Type 1 outlines in [the AMS `amsfonts` distribution][ctan.amsfonts]:
 
 | File | Converted from | Backs |
 |---|---|---|
@@ -131,8 +131,10 @@ This software contains six font files converted from the Type 1 outlines in [the
 | `xm_cmti10.ttf` | `cmti10` | `\textit` |
 | `xm_cmcsc10.ttf` | `cmcsc10` | `\textsc` |
 | `xm_eufm10.ttf` | `eufm10` | `\mathfrak` |
+| `xm_cmmib10.ttf` | `cmmib10` | `\boldsymbol` (maths italic) |
+| `xm_cmbsy10.ttf` | `cmbsy10` | `\boldsymbol` (symbols) |
 
-They carry the same American Mathematical Society copyright and Open Font License as `jlm_msam10.ttf` and `jlm_msbm10.ttf` above, and that licence text names every one of `cmbx10`, `cmss10`, `cmtt10`, `cmti10`, `cmcsc10` and `eufm10` as a Reserved Font Name. Converting Type 1 outlines to TrueType makes a Modified Version, so each file and the font name inside it were renamed (`xm_cmbx10.ttf` holding `XMCMBX10`, and so on) as clause 3 of the licence requires. Nothing else about the fonts was altered: the glyphs, the advance widths and the encoding are the originals, checked against the AFM files shipped alongside the Type 1 sources.
+They carry the same American Mathematical Society copyright and Open Font License as `jlm_msam10.ttf` and `jlm_msbm10.ttf` above, and that licence text names every one of `cmbx10`, `cmss10`, `cmtt10`, `cmti10`, `cmcsc10`, `eufm10`, `cmmib10` and `cmbsy10` as a Reserved Font Name. Converting Type 1 outlines to TrueType makes a Modified Version, so each file and the font name inside it were renamed (`xm_cmbx10.ttf` holding `XMCMBX10`, and so on) as clause 3 of the licence requires. Nothing else about the fonts was altered: the glyphs, the advance widths and the encoding are the originals, checked against the AFM files shipped alongside the Type 1 sources.
 
 [ctan.amsfonts]: https://ctan.org/pkg/amsfonts
 

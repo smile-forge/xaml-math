@@ -38,6 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Six more faces, converted from the Type 1 outlines in the AMS `amsfonts` distribution, so that every font-switching command now has the alphabet it names rather than a roman stand-in: `cmbx10` behind `\mathbf`/`\textbf`, `cmss10` behind `\mathsf`/`\textsf`, `cmtt10` behind `\mathtt`/`\texttt`, `cmti10` behind `\textit`, `cmcsc10` behind `\textsc`, and Euler Fraktur `eufm10` behind `\mathfrak`.
 
   `\textit` had been pointed at the *maths* italic, which spaces letters as though each were a separate variable; `\textsc` faked small capitals by mapping lowercase onto the capital range, and now uses the small capitals `cmcsc10` actually has. Metrics for all six were generated from the converted fonts and check out against the AFM files that ship with the Type 1 sources — every advance width, every code.
+- `\boldsymbol{…}` (also spelled `\bm`), with the bold maths faces `cmmib10` and `cmbsy10` behind it. It is not a text style: a text style picks which alphabet a *letter* comes from, and Greek letters and symbols are resolved by name straight out of the maths and symbol fonts, so no text style could ever have reached them. Instead `TexEnvironment` carries an `IsBold` flag that every character consults as it resolves, and each `<Font>` in `DefaultTexFont.xml` names the `boldId` of the face to take characters from while it is set. So `\boldsymbol{\alpha}`, `\boldsymbol{\nabla}` and `\boldsymbol{x}` all come out bold, and a character whose font has no bold companion — an AMS symbol, say — is simply left as it is.
 - `\overbrace{…}` and `\underbrace{…}`, drawn with the horizontal-delimiter machinery that was already in the library but that nothing reached from markup. Both are operators, as in LaTeX: the script that follows (`^` for `\overbrace`, `_` for `\underbrace`) is set beyond the brace rather than beside it, and a script on the other side stays an ordinary one.
 - `\substack{… \\ …}`, for stacking the lines of a big operator's limit — script size, set solid rather than at table row spacing.
 
@@ -47,6 +48,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - for **Avalonia-Math**: **.NET Framework 4.6.2** or later, **.NET Standard 2.0** or later, **.NET 8** or later.
 
 ### Changed
+- **(Breaking!)** `ITeXFont` gains `GetBoldCharInfo`, needed so that `\boldsymbol` can ask a font for the bold companion of a character it has already resolved. Only affects code implementing the interface itself.
 - The exception classes are now `sealed` (should not break anything, since there never was any sense in extending them in the user code).
 - Avalonia: `AvaloniaMathFontProvider::Instance` is now read-only.
 

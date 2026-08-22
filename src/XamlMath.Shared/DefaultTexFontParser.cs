@@ -70,11 +70,13 @@ internal sealed class DefaultTexFontParser
             var xHeight = fontElement.AttributeDoubleValue("xHeight");
             var quad = fontElement.AttributeDoubleValue("quad");
             var skewChar = fontElement.AttributeInt32Value("skewChar", -1);
+            var boldId = fontElement.AttributeInt32Value("boldId", TexFontUtilities.NoFontId);
 
             var font = _fontProvider.ReadFontFile(fontName);
             var fontInfo = new TexFontInfo(fontId, font, xHeight, space, quad);
             if (skewChar != -1)
                 fontInfo.SkewCharacter = (char)skewChar;
+            fontInfo.BoldFontId = boldId;
 
             foreach (var charElement in fontElement.Elements("Char"))
                 ProcessCharElement(charElement, fontInfo);

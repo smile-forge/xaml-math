@@ -496,6 +496,22 @@ internal static class StandardCommands
         }
     }
 
+    // \boldsymbol{…} (also spelled \bm): every character underneath comes from the bold companion of
+    // the font it would otherwise use, which is what makes it work on Greek letters and symbols
+    // rather than only on the Latin ones a text style could reach.
+    private sealed class BoldSymbolCommand : ICommandParser
+    {
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var content = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new BoldAtom(atomSource, content.RootAtom);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -639,6 +655,8 @@ internal static class StandardCommands
             ["overbrace"] = BraceCommand.Over,
             ["underbrace"] = BraceCommand.Under,
             ["substack"] = MatrixCommandParser.SubStack,
+            ["boldsymbol"] = new BoldSymbolCommand(),
+            ["bm"] = new BoldSymbolCommand(),
             ["boxed"] = new BoxedCommand(),
             ["fbox"] = new BoxedCommand(),
             ["phantom"] = PhantomCommand.Both,
