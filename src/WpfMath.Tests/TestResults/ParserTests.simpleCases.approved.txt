@@ -4,7 +4,7 @@
     "BaseAtom": {
       "[AtomType]": "MatrixAtom",
       "ColumnSpec": null,
-      "HorizontalPadding": 0.35,
+      "HorizontalPadding": 1.0,
       "HorizontalRules": null,
       "MatrixCellAlignment": "Left",
       "MatrixCells": [
@@ -370,6 +370,7 @@
         "SourceName": "User input",
         "Start": 1
       },
+      "SuppressOuterPadding": true,
       "Type": "Ordinary",
       "VerticalPadding": 0.35
     },

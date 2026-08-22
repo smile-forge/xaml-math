@@ -78,6 +78,8 @@
     <Map char="=" symbol="equals"/>
     <Map char="[" symbol="lbrack"/>
     <Map char="}" symbol="rbrace"/>
+    <Map char="`" symbol="lq"/>
+    <Map char="&quot;" symbol="rqq"/>
   </CharacterToSymbolMappings>
 
   <!-- character-to-delimiter-mappings

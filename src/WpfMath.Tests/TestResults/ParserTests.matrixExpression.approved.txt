@@ -63,7 +63,7 @@
         "BaseAtom": {
           "[AtomType]": "MatrixAtom",
           "ColumnSpec": null,
-          "HorizontalPadding": 0.35,
+          "HorizontalPadding": 1.0,
           "HorizontalRules": null,
           "MatrixCellAlignment": "Center",
           "MatrixCells": [
@@ -645,6 +645,7 @@
             "SourceName": "User input",
             "Start": 21
           },
+          "SuppressOuterPadding": true,
           "Type": "Ordinary",
           "VerticalPadding": 0.35
         },
@@ -788,7 +789,7 @@
         "BaseAtom": {
           "[AtomType]": "MatrixAtom",
           "ColumnSpec": null,
-          "HorizontalPadding": 0.35,
+          "HorizontalPadding": 1.0,
           "HorizontalRules": null,
           "MatrixCellAlignment": "Center",
           "MatrixCells": [
@@ -926,6 +927,7 @@
             "SourceName": "User input",
             "Start": 113
           },
+          "SuppressOuterPadding": true,
           "Type": "Ordinary",
           "VerticalPadding": 0.35
         },
@@ -1013,7 +1015,7 @@
         "BaseAtom": {
           "[AtomType]": "MatrixAtom",
           "ColumnSpec": null,
-          "HorizontalPadding": 0.35,
+          "HorizontalPadding": 1.0,
           "HorizontalRules": null,
           "MatrixCellAlignment": "Center",
           "MatrixCells": [
@@ -1151,6 +1153,7 @@
             "SourceName": "User input",
             "Start": 160
           },
+          "SuppressOuterPadding": true,
           "Type": "Ordinary",
           "VerticalPadding": 0.35
         },

@@ -582,7 +582,11 @@ internal static class StandardCommands
             var start = context.CommandNameStartPosition;
             var atomSource = context.CommandSource.Segment(start, position - start);
 
-            var fraction = new FractionAtom(atomSource, top.RootAtom, bottom.RootAtom, TexUnit.Point, 0);
+            // The parentheses stand where a bare fraction's null delimiter space would be.
+            var fraction = new FractionAtom(atomSource, top.RootAtom, bottom.RootAtom, TexUnit.Point, 0)
+            {
+                SuppressNullDelimiterSpace = true,
+            };
             if (_style is { } style)
                 fraction = fraction with { OverrideStyle = style };
 
@@ -781,6 +785,10 @@ internal static class StandardCommands
 
             if (style.Length > 0)
                 fraction = fraction with { OverrideStyle = ParseStyle(style) };
+
+            // Delimiters stand where the null delimiter space otherwise goes.
+            if (left != null || right != null)
+                fraction = fraction with { SuppressNullDelimiterSpace = true };
 
             Atom atom = left == null && right == null
                 ? fraction

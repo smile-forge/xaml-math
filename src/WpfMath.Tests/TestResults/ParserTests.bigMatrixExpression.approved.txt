@@ -102,7 +102,7 @@
         "BaseAtom": {
           "[AtomType]": "MatrixAtom",
           "ColumnSpec": null,
-          "HorizontalPadding": 0.35,
+          "HorizontalPadding": 1.0,
           "HorizontalRules": null,
           "MatrixCellAlignment": "Center",
           "MatrixCells": [
@@ -112,7 +112,7 @@
                 "BaseAtom": {
                   "[AtomType]": "MatrixAtom",
                   "ColumnSpec": null,
-                  "HorizontalPadding": 0.35,
+                  "HorizontalPadding": 1.0,
                   "HorizontalRules": null,
                   "MatrixCellAlignment": "Center",
                   "MatrixCells": [
@@ -422,6 +422,7 @@
                     "SourceName": "User input",
                     "Start": 39
                   },
+                  "SuppressOuterPadding": true,
                   "Type": "Ordinary",
                   "VerticalPadding": 0.35
                 },
@@ -457,7 +458,7 @@
                 "BaseAtom": {
                   "[AtomType]": "MatrixAtom",
                   "ColumnSpec": null,
-                  "HorizontalPadding": 0.35,
+                  "HorizontalPadding": 1.0,
                   "HorizontalRules": null,
                   "MatrixCellAlignment": "Center",
                   "MatrixCells": [
@@ -515,6 +516,7 @@
                           "SourceName": "User input",
                           "Start": 117
                         },
+                        "SuppressNullDelimiterSpace": false,
                         "Type": "Inner"
                       },
                       {
@@ -572,6 +574,7 @@
                           "SourceName": "User input",
                           "Start": 136
                         },
+                        "SuppressNullDelimiterSpace": false,
                         "Type": "Inner"
                       },
                       {
@@ -893,6 +896,7 @@
                     "SourceName": "User input",
                     "Start": 104
                   },
+                  "SuppressOuterPadding": true,
                   "Type": "Ordinary",
                   "VerticalPadding": 0.35
                 },
@@ -928,7 +932,7 @@
                 "BaseAtom": {
                   "[AtomType]": "MatrixAtom",
                   "ColumnSpec": null,
-                  "HorizontalPadding": 0.35,
+                  "HorizontalPadding": 1.0,
                   "HorizontalRules": null,
                   "MatrixCellAlignment": "Center",
                   "MatrixCells": [
@@ -1000,6 +1004,7 @@
                           "SourceName": "User input",
                           "Start": 215
                         },
+                        "SuppressNullDelimiterSpace": false,
                         "Type": "Inner"
                       }
                     ],
@@ -1183,6 +1188,7 @@
                           "SourceName": "User input",
                           "Start": 238
                         },
+                        "SuppressNullDelimiterSpace": false,
                         "Type": "Inner"
                       }
                     ],
@@ -1226,6 +1232,7 @@
                           "SourceName": "User input",
                           "Start": 264
                         },
+                        "SuppressNullDelimiterSpace": false,
                         "Type": "Inner"
                       },
                       {
@@ -1379,6 +1386,7 @@
                           "SourceName": "User input",
                           "Start": 278
                         },
+                        "SuppressNullDelimiterSpace": false,
                         "Type": "Inner"
                       },
                       {
@@ -1404,6 +1412,7 @@
                     "SourceName": "User input",
                     "Start": 198
                   },
+                  "SuppressOuterPadding": true,
                   "Type": "Ordinary",
                   "VerticalPadding": 0.35
                 },
@@ -1441,6 +1450,7 @@
             "SourceName": "User input",
             "Start": 30
           },
+          "SuppressOuterPadding": true,
           "Type": "Ordinary",
           "VerticalPadding": 0.35
         },

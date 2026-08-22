@@ -557,4 +557,11 @@
   <Symbol name="lVert" type="open" del="true"/>
   <Symbol name="rVert" type="close" del="true"/>
 
+  <!-- Quotation marks: ordinary characters, as they are in text. -->
+
+  <Symbol name="lq" type="ord"/>
+  <Symbol name="rq" type="ord"/>
+  <Symbol name="lqq" type="ord"/>
+  <Symbol name="rqq" type="ord"/>
+
 </TeXSymbols>

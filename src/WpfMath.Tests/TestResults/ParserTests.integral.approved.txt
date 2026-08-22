@@ -51,7 +51,7 @@
       "TextStyle": null,
       "Type": "Ordinary"
     },
-    "UseVerticalLimits": null
+    "UseVerticalLimits": false
   },
   "Source": {
     "End": 8,

@@ -8,7 +8,10 @@ namespace XamlMath.Parsers.Matrices;
 /// <summary>A parser for matrix-like constructs.</summary>
 internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
 {
-    internal static readonly MatrixCommandParser Align = new(null, null, MatrixCellAlignment.Aligned);
+    // An aligned block is not a table: its columns are an equation and its parts, so they keep the
+    // close spacing they had rather than taking a column gap.
+    internal static readonly MatrixCommandParser Align =
+        new(null, null, MatrixCellAlignment.Aligned, horizontalPadding: MatrixAtom.DefaultPadding);
     internal static readonly MatrixCommandParser Cases = new("lbrace", null, MatrixCellAlignment.Left);
     internal static readonly MatrixCommandParser Matrix = new(null, null, MatrixCellAlignment.Center);
     internal static readonly MatrixCommandParser PMatrix = new("(", ")", MatrixCellAlignment.Center); // \pmatrix ( )
@@ -40,7 +43,7 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
         MatrixCellAlignment cellAlignment,
         TexStyle? style = null,
         double verticalPadding = MatrixAtom.DefaultPadding,
-        double horizontalPadding = MatrixAtom.DefaultPadding)
+        double horizontalPadding = MatrixAtom.DefaultColumnGap)
     {
         _leftDelimiterSymbolName = leftDelimiterSymbolName;
         _rightDelimiterSymbolName = rightDelimiterSymbolName;
@@ -81,7 +84,15 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
         var matrixSource = context.EnvironmentSource;
 
         var cells = ReadMatrixCells(context.Parser, context.Formula, cellsSource, context.Environment);
-        var matrix = new MatrixAtom(matrixSource, cells, _cellAlignment, _verticalPadding, _horizontalPadding);
+        // A matrix has no outer gap - its brackets sit against its contents - but an aligned block is
+        // not bracketed and its columns are its own business, so it keeps what it had.
+        var matrix = new MatrixAtom(
+            matrixSource,
+            cells,
+            _cellAlignment,
+            _verticalPadding,
+            _horizontalPadding,
+            suppressOuterPadding: _cellAlignment != MatrixCellAlignment.Aligned);
 
         SymbolAtom? GetDelimiter(string? name) =>
             name == null
