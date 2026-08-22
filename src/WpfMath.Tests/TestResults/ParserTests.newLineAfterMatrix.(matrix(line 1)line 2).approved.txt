@@ -1,13 +1,17 @@
 {
   "RootAtom": {
     "[AtomType]": "MatrixAtom",
+    "ColumnSpec": null,
     "HorizontalPadding": 0.35,
+    "HorizontalRules": null,
     "MatrixCellAlignment": "Left",
     "MatrixCells": [
       [
         {
           "[AtomType]": "MatrixAtom",
+          "ColumnSpec": null,
           "HorizontalPadding": 0.35,
+          "HorizontalRules": null,
           "MatrixCellAlignment": "Center",
           "MatrixCells": [
             [

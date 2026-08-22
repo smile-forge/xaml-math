@@ -512,6 +512,34 @@ internal static class StandardCommands
         }
     }
 
+    // \operatorname{name} sets a function name upright and, more importantly, types it as an
+    // operator: that is what gives it operator spacing and lets a following script become a limit.
+    // The starred form takes its limits above and below in display style, as \sum does.
+    private sealed class OperatorNameCommand : ICommandParser
+    {
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+
+            var starred = position < source.Length && source[position] == '*';
+            if (starred)
+                position++;
+
+            var after = TexFormulaParser.ReadElement(source, position);
+            position = after.position;
+            var name = context.Parser.Parse(after.source, "mathrm", context.Environment.CreateChildEnvironment());
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+
+            // null lets the style decide, which is what the starred form means; false keeps the
+            // limits beside the name whatever the style, which is the plain form.
+            var atom = new BigOperatorAtom(atomSource, name.RootAtom, null, null, starred ? null : (bool?)false);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -655,6 +683,7 @@ internal static class StandardCommands
             ["overbrace"] = BraceCommand.Over,
             ["underbrace"] = BraceCommand.Under,
             ["substack"] = MatrixCommandParser.SubStack,
+            ["operatorname"] = new OperatorNameCommand(),
             ["boldsymbol"] = new BoldSymbolCommand(),
             ["bm"] = new BoldSymbolCommand(),
             ["boxed"] = new BoxedCommand(),
@@ -684,6 +713,7 @@ internal static class StandardCommands
     internal static readonly IReadOnlyDictionary<string, IEnvironmentParser> Environments =
         new Dictionary<string, IEnvironmentParser>
         {
+            ["array"] = ArrayCommandParser.Instance,
             ["align"] = MatrixCommandParser.Align,
             ["align*"] = MatrixCommandParser.Align,
             ["aligned"] = MatrixCommandParser.Align,

@@ -76,7 +76,9 @@
         "[AtomType]": "FencedAtom",
         "BaseAtom": {
           "[AtomType]": "MatrixAtom",
+          "ColumnSpec": null,
           "HorizontalPadding": 0.35,
+          "HorizontalRules": null,
           "MatrixCellAlignment": "Left",
           "MatrixCells": [
             [

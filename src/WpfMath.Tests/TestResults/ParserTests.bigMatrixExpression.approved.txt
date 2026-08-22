@@ -101,7 +101,9 @@
         "[AtomType]": "FencedAtom",
         "BaseAtom": {
           "[AtomType]": "MatrixAtom",
+          "ColumnSpec": null,
           "HorizontalPadding": 0.35,
+          "HorizontalRules": null,
           "MatrixCellAlignment": "Center",
           "MatrixCells": [
             [
@@ -109,7 +111,9 @@
                 "[AtomType]": "FencedAtom",
                 "BaseAtom": {
                   "[AtomType]": "MatrixAtom",
+                  "ColumnSpec": null,
                   "HorizontalPadding": 0.35,
+                  "HorizontalRules": null,
                   "MatrixCellAlignment": "Center",
                   "MatrixCells": [
                     [
@@ -452,7 +456,9 @@
                 "[AtomType]": "FencedAtom",
                 "BaseAtom": {
                   "[AtomType]": "MatrixAtom",
+                  "ColumnSpec": null,
                   "HorizontalPadding": 0.35,
+                  "HorizontalRules": null,
                   "MatrixCellAlignment": "Center",
                   "MatrixCells": [
                     [
@@ -921,7 +927,9 @@
                 "[AtomType]": "FencedAtom",
                 "BaseAtom": {
                   "[AtomType]": "MatrixAtom",
+                  "ColumnSpec": null,
                   "HorizontalPadding": 0.35,
+                  "HorizontalRules": null,
                   "MatrixCellAlignment": "Center",
                   "MatrixCells": [
                     [
