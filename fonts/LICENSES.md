@@ -121,7 +121,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 ## `jlm_rsfs10.ttf`
 
-This software contains the font file `jlm_rsfs10.ttf` - Ralph Smith's Formal Script - ([taken from JLaTeXMath project][jlatexmath.fonts]). The original `rsfs` fonts are by Ralph Smith, released for free use and redistribution; [they are distributed from CTAN][ctan.rsfs] under the terms reproduced there. The converted file carries the `jlm_` prefix rather than the original name.
+This software contains the font file `jlm_rsfs10.ttf` — Ralph Smith's Formal Script ([taken from JLaTeXMath project][jlatexmath.fonts]). The original `rsfs` fonts are by Ralph Smith and are [distributed from CTAN][ctan.rsfs], where the accompanying README grants:
+
+> You are welcome to use and distribute these files; if you modify them,
+> please change the name but give credit to the original author!
+
+>          - Ralph Smith
+
+The converted file carries the `jlm_` prefix rather than the original name, as that grant requires.
 
 [ctan.rsfs]: https://ctan.org/pkg/rsfs
 
