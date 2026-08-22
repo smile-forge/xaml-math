@@ -249,6 +249,201 @@ internal static class StandardCommands
         }
     }
 
+    // \displaystyle, \textstyle, \scriptstyle and \scriptscriptstyle are switches, not one-argument commands:
+    // they apply from where they appear to the end of the enclosing group. Reading only the next element would
+    // leave the scripts of e.g. "\displaystyle\sum_{i=1}^{n}" outside the switch, which is where the style
+    // actually matters (display style is what moves the limits above and below the operator).
+    private sealed class StyleCommand : ICommandParser
+    {
+        public static StyleCommand Display { get; } = new(TexStyle.Display);
+        public static StyleCommand Text { get; } = new(TexStyle.Text);
+        public static StyleCommand Script { get; } = new(TexStyle.Script);
+        public static StyleCommand ScriptScript { get; } = new(TexStyle.ScriptScript);
+
+        private readonly TexStyle _style;
+
+        private StyleCommand(TexStyle style)
+        {
+            _style = style;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var start = context.CommandNameStartPosition;
+
+            // The rest of the group is the argument. It keeps the current environment rather than a child one, so
+            // that a switch inside a matrix cell doesn't swallow the row and cell separators.
+            var rest = source.Segment(context.ArgumentsStartPosition);
+            var formula = context.Parser.Parse(rest, context.Formula.TextStyle, context.Environment);
+
+            var atomSource = source.Segment(start, source.Length - start);
+            var atom = new StyleAtom(atomSource, formula.RootAtom, _style);
+            return new CommandProcessingResult(atom, source.Length);
+        }
+    }
+
+    // \overset{ann}{base}, \underset{ann}{base} and \stackrel{ann}{rel}: the annotation is set in script size
+    // above or below the base. \stackrel differs from \overset only in the spacing it gets: its result is a
+    // relation (it exists to stack something over an arrow), so it is typed as one.
+    private sealed class StackedAnnotationCommand : ICommandParser
+    {
+        public static StackedAnnotationCommand Overset { get; } = new(over: true, asRelation: false);
+        public static StackedAnnotationCommand Underset { get; } = new(over: false, asRelation: false);
+        public static StackedAnnotationCommand Stackrel { get; } = new(over: true, asRelation: true);
+
+        private const double AnnotationSpace = 2.5; // mu, the same order as the \overbrace-style annotations
+
+        private readonly bool _over;
+        private readonly bool _asRelation;
+
+        private StackedAnnotationCommand(bool over, bool asRelation)
+        {
+            _over = over;
+            _asRelation = asRelation;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var annotation = ReadArgument(context, ref position);
+            var baseFormula = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+
+            Atom atom = new UnderOverAtom(
+                atomSource,
+                baseFormula.RootAtom,
+                annotation.RootAtom,
+                TexUnit.Mu,
+                AnnotationSpace,
+                true,
+                _over);
+
+            if (_asRelation)
+                atom = new TypedAtom(atomSource, atom, TexAtomType.Relation, TexAtomType.Relation);
+
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \phantom{x} and its one-dimensional variants: the content is measured and then not drawn, so it reserves
+    // space without printing anything.
+    private sealed class PhantomCommand : ICommandParser
+    {
+        public static PhantomCommand Both { get; } = new(useWidth: true, useHeight: true);
+        public static PhantomCommand Horizontal { get; } = new(useWidth: true, useHeight: false);
+        public static PhantomCommand Vertical { get; } = new(useWidth: false, useHeight: true);
+
+        private readonly bool _useWidth;
+        private readonly bool _useHeight;
+
+        private PhantomCommand(bool useWidth, bool useHeight)
+        {
+            _useWidth = useWidth;
+            _useHeight = useHeight;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var content = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new PhantomAtom(atomSource, content.RootAtom, _useWidth, _useHeight, _useHeight);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \smash{x} draws the content and reports no height, \math?lap{x} draws it and reports no width. Both are the
+    // inverse of \phantom: ink without extent rather than extent without ink.
+    private sealed class SmashCommand : ICommandParser
+    {
+        public static SmashCommand Smash { get; } = new(null);
+        public static SmashCommand Llap { get; } = new(TexAlignment.Left);
+        public static SmashCommand Rlap { get; } = new(TexAlignment.Right);
+        public static SmashCommand Clap { get; } = new(TexAlignment.Center);
+
+        private readonly TexAlignment? _lapAlignment;
+
+        private SmashCommand(TexAlignment? lapAlignment)
+        {
+            _lapAlignment = lapAlignment;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var content = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = _lapAlignment is { } alignment
+                ? (Atom)new LapAtom(atomSource, content.RootAtom, alignment)
+                : new SmashAtom(atomSource, content.RootAtom);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \boxed{x} and \fbox{x}: the content inside a rectangular frame.
+    private sealed class BoxedCommand : ICommandParser
+    {
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var content = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new BoxedAtom(atomSource, content.RootAtom);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \xrightarrow[under]{over} and friends: an arrow stretched to fit the labels written over (and optionally
+    // under) it. The under label is the optional argument, as in LaTeX.
+    private sealed class ExtensibleArrowCommand : ICommandParser
+    {
+        public static ExtensibleArrowCommand Right { get; } = new(ArrowDecoration.HeadRight);
+        public static ExtensibleArrowCommand Left { get; } = new(ArrowDecoration.HeadLeft);
+        public static ExtensibleArrowCommand Both { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.HeadRight);
+        public static ExtensibleArrowCommand DoubleRight { get; } =
+            new(ArrowDecoration.HeadRight | ArrowDecoration.DoubleShaft);
+        public static ExtensibleArrowCommand DoubleLeft { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.DoubleShaft);
+        public static ExtensibleArrowCommand DoubleBoth { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.HeadRight | ArrowDecoration.DoubleShaft);
+        public static ExtensibleArrowCommand MapsTo { get; } =
+            new(ArrowDecoration.HeadRight | ArrowDecoration.TailBarLeft);
+
+        private readonly ArrowDecoration _decoration;
+
+        private ExtensibleArrowCommand(ArrowDecoration decoration)
+        {
+            _decoration = decoration;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+
+            var underSource = TexFormulaParser.ReadElementGroupOptional(source, ref position, '[', ']');
+            var under = underSource == null
+                ? null
+                : context.Parser.Parse(
+                    underSource,
+                    context.Formula.TextStyle,
+                    context.Environment.CreateChildEnvironment());
+
+            var over = ReadArgument(context, ref position);
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+            var atom = new ExtensibleArrowAtom(atomSource, over.RootAtom, under?.RootAtom, _decoration);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -382,6 +577,32 @@ internal static class StandardCommands
             ["cfrac"] = new CfracCommand(),
             ["nicefrac"] = new SlashFractionCommand(),
             ["sfrac"] = new SlashFractionCommand(),
+            ["xrightarrow"] = ExtensibleArrowCommand.Right,
+            ["xleftarrow"] = ExtensibleArrowCommand.Left,
+            ["xleftrightarrow"] = ExtensibleArrowCommand.Both,
+            ["xRightarrow"] = ExtensibleArrowCommand.DoubleRight,
+            ["xLeftarrow"] = ExtensibleArrowCommand.DoubleLeft,
+            ["xLeftrightarrow"] = ExtensibleArrowCommand.DoubleBoth,
+            ["xmapsto"] = ExtensibleArrowCommand.MapsTo,
+            ["boxed"] = new BoxedCommand(),
+            ["fbox"] = new BoxedCommand(),
+            ["phantom"] = PhantomCommand.Both,
+            ["hphantom"] = PhantomCommand.Horizontal,
+            ["vphantom"] = PhantomCommand.Vertical,
+            ["smash"] = SmashCommand.Smash,
+            ["mathllap"] = SmashCommand.Llap,
+            ["mathrlap"] = SmashCommand.Rlap,
+            ["mathclap"] = SmashCommand.Clap,
+            ["llap"] = SmashCommand.Llap,
+            ["rlap"] = SmashCommand.Rlap,
+            ["clap"] = SmashCommand.Clap,
+            ["overset"] = StackedAnnotationCommand.Overset,
+            ["underset"] = StackedAnnotationCommand.Underset,
+            ["stackrel"] = StackedAnnotationCommand.Stackrel,
+            ["displaystyle"] = StyleCommand.Display,
+            ["textstyle"] = StyleCommand.Text,
+            ["scriptstyle"] = StyleCommand.Script,
+            ["scriptscriptstyle"] = StyleCommand.ScriptScript,
             ["pmod"] = ParenModCommand.Pmod,
             ["pod"] = ParenModCommand.Pod,
             ["begin"] = new ProcessEnvironmentCommand()
@@ -391,6 +612,15 @@ internal static class StandardCommands
         new Dictionary<string, IEnvironmentParser>
         {
             ["align"] = MatrixCommandParser.Align,
+            ["align*"] = MatrixCommandParser.Align,
+            ["aligned"] = MatrixCommandParser.Align,
+            ["split"] = MatrixCommandParser.Align,
+            ["gather"] = MatrixCommandParser.Gathered,
+            ["gather*"] = MatrixCommandParser.Gathered,
+            ["gathered"] = MatrixCommandParser.Gathered,
+            ["cases"] = MatrixCommandParser.Cases,
+            ["matrix"] = MatrixCommandParser.Matrix,
+            ["smallmatrix"] = MatrixCommandParser.SmallMatrix,
             ["pmatrix"] = MatrixCommandParser.PMatrix,
             ["bmatrix"] = MatrixCommandParser.BMatrix,
             ["Bmatrix"] = MatrixCommandParser.BbMatrix,

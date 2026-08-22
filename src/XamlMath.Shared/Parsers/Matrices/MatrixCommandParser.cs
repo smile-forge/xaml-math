@@ -16,19 +16,27 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
     internal static readonly MatrixCommandParser BbMatrix = new("lbrace", "rbrace", MatrixCellAlignment.Center); // \Bmatrix { }
     internal static readonly MatrixCommandParser VMatrix = new("vert", "vert", MatrixCellAlignment.Center); // \vmatrix | |
     internal static readonly MatrixCommandParser VvMatrix = new("Vert", "Vert", MatrixCellAlignment.Center); // \Vmatrix ‖ ‖
+    internal static readonly MatrixCommandParser Gathered = new(null, null, MatrixCellAlignment.Center);
+
+    // \smallmatrix is an inline matrix: the same layout, set in script size.
+    internal static readonly MatrixCommandParser SmallMatrix =
+        new(null, null, MatrixCellAlignment.Center, TexStyle.Script);
 
     private readonly string? _leftDelimiterSymbolName;
     private readonly string? _rightDelimiterSymbolName;
     private readonly MatrixCellAlignment _cellAlignment;
+    private readonly TexStyle? _style;
 
     private MatrixCommandParser(
         string? leftDelimiterSymbolName,
         string? rightDelimiterSymbolName,
-        MatrixCellAlignment cellAlignment)
+        MatrixCellAlignment cellAlignment,
+        TexStyle? style = null)
     {
         _leftDelimiterSymbolName = leftDelimiterSymbolName;
         _rightDelimiterSymbolName = rightDelimiterSymbolName;
         _cellAlignment = cellAlignment;
+        _style = style;
     }
 
     public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -80,6 +88,10 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
                 matrix,
                 leftDelimiter,
                 rightDelimiter);
+
+        if (_style is { } style)
+            atom = new StyleAtom(matrixSource, atom, style);
+
         return new EnvironmentProcessingResult(atom);
     }
 

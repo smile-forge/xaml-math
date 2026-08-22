@@ -503,9 +503,42 @@
     <Return name="f" />
   </Formula>
 
+  <Formula name="Longleftarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\Leftarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\equals" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="impliedby" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\thickspace\Longleftarrow\thickspace" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
   <!-- amssymb negated relations. The dedicated AMS glyphs live in the msbm font, which is not
-       bundled, so these overlay the base relation with the zero-width 
-ot slash. -->
+       bundled, so these overlay the base relation with the zero-width \not slash. -->
 
   <Formula name="nless" enabled="true">
     <CreateFormula name="f">

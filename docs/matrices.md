@@ -29,6 +29,9 @@ There's also a matrix-like construct:
 
 - `\cases`: for piecewise functions etc
 
+The `smallmatrix` and `gathered` environments have no command form — see the documentation on
+[environments][].
+
 See also the documentation on [environments][].
 
 [environments]: environments.md
