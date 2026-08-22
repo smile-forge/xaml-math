@@ -559,6 +559,15 @@ internal static class StandardCommands
         new Dictionary<string, IEnvironmentParser>
         {
             ["align"] = MatrixCommandParser.Align,
+            ["align*"] = MatrixCommandParser.Align,
+            ["aligned"] = MatrixCommandParser.Align,
+            ["split"] = MatrixCommandParser.Align,
+            ["gather"] = MatrixCommandParser.Gathered,
+            ["gather*"] = MatrixCommandParser.Gathered,
+            ["gathered"] = MatrixCommandParser.Gathered,
+            ["cases"] = MatrixCommandParser.Cases,
+            ["matrix"] = MatrixCommandParser.Matrix,
+            ["smallmatrix"] = MatrixCommandParser.SmallMatrix,
             ["pmatrix"] = MatrixCommandParser.PMatrix,
             ["bmatrix"] = MatrixCommandParser.BMatrix,
             ["Bmatrix"] = MatrixCommandParser.BbMatrix,
