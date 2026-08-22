@@ -53,8 +53,9 @@ internal sealed class OverUnderBox : Box
                 TranslationX: translationX,
                 TranslationY: translationY,
 
-                // Draw script box as superscript.
-                YPosition: centerY - this.Kern - this.ScriptBox!.Depth // Nullable TODO: This probably needs null checking
+                // Draw script box as superscript. The delimiter can stand alone (an unlabelled
+                // \overbrace), in which case there is no script box to place.
+                YPosition: this.ScriptBox == null ? 0.0 : centerY - this.Kern - this.ScriptBox.Depth
             );
         }
         else
@@ -70,7 +71,7 @@ internal sealed class OverUnderBox : Box
                 TranslationY: translationY,
 
                 // Draw script box as subscript.
-                YPosition: centerY + this.Kern + this.ScriptBox!.Height // Nullable TODO: This probably needs null checking
+                YPosition: this.ScriptBox == null ? 0.0 : centerY + this.Kern + this.ScriptBox.Height
             );
         }
     }

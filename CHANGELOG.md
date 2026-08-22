@@ -28,6 +28,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - The environments `matrix`, `cases`, `aligned`, `split`, `gather`, `gathered`, `smallmatrix`, and the starred `align*`/`gather*`. `smallmatrix` is a matrix set in script size; `cases` and `matrix` previously existed only as commands.
 - `\Longleftarrow` and the AMS abbreviation `\impliedby`, completing the set alongside `\implies` and `\iff`.
 - `\textcolor{…}{…}` as a spelling of the existing two-argument `\color`.
+- `\overbrace{…}` and `\underbrace{…}`, drawn with the horizontal-delimiter machinery that was already in the library but that nothing reached from markup. Both are operators, as in LaTeX: the script that follows (`^` for `\overbrace`, `_` for `\underbrace`) is set beyond the brace rather than beside it, and a script on the other side stays an ordinary one.
+- `\substack{… \\ …}`, for stacking the lines of a big operator's limit — script size, set solid rather than at table row spacing.
 
 ### Removed
 - **(Breaking change!)** Support for .NET 6 and 7. The new list of supported frameworks:
@@ -42,6 +44,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `pmatrix` now renders with parentheses `( )` instead of square brackets `[ ]`, matching LaTeX (the square-bracket variant is `bmatrix`).
 - Matrix cells of differing heights within a row now share a common baseline instead of each being vertically centred, so short glyphs (e.g. `a`) no longer float above taller ones (e.g. `b`). Affects `\matrix`/`\pmatrix`/`\cases`/`align` and the matrix-based commands.
 - `UnderOverAtom` built the gap below the base with the *over* unit rather than the under one. An atom that only has an under-annotation leaves the over unit at its default (`em`), so a gap asked for in `mu` came out 18× too large and the annotation sat far below the base. Visible in `\underset{n \to \infty}{\lim}`, and in anything going through `TexFormulaHelper.PutUnder`.
+- `OverUnderBox` reached for its script box while positioning, even when it had none, so a horizontal delimiter with no label (`\overbrace{a+b}`) threw a `NullReferenceException` on render.
 
 ## [2.1.0] - 2023-07-15
 ### Changed

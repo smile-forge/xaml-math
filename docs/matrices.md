@@ -25,9 +25,12 @@ The following matrix types are supported (each named after its delimiters, follo
 - `\vmatrix`: a matrix within single vertical bars `| |`
 - `\Vmatrix`: a matrix within double vertical bars `‖ ‖`
 
-There's also a matrix-like construct:
+There are also matrix-like constructs:
 
 - `\cases`: for piecewise functions etc
+- `\substack{… \\ …}`: stacks several conditions into one limit of a big operator, e.g.
+  `\sum_{\substack{0 < i < m \\ 0 < j < n}} P(i, j)`. Set in script size, and solid rather than at
+  table row spacing.
 
 The `smallmatrix` and `gathered` environments have no command form — see the documentation on
 [environments][].

@@ -444,6 +444,58 @@ internal static class StandardCommands
         }
     }
 
+    // \overbrace{body}^{label} and \underbrace{body}_{label}: a brace stretched to the width of the
+    // body, with an optional label beyond it. LaTeX makes these operators, so a script written after
+    // one belongs above (or below) the brace rather than beside it — which means reading it here,
+    // before the parser attaches it as an ordinary script.
+    private sealed class BraceCommand : ICommandParser
+    {
+        public static BraceCommand Over { get; } = new(over: true);
+        public static BraceCommand Under { get; } = new(over: false);
+
+        private const double LabelKern = 0.5; // ex, between the brace and its label
+
+        private readonly bool _over;
+
+        private BraceCommand(bool over)
+        {
+            _over = over;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+            var body = ReadArgument(context, ref position);
+
+            Atom? label = null;
+            var afterBody = TexFormulaParser.WithSkippedWhiteSpace(source, position);
+            if (afterBody < source.Length && source[afterBody] == (_over ? '^' : '_'))
+            {
+                position = afterBody + 1;
+                label = ReadArgument(context, ref position).RootAtom;
+            }
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+
+            // The brace is a vertical delimiter stretched to the body's width and drawn rotated, so the
+            // two halves of the curly-brace pair are what open upwards and downwards.
+            var name = TexFormulaParser.DelimiterNames[(int)TexDelimiter.Brace][
+                (int)(_over ? TexDelimeterType.Over : TexDelimeterType.Under)];
+
+            var atom = new OverUnderDelimiter(
+                atomSource,
+                body.RootAtom,
+                label,
+                SymbolAtom.GetAtom(name, atomSource),
+                TexUnit.Ex,
+                LabelKern,
+                _over);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -584,6 +636,9 @@ internal static class StandardCommands
             ["xLeftarrow"] = ExtensibleArrowCommand.DoubleLeft,
             ["xLeftrightarrow"] = ExtensibleArrowCommand.DoubleBoth,
             ["xmapsto"] = ExtensibleArrowCommand.MapsTo,
+            ["overbrace"] = BraceCommand.Over,
+            ["underbrace"] = BraceCommand.Under,
+            ["substack"] = MatrixCommandParser.SubStack,
             ["boxed"] = new BoxedCommand(),
             ["fbox"] = new BoxedCommand(),
             ["phantom"] = PhantomCommand.Both,
