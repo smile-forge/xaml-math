@@ -283,6 +283,50 @@ internal static class StandardCommands
         }
     }
 
+    // \overset{ann}{base}, \underset{ann}{base} and \stackrel{ann}{rel}: the annotation is set in script size
+    // above or below the base. \stackrel differs from \overset only in the spacing it gets: its result is a
+    // relation (it exists to stack something over an arrow), so it is typed as one.
+    private sealed class StackedAnnotationCommand : ICommandParser
+    {
+        public static StackedAnnotationCommand Overset { get; } = new(over: true, asRelation: false);
+        public static StackedAnnotationCommand Underset { get; } = new(over: false, asRelation: false);
+        public static StackedAnnotationCommand Stackrel { get; } = new(over: true, asRelation: true);
+
+        private const double AnnotationSpace = 2.5; // mu, the same order as the \overbrace-style annotations
+
+        private readonly bool _over;
+        private readonly bool _asRelation;
+
+        private StackedAnnotationCommand(bool over, bool asRelation)
+        {
+            _over = over;
+            _asRelation = asRelation;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var annotation = ReadArgument(context, ref position);
+            var baseFormula = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+
+            Atom atom = new UnderOverAtom(
+                atomSource,
+                baseFormula.RootAtom,
+                annotation.RootAtom,
+                TexUnit.Mu,
+                AnnotationSpace,
+                true,
+                _over);
+
+            if (_asRelation)
+                atom = new TypedAtom(atomSource, atom, TexAtomType.Relation, TexAtomType.Relation);
+
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -416,6 +460,9 @@ internal static class StandardCommands
             ["cfrac"] = new CfracCommand(),
             ["nicefrac"] = new SlashFractionCommand(),
             ["sfrac"] = new SlashFractionCommand(),
+            ["overset"] = StackedAnnotationCommand.Overset,
+            ["underset"] = StackedAnnotationCommand.Underset,
+            ["stackrel"] = StackedAnnotationCommand.Stackrel,
             ["displaystyle"] = StyleCommand.Display,
             ["textstyle"] = StyleCommand.Text,
             ["scriptstyle"] = StyleCommand.Script,
