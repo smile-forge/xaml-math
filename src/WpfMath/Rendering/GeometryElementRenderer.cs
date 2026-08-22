@@ -58,23 +58,32 @@ public class GeometryElementRenderer : IElementRenderer
 
     private static void ApplyTransformations(IEnumerable<Transformation> transformations, GeometryGroup geometry)
     {
+        // Transform.Value hands back a Matrix by value, so the transformations have to be accumulated
+        // here and assigned once — mutating that copy left the geometry untransformed.
+        //
+        // Each one is *prepended*, which is what makes the list read the same way as it does through
+        // the drawing-context renderer: there the last transformation pushed is the first the content
+        // sees, so a [translate, rotate] pair rotates and then translates.
+        var matrix = Matrix.Identity;
         foreach (var transformation in transformations)
         {
-            ApplyTransformation(transformation, geometry);
+            ApplyTransformation(transformation, ref matrix);
         }
+
+        geometry.Transform = new MatrixTransform(matrix);
     }
 
-    private static void ApplyTransformation(Transformation transformation, GeometryGroup geometry)
+    private static void ApplyTransformation(Transformation transformation, ref Matrix matrix)
     {
         switch (transformation.Kind)
         {
             case TransformationKind.Translate:
                 var tt = (Transformation.Translate)transformation;
-                geometry.Transform.Value.Translate(tt.X, tt.Y);
+                matrix.TranslatePrepend(tt.X, tt.Y);
                 break;
             case TransformationKind.Rotate:
                 var rt = (Transformation.Rotate)transformation;
-                geometry.Transform.Value.Rotate(rt.RotationDegrees);
+                matrix.RotatePrepend(rt.RotationDegrees);
                 break;
             default:
                 throw new NotSupportedException($"Unknown {nameof(Transformation)} kind: {transformation.Kind}");

@@ -55,8 +55,14 @@ internal sealed record OverUnderDelimiter : Atom
         var maxWidth = GetMaxWidth(baseBox, delimeterBox, scriptBox);
         if (Math.Abs(maxWidth - baseBox.Width) > TexUtilities.FloatPrecision)
             baseBox = new HorizontalBox(baseBox, maxWidth, TexAlignment.Center);
-        if (Math.Abs(maxWidth - delimeterBox.Height - delimeterBox.Depth) > TexUtilities.FloatPrecision)
-            delimeterBox = new VerticalBox(delimeterBox, maxWidth, TexAlignment.Center);
+
+        // The delimiter is drawn rotated, so its height plus depth is what has to reach across the
+        // width. Mind the constructors: HorizontalBox takes the width to fill, VerticalBox takes the
+        // leftover to share out — handing it the width instead pads the delimiter by half a width on
+        // each side, which slides the whole thing sideways.
+        var delimeterLength = delimeterBox.Height + delimeterBox.Depth;
+        if (Math.Abs(maxWidth - delimeterLength) > TexUtilities.FloatPrecision)
+            delimeterBox = new VerticalBox(delimeterBox, maxWidth - delimeterLength, TexAlignment.Center);
         if (scriptBox != null && Math.Abs(maxWidth - scriptBox.Width) > TexUtilities.FloatPrecision)
             scriptBox = new HorizontalBox(scriptBox, maxWidth, TexAlignment.Center);
 
