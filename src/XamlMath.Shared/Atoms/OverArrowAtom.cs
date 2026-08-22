@@ -23,7 +23,11 @@ internal sealed record OverArrowAtom : Atom
         var baseBox = this.BaseAtom == null ? StrutBox.Empty : this.BaseAtom.CreateBox(environment.GetCrampedStyle());
 
         var thickness = environment.MathFont.GetDefaultLineThickness(environment.Style);
-        var arrowBox = new ArrowBox(environment, baseBox.Width, thickness, _pointsRight);
+        var arrowBox = new ArrowBox(
+            environment,
+            baseBox.Width,
+            thickness,
+            _pointsRight ? ArrowDecoration.HeadRight : ArrowDecoration.HeadLeft);
 
         var resultBox = new VerticalBox();
         resultBox.Add(new StrutBox(0, thickness, 0, 0));

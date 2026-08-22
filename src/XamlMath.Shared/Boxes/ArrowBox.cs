@@ -3,17 +3,39 @@ using XamlMath.Rendering;
 
 namespace XamlMath.Boxes;
 
-// Box that draws a single horizontal arrow (a shaft plus one arrowhead) spanning its full width.
-// Used to build the stretchy accents \overrightarrow and \overleftarrow.
+/// <summary>What an <see cref="ArrowBox"/> draws on top of its shaft.</summary>
+[Flags]
+internal enum ArrowDecoration
+{
+    None = 0,
+
+    /// <summary>An arrowhead at the left end.</summary>
+    HeadLeft = 1,
+
+    /// <summary>An arrowhead at the right end.</summary>
+    HeadRight = 2,
+
+    /// <summary>Two parallel shafts instead of one, for the \Rightarrow family.</summary>
+    DoubleShaft = 4,
+
+    /// <summary>A vertical bar at the left end, for \mapsto.</summary>
+    TailBarLeft = 8,
+}
+
+// Box that draws a horizontal arrow spanning its full width: a shaft, arrowheads at either or both ends, and
+// optionally a tail bar. Used both for the stretchy accents (\overrightarrow) and for the extensible arrows
+// (\xrightarrow).
 internal sealed class ArrowBox : Box
 {
-    private readonly bool _pointsRight;
+    private readonly ArrowDecoration _decoration;
+    private readonly double _thickness;
     private readonly double _headHalfHeight;
     private readonly double _headLength;
 
-    public ArrowBox(TexEnvironment environment, double width, double thickness, bool pointsRight)
+    public ArrowBox(TexEnvironment environment, double width, double thickness, ArrowDecoration decoration)
     {
-        _pointsRight = pointsRight;
+        _decoration = decoration;
+        _thickness = thickness;
         _headHalfHeight = 2.0 * thickness;
         _headLength = 5.0 * thickness;
 
@@ -31,19 +53,41 @@ internal sealed class ArrowBox : Box
         var left = x;
         var right = x + this.Width;
 
-        renderer.RenderLine(new Point(left, shaftY), new Point(right, shaftY), this.Foreground);
-
-        // Arrowhead: two short strokes converging on the pointing end.
-        var headLength = Math.Min(_headLength, this.Width);
-        if (_pointsRight)
+        if (_decoration.HasFlag(ArrowDecoration.DoubleShaft))
         {
-            renderer.RenderLine(new Point(right, shaftY), new Point(right - headLength, shaftY - _headHalfHeight), this.Foreground);
-            renderer.RenderLine(new Point(right, shaftY), new Point(right - headLength, shaftY + _headHalfHeight), this.Foreground);
+            var offset = _thickness;
+            renderer.RenderLine(new Point(left, shaftY - offset), new Point(right, shaftY - offset), this.Foreground);
+            renderer.RenderLine(new Point(left, shaftY + offset), new Point(right, shaftY + offset), this.Foreground);
         }
         else
         {
-            renderer.RenderLine(new Point(left, shaftY), new Point(left + headLength, shaftY - _headHalfHeight), this.Foreground);
-            renderer.RenderLine(new Point(left, shaftY), new Point(left + headLength, shaftY + _headHalfHeight), this.Foreground);
+            renderer.RenderLine(new Point(left, shaftY), new Point(right, shaftY), this.Foreground);
+        }
+
+        // Arrowheads: two short strokes converging on the pointing end.
+        var headLength = Math.Min(_headLength, this.Width);
+        if (_decoration.HasFlag(ArrowDecoration.HeadRight))
+        {
+            renderer.RenderLine(
+                new Point(right, shaftY), new Point(right - headLength, shaftY - _headHalfHeight), this.Foreground);
+            renderer.RenderLine(
+                new Point(right, shaftY), new Point(right - headLength, shaftY + _headHalfHeight), this.Foreground);
+        }
+
+        if (_decoration.HasFlag(ArrowDecoration.HeadLeft))
+        {
+            renderer.RenderLine(
+                new Point(left, shaftY), new Point(left + headLength, shaftY - _headHalfHeight), this.Foreground);
+            renderer.RenderLine(
+                new Point(left, shaftY), new Point(left + headLength, shaftY + _headHalfHeight), this.Foreground);
+        }
+
+        if (_decoration.HasFlag(ArrowDecoration.TailBarLeft))
+        {
+            renderer.RenderLine(
+                new Point(left, shaftY - _headHalfHeight),
+                new Point(left, shaftY + _headHalfHeight),
+                this.Foreground);
         }
     }
 

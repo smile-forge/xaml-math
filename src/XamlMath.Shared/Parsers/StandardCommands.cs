@@ -398,6 +398,52 @@ internal static class StandardCommands
         }
     }
 
+    // \xrightarrow[under]{over} and friends: an arrow stretched to fit the labels written over (and optionally
+    // under) it. The under label is the optional argument, as in LaTeX.
+    private sealed class ExtensibleArrowCommand : ICommandParser
+    {
+        public static ExtensibleArrowCommand Right { get; } = new(ArrowDecoration.HeadRight);
+        public static ExtensibleArrowCommand Left { get; } = new(ArrowDecoration.HeadLeft);
+        public static ExtensibleArrowCommand Both { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.HeadRight);
+        public static ExtensibleArrowCommand DoubleRight { get; } =
+            new(ArrowDecoration.HeadRight | ArrowDecoration.DoubleShaft);
+        public static ExtensibleArrowCommand DoubleLeft { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.DoubleShaft);
+        public static ExtensibleArrowCommand DoubleBoth { get; } =
+            new(ArrowDecoration.HeadLeft | ArrowDecoration.HeadRight | ArrowDecoration.DoubleShaft);
+        public static ExtensibleArrowCommand MapsTo { get; } =
+            new(ArrowDecoration.HeadRight | ArrowDecoration.TailBarLeft);
+
+        private readonly ArrowDecoration _decoration;
+
+        private ExtensibleArrowCommand(ArrowDecoration decoration)
+        {
+            _decoration = decoration;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+
+            var underSource = TexFormulaParser.ReadElementGroupOptional(source, ref position, '[', ']');
+            var under = underSource == null
+                ? null
+                : context.Parser.Parse(
+                    underSource,
+                    context.Formula.TextStyle,
+                    context.Environment.CreateChildEnvironment());
+
+            var over = ReadArgument(context, ref position);
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+            var atom = new ExtensibleArrowAtom(atomSource, over.RootAtom, under?.RootAtom, _decoration);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -531,6 +577,13 @@ internal static class StandardCommands
             ["cfrac"] = new CfracCommand(),
             ["nicefrac"] = new SlashFractionCommand(),
             ["sfrac"] = new SlashFractionCommand(),
+            ["xrightarrow"] = ExtensibleArrowCommand.Right,
+            ["xleftarrow"] = ExtensibleArrowCommand.Left,
+            ["xleftrightarrow"] = ExtensibleArrowCommand.Both,
+            ["xRightarrow"] = ExtensibleArrowCommand.DoubleRight,
+            ["xLeftarrow"] = ExtensibleArrowCommand.DoubleLeft,
+            ["xLeftrightarrow"] = ExtensibleArrowCommand.DoubleBoth,
+            ["xmapsto"] = ExtensibleArrowCommand.MapsTo,
             ["boxed"] = new BoxedCommand(),
             ["fbox"] = new BoxedCommand(),
             ["phantom"] = PhantomCommand.Both,
