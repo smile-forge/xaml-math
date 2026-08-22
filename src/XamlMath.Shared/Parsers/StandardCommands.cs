@@ -384,6 +384,20 @@ internal static class StandardCommands
         }
     }
 
+    // \boxed{x} and \fbox{x}: the content inside a rectangular frame.
+    private sealed class BoxedCommand : ICommandParser
+    {
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var content = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new BoxedAtom(atomSource, content.RootAtom);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -517,6 +531,8 @@ internal static class StandardCommands
             ["cfrac"] = new CfracCommand(),
             ["nicefrac"] = new SlashFractionCommand(),
             ["sfrac"] = new SlashFractionCommand(),
+            ["boxed"] = new BoxedCommand(),
+            ["fbox"] = new BoxedCommand(),
             ["phantom"] = PhantomCommand.Both,
             ["hphantom"] = PhantomCommand.Horizontal,
             ["vphantom"] = PhantomCommand.Vertical,
