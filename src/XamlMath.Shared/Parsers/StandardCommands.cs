@@ -249,6 +249,40 @@ internal static class StandardCommands
         }
     }
 
+    // \displaystyle, \textstyle, \scriptstyle and \scriptscriptstyle are switches, not one-argument commands:
+    // they apply from where they appear to the end of the enclosing group. Reading only the next element would
+    // leave the scripts of e.g. "\displaystyle\sum_{i=1}^{n}" outside the switch, which is where the style
+    // actually matters (display style is what moves the limits above and below the operator).
+    private sealed class StyleCommand : ICommandParser
+    {
+        public static StyleCommand Display { get; } = new(TexStyle.Display);
+        public static StyleCommand Text { get; } = new(TexStyle.Text);
+        public static StyleCommand Script { get; } = new(TexStyle.Script);
+        public static StyleCommand ScriptScript { get; } = new(TexStyle.ScriptScript);
+
+        private readonly TexStyle _style;
+
+        private StyleCommand(TexStyle style)
+        {
+            _style = style;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var start = context.CommandNameStartPosition;
+
+            // The rest of the group is the argument. It keeps the current environment rather than a child one, so
+            // that a switch inside a matrix cell doesn't swallow the row and cell separators.
+            var rest = source.Segment(context.ArgumentsStartPosition);
+            var formula = context.Parser.Parse(rest, context.Formula.TextStyle, context.Environment);
+
+            var atomSource = source.Segment(start, source.Length - start);
+            var atom = new StyleAtom(atomSource, formula.RootAtom, _style);
+            return new CommandProcessingResult(atom, source.Length);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -382,6 +416,10 @@ internal static class StandardCommands
             ["cfrac"] = new CfracCommand(),
             ["nicefrac"] = new SlashFractionCommand(),
             ["sfrac"] = new SlashFractionCommand(),
+            ["displaystyle"] = StyleCommand.Display,
+            ["textstyle"] = StyleCommand.Text,
+            ["scriptstyle"] = StyleCommand.Script,
+            ["scriptscriptstyle"] = StyleCommand.ScriptScript,
             ["pmod"] = ParenModCommand.Pmod,
             ["pod"] = ParenModCommand.Pod,
             ["begin"] = new ProcessEnvironmentCommand()
