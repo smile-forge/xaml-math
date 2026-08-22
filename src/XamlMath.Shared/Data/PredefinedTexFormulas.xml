@@ -1063,4 +1063,88 @@
     <Return name="f" />
   </Formula>
 
+  <!-- amsmath names its dots for what they sit among; each resolves to one of the two shapes -->
+  <Formula name="dotsb" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\cdots" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="dotsi" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\cdots" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="dotsm" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\cdots" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="dotsc" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\ldots" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="dotso" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\ldots" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <!-- The limit-like operators of amsmath: names, and lim wearing a decoration. -->
+
+  <Formula name="injlim" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddOperator" formula="f">
+      <Argument type="string" value="\mathrm{inj\,lim}" />
+      <Argument type="bool" value="true" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="projlim" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddOperator" formula="f">
+      <Argument type="string" value="\mathrm{proj\,lim}" />
+      <Argument type="bool" value="true" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="varliminf" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\underline{\lim}" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="varlimsup" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\overline{\lim}" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="varinjlim" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\underset{\longrightarrow}{\lim}" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="varprojlim" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\underset{\longleftarrow}{\lim}" />
+    </CreateFormula>
+    <Return name="f" />
+  </Formula>
+
 </PredefinedFormulas>

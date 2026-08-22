@@ -250,6 +250,29 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
     <SymbolMapping name="Psi" ch="170" fontId="1"/>
     <SymbolMapping name="Omega" ch="173" fontId="1"/>
 
+    <!-- The italic capitals amsmath calls \varGamma and friends. Same codes as the
+         upright ones above, taken from the maths italic rather than the roman. -->
+
+    <SymbolMapping name="varGamma" ch="161" fontId="0"/>
+    <SymbolMapping name="varDelta" ch="162" fontId="0"/>
+    <SymbolMapping name="varTheta" ch="163" fontId="0"/>
+    <SymbolMapping name="varLambda" ch="164" fontId="0"/>
+    <SymbolMapping name="varXi" ch="165" fontId="0"/>
+    <SymbolMapping name="varPi" ch="166" fontId="0"/>
+    <SymbolMapping name="varSigma" ch="167" fontId="0"/>
+    <SymbolMapping name="varUpsilon" ch="168" fontId="0"/>
+    <SymbolMapping name="varPhi" ch="169" fontId="0"/>
+    <SymbolMapping name="varPsi" ch="170" fontId="0"/>
+    <SymbolMapping name="varOmega" ch="173" fontId="0"/>
+
+    <!-- Bars that carry a side: same glyphs as \vert and \Vert, typed as
+         opening or closing so they space like the delimiters they are. -->
+
+    <SymbolMapping name="lvert" ch="106" fontId="3"/>
+    <SymbolMapping name="rvert" ch="106" fontId="3"/>
+    <SymbolMapping name="lVert" ch="107" fontId="3"/>
+    <SymbolMapping name="rVert" ch="107" fontId="3"/>
+
     <!-- miscellaneous symbols of type "ord" -->
 
     <SymbolMapping name="aleph" ch="64" fontId="3"/>
