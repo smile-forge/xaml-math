@@ -42,7 +42,8 @@ public class TexFormulaParser
         "left",
         "overline",
         "right",
-        "sqrt"
+        "sqrt",
+        "textcolor"
     };
 
     private static readonly IReadOnlyList<string> symbols;
@@ -524,6 +525,7 @@ public class TexFormulaParser
                         new Radical(source, sqrtFormula.RootAtom ?? new NullAtom(), degreeFormula?.RootAtom));
                 }
             case "color":
+            case "textcolor":
                 {
                     var color = ReadColorModelData(value, ref position);
 
