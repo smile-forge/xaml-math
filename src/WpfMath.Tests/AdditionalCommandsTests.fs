@@ -56,6 +56,20 @@ type AdditionalCommandsTests() =
         Assert.IsType<UnderOverAtom>(parseRoot markup) |> ignore
 
     [<Fact>]
+    member _.``underset sets its annotation as close as overset does``() =
+        // The gap the annotation is held at is the only thing that differs between the two, and it is
+        // asked for in the same unit, so an annotation set below must sit exactly as far from the base
+        // as the same annotation set above. (It did not: the under gap was built with the *over* unit,
+        // which an under-only atom leaves at the default em — an 18x gap for a value meant as mu.)
+        let overBox  = (parseRoot @"\overset{a}{X}").CreateBox(environment)
+        let underBox = (parseRoot @"\underset{a}{X}").CreateBox(environment)
+        let bare     = (parseRoot @"X").CreateBox(environment)
+
+        let above = overBox.Height - bare.Height
+        let below = underBox.Depth - bare.Depth
+        Assert.Equal(above, below, 6)
+
+    [<Fact>]
     member _.``stackrel is typed as a relation``() =
         let atom = Assert.IsType<TypedAtom>(parseRoot @"\stackrel{f}{\rightarrow}")
         Assert.Equal(TexAtomType.Relation, atom.GetLeftType())
