@@ -327,6 +327,63 @@ internal static class StandardCommands
         }
     }
 
+    // \phantom{x} and its one-dimensional variants: the content is measured and then not drawn, so it reserves
+    // space without printing anything.
+    private sealed class PhantomCommand : ICommandParser
+    {
+        public static PhantomCommand Both { get; } = new(useWidth: true, useHeight: true);
+        public static PhantomCommand Horizontal { get; } = new(useWidth: true, useHeight: false);
+        public static PhantomCommand Vertical { get; } = new(useWidth: false, useHeight: true);
+
+        private readonly bool _useWidth;
+        private readonly bool _useHeight;
+
+        private PhantomCommand(bool useWidth, bool useHeight)
+        {
+            _useWidth = useWidth;
+            _useHeight = useHeight;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var content = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new PhantomAtom(atomSource, content.RootAtom, _useWidth, _useHeight, _useHeight);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
+    // \smash{x} draws the content and reports no height, \math?lap{x} draws it and reports no width. Both are the
+    // inverse of \phantom: ink without extent rather than extent without ink.
+    private sealed class SmashCommand : ICommandParser
+    {
+        public static SmashCommand Smash { get; } = new(null);
+        public static SmashCommand Llap { get; } = new(TexAlignment.Left);
+        public static SmashCommand Rlap { get; } = new(TexAlignment.Right);
+        public static SmashCommand Clap { get; } = new(TexAlignment.Center);
+
+        private readonly TexAlignment? _lapAlignment;
+
+        private SmashCommand(TexAlignment? lapAlignment)
+        {
+            _lapAlignment = lapAlignment;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var content = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = _lapAlignment is { } alignment
+                ? (Atom)new LapAtom(atomSource, content.RootAtom, alignment)
+                : new SmashAtom(atomSource, content.RootAtom);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     private class BinomCommand : ICommandParser
     {
         public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -460,6 +517,16 @@ internal static class StandardCommands
             ["cfrac"] = new CfracCommand(),
             ["nicefrac"] = new SlashFractionCommand(),
             ["sfrac"] = new SlashFractionCommand(),
+            ["phantom"] = PhantomCommand.Both,
+            ["hphantom"] = PhantomCommand.Horizontal,
+            ["vphantom"] = PhantomCommand.Vertical,
+            ["smash"] = SmashCommand.Smash,
+            ["mathllap"] = SmashCommand.Llap,
+            ["mathrlap"] = SmashCommand.Rlap,
+            ["mathclap"] = SmashCommand.Clap,
+            ["llap"] = SmashCommand.Llap,
+            ["rlap"] = SmashCommand.Rlap,
+            ["clap"] = SmashCommand.Clap,
             ["overset"] = StackedAnnotationCommand.Overset,
             ["underset"] = StackedAnnotationCommand.Underset,
             ["stackrel"] = StackedAnnotationCommand.Stackrel,
