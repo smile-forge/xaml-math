@@ -47,6 +47,7 @@
         <Compile Include="AmsMathDisplayTests.fs" />
         <Compile Include="PlainTexSwitchTests.fs" />
         <Compile Include="TeXLayoutRuleTests.fs" />
+        <Compile Include="CorpusGapTests.fs" />
         <Compile Include="RenderingTests.fs" />
         <Compile Include="TransformationTests.fs" />
         <Compile Include="VerticalBoxTests.fs" />

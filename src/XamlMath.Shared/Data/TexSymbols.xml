@@ -564,4 +564,10 @@
   <Symbol name="lqq" type="ord"/>
   <Symbol name="rqq" type="ord"/>
 
+  <!-- Escaped literals: ordinary characters that mean something else unescaped. -->
+
+  <Symbol name="#" type="ord"/>
+  <Symbol name="$" type="ord"/>
+  <Symbol name="&amp;" type="ord"/>
+
 </TeXSymbols>

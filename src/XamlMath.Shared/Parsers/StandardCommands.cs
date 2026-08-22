@@ -93,6 +93,18 @@ internal static class StandardCommands
     // \hspace{<length>} inserts horizontal space of an explicit length, e.g. \hspace{2em} or \hspace{-3pt}.
     private sealed class HspaceCommand : ICommandParser
     {
+        public static HspaceCommand Hspace { get; } = new("hspace");
+
+        /// <summary>amsmath's <c>\mspace</c>: the same thing, in math units.</summary>
+        public static HspaceCommand Mspace { get; } = new("mspace");
+
+        private readonly string _name;
+
+        private HspaceCommand(string name)
+        {
+            _name = name;
+        }
+
         public CommandProcessingResult ProcessCommand(CommandContext context)
         {
             var source = context.CommandSource;
@@ -104,7 +116,7 @@ internal static class StandardCommands
 
             var afterArg = TexFormulaParser.ReadElement(source, position);
             position = afterArg.position;
-            ParseLength(afterArg.source.ToString(), @"\hspace", out var unit, out var value);
+            ParseLength(afterArg.source.ToString(), "\\" + _name, out var unit, out var value);
 
             var start = context.CommandNameStartPosition;
             var atomSource = source.Segment(start, position - start);
@@ -672,6 +684,55 @@ internal static class StandardCommands
         }
     }
 
+    // \mathop{…} and its family: the argument keeps its shape and changes its kind, which is what
+    // decides the space around it. A paper reaches for \mathop where a name should behave as an
+    // operator and for \mathrel where a symbol should behave as a relation.
+    private sealed class AtomTypeCommand : ICommandParser
+    {
+        public static AtomTypeCommand Ordinary { get; } = new(TexAtomType.Ordinary);
+        public static AtomTypeCommand Operator { get; } = new(TexAtomType.BigOperator);
+        public static AtomTypeCommand Binary { get; } = new(TexAtomType.BinaryOperator);
+        public static AtomTypeCommand Relation { get; } = new(TexAtomType.Relation);
+        public static AtomTypeCommand Opening { get; } = new(TexAtomType.Opening);
+        public static AtomTypeCommand Closing { get; } = new(TexAtomType.Closing);
+        public static AtomTypeCommand Punctuation { get; } = new(TexAtomType.Punctuation);
+        public static AtomTypeCommand Inner { get; } = new(TexAtomType.Inner);
+
+        private readonly TexAtomType _type;
+
+        private AtomTypeCommand(TexAtomType type)
+        {
+            _type = type;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var argument = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = argument.RootAtom ?? (Atom)new NullAtom(atomSource);
+            return new CommandProcessingResult(new TypedAtom(atomSource, atom, _type, _type), position);
+        }
+    }
+
+    // \_ : there is no underscore in the text encoding, so LaTeX draws one - a rule 0.3em wide,
+    // sitting a little below the baseline. Its neighbours \# \$ \% \& are ordinary glyphs and are
+    // handled as symbols instead.
+    private sealed class UnderscoreCommand : ICommandParser
+    {
+        public static UnderscoreCommand Instance { get; } = new();
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var start = context.CommandNameStartPosition;
+            var position = context.ArgumentsStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+            var atom = new RuleAtom(atomSource, TexUnit.Em, Width: 0.3, Thickness: 0.04, Shift: -0.06);
+            return new CommandProcessingResult(atom, position);
+        }
+    }
+
     // The plain-TeX font switches: \cal, \bf, \it, \rm, \sf, \tt, \frak. Unlike \mathcal{…} they
     // take no argument - a switch runs from where it stands to the end of its group, which is why they
     // are written {\cal N} rather than \cal{N}. Nothing in amsmath documents them and they are
@@ -985,7 +1046,8 @@ internal static class StandardCommands
             ["underleftrightarrow"] = OverArrowCommand.UnderBoth,
             ["vdots"] = DotsCommand.Vertical,
             ["ddots"] = DotsCommand.Diagonal,
-            ["hspace"] = new HspaceCommand(),
+            ["hspace"] = HspaceCommand.Hspace,
+            ["mspace"] = HspaceCommand.Mspace,
             ["dfrac"] = FracStyleCommand.Dfrac,
             ["tfrac"] = FracStyleCommand.Tfrac,
             ["cfrac"] = new CfracCommand(),
@@ -1002,6 +1064,17 @@ internal static class StandardCommands
             ["underbrace"] = BraceCommand.Under,
             ["substack"] = MatrixCommandParser.SubStack,
             ["hdotsfor"] = HDotsForCommand.Instance,
+
+            // Retyping commands, and the one escaped literal that has no glyph to be.
+            ["mathord"] = AtomTypeCommand.Ordinary,
+            ["mathop"] = AtomTypeCommand.Operator,
+            ["mathbin"] = AtomTypeCommand.Binary,
+            ["mathrel"] = AtomTypeCommand.Relation,
+            ["mathopen"] = AtomTypeCommand.Opening,
+            ["mathclose"] = AtomTypeCommand.Closing,
+            ["mathpunct"] = AtomTypeCommand.Punctuation,
+            ["mathinner"] = AtomTypeCommand.Inner,
+            ["_"] = UnderscoreCommand.Instance,
             ["genfrac"] = GenFracCommand.Instance,
             ["big"] = new BigDelimiterCommand(0, TexAtomType.Ordinary),
             ["bigl"] = new BigDelimiterCommand(0, TexAtomType.Opening),

@@ -254,6 +254,12 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
          quoted kets; without these the formula around them is rejected over the quote. -->
 
     <SymbolMapping name="lq" ch="96" fontId="1"/>
+
+    <!-- The characters that have to be escaped to be written at all. -->
+
+    <SymbolMapping name="#" ch="35" fontId="1"/>
+    <SymbolMapping name="$" ch="36" fontId="1"/>
+    <SymbolMapping name="&amp;" ch="38" fontId="1"/>
     <SymbolMapping name="rq" ch="39" fontId="1"/>
     <SymbolMapping name="lqq" ch="92" fontId="1"/>
     <SymbolMapping name="rqq" ch="34" fontId="1"/>
