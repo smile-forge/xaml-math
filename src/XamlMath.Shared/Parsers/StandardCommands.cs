@@ -270,9 +270,16 @@ internal static class StandardCommands
         public static StyleCommand Script { get; } = new(TexStyle.Script);
         public static StyleCommand ScriptScript { get; } = new(TexStyle.ScriptScript);
 
-        private readonly TexStyle _style;
+        /// <summary>
+        /// A size switch with no equivalent here - <c>\large</c>, <c>\small</c> and the rest. They set
+        /// the type size of a document, and a formula is set at one size, so this applies to the rest
+        /// of the group and changes nothing: a formula written with one still renders.
+        /// </summary>
+        public static StyleCommand Unchanged { get; } = new(null);
 
-        private StyleCommand(TexStyle style)
+        private readonly TexStyle? _style;
+
+        private StyleCommand(TexStyle? style)
         {
             _style = style;
         }
@@ -288,7 +295,9 @@ internal static class StandardCommands
             var formula = context.Parser.Parse(rest, context.Formula.TextStyle, context.Environment);
 
             var atomSource = source.Segment(start, source.Length - start);
-            var atom = new StyleAtom(atomSource, formula.RootAtom, _style);
+            Atom atom = _style is { } style
+                ? new StyleAtom(atomSource, formula.RootAtom, style)
+                : formula.RootAtom ?? new NullAtom(atomSource);
             return new CommandProcessingResult(atom, source.Length);
         }
     }
@@ -659,6 +668,45 @@ internal static class StandardCommands
         }
     }
 
+    // The plain-TeX font switches: \cal, \bf, \it, \rm, \sf, \tt, \frak. Unlike \mathcal{…} they
+    // take no argument - a switch runs from where it stands to the end of its group, which is why they
+    // are written {\cal N} rather than \cal{N}. Nothing in amsmath documents them and they are
+    // deprecated in LaTeX2e, but published papers are full of them, so a formula lifted out of one
+    // needs them to mean what it meant there.
+    private sealed class FontSwitchCommand : ICommandParser
+    {
+        public static FontSwitchCommand Calligraphic { get; } = new("mathcal");
+        public static FontSwitchCommand Bold { get; } = new("mathbf");
+        public static FontSwitchCommand Italic { get; } = new("mathit");
+        public static FontSwitchCommand Roman { get; } = new("mathrm");
+        public static FontSwitchCommand SansSerif { get; } = new("mathsf");
+        public static FontSwitchCommand Typewriter { get; } = new("mathtt");
+        public static FontSwitchCommand Fraktur { get; } = new("mathfrak");
+        public static FontSwitchCommand Script { get; } = new("mathscr");
+
+        private readonly string _textStyle;
+
+        private FontSwitchCommand(string textStyle)
+        {
+            _textStyle = textStyle;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var start = context.CommandNameStartPosition;
+
+            // The rest of the group is the argument. As with the style switches, the environment is
+            // kept rather than a child one, so a switch inside a matrix cell does not swallow the row
+            // and cell separators.
+            var rest = source.Segment(context.ArgumentsStartPosition);
+            var formula = context.Parser.Parse(rest, _textStyle, context.Environment);
+            var atomSource = source.Segment(start, source.Length - start);
+            var atom = formula.RootAtom ?? (Atom)new NullAtom(atomSource);
+            return new CommandProcessingResult(atom, source.Length);
+        }
+    }
+
     // \big, \Big, \bigg and \Bigg, with their l/r/m variants: a delimiter at a set size, rather than
     // one grown to fit what it stands beside. TeX builds them by fencing an empty box 8.5, 11.5, 14.5
     // or 17.5pt tall, and \left's sizing rule turns those into delimiters of 1.15, 1.75, 2.35 and
@@ -986,6 +1034,27 @@ internal static class StandardCommands
             ["textstyle"] = StyleCommand.Text,
             ["scriptstyle"] = StyleCommand.Script,
             ["scriptscriptstyle"] = StyleCommand.ScriptScript,
+
+            // The plain-TeX switches a paper is written with; see FontSwitchCommand and StyleCommand.
+            ["cal"] = FontSwitchCommand.Calligraphic,
+            ["bf"] = FontSwitchCommand.Bold,
+            ["it"] = FontSwitchCommand.Italic,
+            ["mit"] = FontSwitchCommand.Italic,   // plain TeX's name for the maths italic
+            ["rm"] = FontSwitchCommand.Roman,
+            ["sf"] = FontSwitchCommand.SansSerif,
+            ["tt"] = FontSwitchCommand.Typewriter,
+            ["frak"] = FontSwitchCommand.Fraktur,
+            ["scr"] = FontSwitchCommand.Script,
+            ["tiny"] = StyleCommand.ScriptScript,
+            ["scriptsize"] = StyleCommand.Script,
+            ["footnotesize"] = StyleCommand.Unchanged,
+            ["small"] = StyleCommand.Unchanged,
+            ["normalsize"] = StyleCommand.Unchanged,
+            ["large"] = StyleCommand.Unchanged,
+            ["Large"] = StyleCommand.Unchanged,
+            ["LARGE"] = StyleCommand.Unchanged,
+            ["huge"] = StyleCommand.Unchanged,
+            ["Huge"] = StyleCommand.Unchanged,
             ["pmod"] = ParenModCommand.Pmod,
             ["pod"] = ParenModCommand.Pod,
 
