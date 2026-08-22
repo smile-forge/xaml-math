@@ -146,7 +146,7 @@ internal sealed record UnderOverAtom : Atom
         // Create and add box for under atom.
         if (this.UnderAtom != null)
         {
-            resultBox.Add(new SpaceAtom(null, this.OverSpaceUnit, 0, this.UnderSpace, 0).CreateBox(environment));
+            resultBox.Add(new SpaceAtom(null, this.UnderSpaceUnit, 0, this.UnderSpace, 0).CreateBox(environment));
             resultBox.Add(ChangeWidth(underBox!, maxWidth));
         }
 

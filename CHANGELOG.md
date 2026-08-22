@@ -41,6 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - `pmatrix` now renders with parentheses `( )` instead of square brackets `[ ]`, matching LaTeX (the square-bracket variant is `bmatrix`).
 - Matrix cells of differing heights within a row now share a common baseline instead of each being vertically centred, so short glyphs (e.g. `a`) no longer float above taller ones (e.g. `b`). Affects `\matrix`/`\pmatrix`/`\cases`/`align` and the matrix-based commands.
+- `UnderOverAtom` built the gap below the base with the *over* unit rather than the under one. An atom that only has an under-annotation leaves the over unit at its default (`em`), so a gap asked for in `mu` came out 18× too large and the annotation sat far below the base. Visible in `\underset{n \to \infty}{\lim}`, and in anything going through `TexFormulaHelper.PutUnder`.
 
 ## [2.1.0] - 2023-07-15
 ### Changed
