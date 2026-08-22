@@ -97,10 +97,11 @@
       <MapRange code="small" fontId="1" start="97"/>
     </TextStyleMapping>
 
-    <!-- \mathscr is the same calligraphic alphabet as \mathcal, which the symbol font does have. -->
+    <!-- \mathscr is Ralph Smith's Formal Script, a different alphabet from the calligraphic
+         one \mathcal takes from the symbol font. Capitals only - that is all rsfs10 has. -->
 
     <TextStyleMapping name="mathscr">
-      <MapRange code="capitals" fontId="3" start="65"/>
+      <MapRange code="capitals" fontId="6" start="65"/>
     </TextStyleMapping>
 
     <TextStyleMapping name="textrm">
@@ -2226,6 +2227,35 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
       <Char code="194" width="0.888" height="0.694" depth="0.194" />
       <Char code="195" width="0.777" height="0.636" depth="0.248" />
       <Char code="196" width="0.429" height="0.442" />
+    </Font>
+
+    <Font name="jlm_rsfs10.ttf" id="6" space="0.0" xHeight="0.430555" quad="1.000003" >
+      <Char code="65" width="0.803" height="0.717" depth="0.008" />
+      <Char code="66" width="0.908" height="0.708" depth="0.014" />
+      <Char code="67" width="0.666" height="0.714" depth="0.019" />
+      <Char code="68" width="0.774" height="0.708" depth="0.031" />
+      <Char code="69" width="0.562" height="0.708" depth="0.008" />
+      <Char code="70" width="0.895" height="0.728" depth="0.022" />
+      <Char code="71" width="0.610" height="0.717" depth="0.022" />
+      <Char code="72" width="0.969" height="0.717" depth="0.022" />
+      <Char code="73" width="0.809" height="0.717" depth="0.017" />
+      <Char code="74" width="1.052" height="0.717" depth="0.300" />
+      <Char code="75" width="0.914" height="0.717" depth="0.022" />
+      <Char code="76" width="0.874" height="0.717" depth="0.017" />
+      <Char code="77" width="1.080" height="0.719" depth="0.036" />
+      <Char code="78" width="0.902" height="0.719" depth="0.022" />
+      <Char code="79" width="0.738" height="0.708" depth="0.008" />
+      <Char code="80" width="1.013" height="0.717" depth="0.022" />
+      <Char code="81" width="0.883" height="0.717" depth="0.017" />
+      <Char code="82" width="0.850" height="0.717" depth="0.017" />
+      <Char code="83" width="0.868" height="0.708" depth="0.022" />
+      <Char code="84" width="0.747" height="0.728" depth="0.022" />
+      <Char code="85" width="0.800" height="0.717" depth="0.017" />
+      <Char code="86" width="0.622" height="0.717" depth="0.017" />
+      <Char code="87" width="0.805" height="0.717" depth="0.017" />
+      <Char code="88" width="0.944" height="0.717" depth="0.017" />
+      <Char code="89" width="0.710" height="0.717" depth="0.017" />
+      <Char code="90" width="0.821" height="0.717" depth="0.017" />
     </Font>
 
   </FontDescriptions>
