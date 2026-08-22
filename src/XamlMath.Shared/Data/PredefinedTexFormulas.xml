@@ -1147,4 +1147,110 @@
     <Return name="f" />
   </Formula>
 
+  <!-- The arrows the set was still missing, built the way the ones above are: two pieces
+       butted together with a kern, since no font here has them whole. -->
+  <Formula name="longleftrightarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\leftarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\rightarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="longmapsto" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\vert" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\longrightarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-9" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="hookleftarrow" enabled="true">
+    <CreateFormula name="f">
+      <Argument type="string" value="\leftarrow" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="f">
+      <Argument type="AtomType" value="Relation" />
+      <Argument type="AtomType" value="Ordinary" />
+    </MethodInvocation>
+    <CreateFormula name="g">
+      <Argument type="string" value="\rhook" />
+    </CreateFormula>
+    <MethodInvocation name="SetFixedTypes" formula="g">
+      <Argument type="AtomType" value="Ordinary" />
+      <Argument type="AtomType" value="Relation" />
+    </MethodInvocation>
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="-3" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <MethodInvocation name="Add" formula="f">
+      <Argument type="Formula" value="g" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <!-- Half a quad, and the interword space: both spelled out in papers. -->
+  <Formula name="enspace" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="9" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
+  <Formula name="space" enabled="true">
+    <CreateFormula name="f" />
+    <MethodInvocation name="AddStrut" formula="f">
+      <Argument type="Unit" value="Mu" />
+      <Argument type="double" value="6" />
+      <Argument type="double" value="0" />
+      <Argument type="double" value="0" />
+    </MethodInvocation>
+    <Return name="f" />
+  </Formula>
+
 </PredefinedFormulas>
