@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XamlMath.Boxes;
+using XamlMath.Parsers.Matrices;
 using SurroundingGap = System.Tuple<double, double>;
 
 namespace XamlMath.Atoms;
@@ -25,13 +26,23 @@ internal sealed record MatrixAtom : Atom
         IEnumerable<IEnumerable<Atom?>> cells,
         MatrixCellAlignment matrixCellAlignment,
         double verticalPadding = DefaultPadding,
-        double horizontalPadding = DefaultPadding) : base(source)
+        double horizontalPadding = DefaultPadding,
+        ArrayColumnSpec? columnSpec = null,
+        IReadOnlyCollection<int>? horizontalRules = null) : base(source)
     {
         MatrixCells = ToImmutableCollection(cells.Select(ToImmutableCollection));
         MatrixCellAlignment = matrixCellAlignment;
         VerticalPadding = verticalPadding;
         HorizontalPadding = horizontalPadding;
+        ColumnSpec = columnSpec;
+        HorizontalRules = horizontalRules;
     }
+
+    /// <summary>Per-column alignment and vertical rules, for an <c>array</c>; null for everything else.</summary>
+    public ArrayColumnSpec? ColumnSpec { get; }
+
+    /// <summary>Row boundaries carrying an <c>\hline</c>, numbered from 0 (above the first row).</summary>
+    public IReadOnlyCollection<int>? HorizontalRules { get; }
 
     public IReadOnlyCollection<IReadOnlyCollection<Atom?>> MatrixCells { get; }
 
@@ -46,6 +57,8 @@ internal sealed record MatrixAtom : Atom
         Box CreateCell(Atom? atom) => atom is null ? StrutBox.Empty : atom.CreateBox(environment);
 
         var cells = MatrixCells.Select(row => row.Select(CreateCell).ToArray()).ToArray();
+        var columnEdges = new List<double>();
+        var rowHeights = new List<double>();
         var columnCount = MatrixCells.Max(row => row.Count);
         var columnWidths = Enumerable.Range(0, columnCount)
                                      .Select(i => cells.Where(row => i < row.Length)
@@ -60,6 +73,7 @@ internal sealed record MatrixAtom : Atom
             // tall enough for the largest ascent and deepest descent it contains, but every cell
             // sits on the same baseline rather than being vertically centred (which would raise
             // short glyphs like "a" above taller ones like "b").
+            var columnEdgeX = 0.0;
             var rowAscent = row.Length > 0 ? row.Max(cell => cell.Height) : 0.0;
             var rowDescent = row.Length > 0 ? row.Max(cell => cell.Depth) : 0.0;
             var halfVPadding = VerticalPadding / 2;
@@ -84,8 +98,13 @@ internal sealed record MatrixAtom : Atom
                 rowContainer.Add(new StrutBox(lGap, 0.0, 0.0, 0.0));
                 rowContainer.Add(cellContainer);
                 rowContainer.Add(new StrutBox(rGap, 0.0, 0.0, 0.0));
+
+                if (columnEdges.Count == j)
+                    columnEdges.Add(columnEdgeX);
+                columnEdgeX += lGap + columnWidth + rGap;
             }
 
+            rowHeights.Add(rowContainer.TotalHeight);
             rowsContainer.Add(rowContainer);
         }
 
@@ -94,12 +113,80 @@ internal sealed record MatrixAtom : Atom
         rowsContainer.Depth = containerHeight / 2 - axis;
         rowsContainer.Height = containerHeight / 2 + axis;
 
-        return rowsContainer;
+        var rules = CreateRulesBox(environment, rowsContainer, columnEdges, columnEdgeXTotal(), rowHeights);
+        if (rules == null)
+            return rowsContainer;
+
+        var layered = new LayeredBox();
+        layered.Add(rowsContainer);
+        layered.Add(rules);
+        layered.Height = rowsContainer.Height;
+        layered.Depth = rowsContainer.Depth;
+        layered.Width = rowsContainer.Width;
+        return layered;
+
+        double columnEdgeXTotal() => rowsContainer.Width;
+    }
+
+    private Box? CreateRulesBox(
+        TexEnvironment environment,
+        Box grid,
+        IReadOnlyList<double> columnEdges,
+        double totalWidth,
+        IReadOnlyList<double> rowHeights)
+    {
+        var wantsVertical = ColumnSpec?.VerticalRules.Count > 0;
+        var wantsHorizontal = HorizontalRules?.Count > 0;
+        if (!wantsVertical && !wantsHorizontal)
+            return null;
+
+        var thickness = environment.MathFont.GetDefaultLineThickness(environment.Style);
+
+        var verticalAt = new List<double>();
+        if (ColumnSpec != null)
+        {
+            foreach (var boundary in ColumnSpec.VerticalRules)
+            {
+                // A boundary past the last column is the right edge; the rule is drawn inside it.
+                var x = boundary < columnEdges.Count ? columnEdges[boundary] : totalWidth - thickness;
+                verticalAt.Add(x);
+            }
+        }
+
+        var horizontalAt = new List<double>();
+        if (HorizontalRules != null)
+        {
+            foreach (var boundary in HorizontalRules)
+            {
+                var y = 0.0;
+                for (var i = 0; i < boundary && i < rowHeights.Count; i++)
+                    y += rowHeights[i];
+                horizontalAt.Add(boundary >= rowHeights.Count ? y - thickness : y);
+            }
+        }
+
+        return new GridRulesBox(environment, verticalAt, horizontalAt, thickness)
+        {
+            Width = totalWidth,
+            Height = grid.Height,
+            Depth = grid.Depth,
+        };
     }
 
     private SurroundingGap GetLeftRightGap(double hFreeSpace, int columnIndex)
     {
         var lrPadding = HorizontalPadding / 2;
+
+        if (ColumnSpec != null)
+        {
+            return ColumnSpec.AlignmentOf(columnIndex) switch
+            {
+                TexAlignment.Left => new SurroundingGap(lrPadding, lrPadding + hFreeSpace),
+                TexAlignment.Right => new SurroundingGap(lrPadding + hFreeSpace, lrPadding),
+                _ => new SurroundingGap(lrPadding + hFreeSpace / 2, lrPadding + hFreeSpace / 2),
+            };
+        }
+
         return MatrixCellAlignment switch
         {
             MatrixCellAlignment.Aligned => (columnIndex % 2) switch

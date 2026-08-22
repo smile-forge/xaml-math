@@ -44,4 +44,12 @@ List of currently supported environment names:
   \begin{gather} a^2 + b^2 = c^2 \\ e^{i\pi} + 1 = 0 \end{gather}
   ```
 
+- `array`: the only environment that takes an argument - a column preamble, giving each column its
+  own alignment with `l`, `c` or `r`, and a rule at any boundary marked `|`. `\hline` draws a rule
+  between rows. A preamble asking for anything else (`p{...}`, `@{...}`) is an error rather than
+  something silently dropped.
+  ```tex
+  \left[\begin{array}{cc|c} 1 & 0 & 3 \\ 0 & 1 & 4 \end{array}\right]
+  ```
+
 [docs.matrices]: matrices.md

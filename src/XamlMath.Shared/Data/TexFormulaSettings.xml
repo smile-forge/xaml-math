@@ -37,6 +37,7 @@
 
   <TextStyles>
     <TextStyle name="text"/>
+    <TextStyle name="mbox"/>
     <TextStyle name="mathrm"/>
     <TextStyle name="mathit"/>
     <TextStyle name="mathcal"/>

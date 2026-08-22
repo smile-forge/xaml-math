@@ -42,6 +42,7 @@
         <Compile Include="AdditionalSymbolsTests.fs" />
         <Compile Include="AdditionalCommandsTests.fs" />
         <Compile Include="AmsSymbolFontTests.fs" />
+        <Compile Include="ArrayAndOperatorTests.fs" />
         <Compile Include="RenderingTests.fs" />
         <Compile Include="TransformationTests.fs" />
         <Compile Include="VerticalBoxTests.fs" />

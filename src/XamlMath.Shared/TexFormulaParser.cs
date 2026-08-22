@@ -52,11 +52,12 @@ public class TexFormulaParser
 
     /// <summary>
     /// Text styles whose argument is ordinary text rather than a formula: the spaces in it are kept and the
-    /// characters are not treated as math symbols. <c>	ext</c> and the <c>	ext*</c> font-switching family.
+    /// characters are not treated as math symbols. <c>\text</c> and the <c>\text*</c> font-switching family.
     /// </summary>
     private static readonly HashSet<string> rawTextStyles = new()
     {
         TexUtilities.TextStyleName,
+        "mbox",
         "textbf",
         "textit",
         "textrm",
@@ -657,10 +658,14 @@ public class TexFormulaParser
 
             position = afterRead.position;
 
+            // \mbox is \text spelled differently - LaTeX's box-making side of it has no meaning
+            // here, where there is no line breaking to protect the contents from.
+            var styleName = command == "mbox" ? TexUtilities.TextStyleName : command;
+
             TexFormula styledFormula =
                 rawTextStyles.Contains(command)
-                ? ConvertRawText(afterRead.source, command)
-                : Parse(afterRead.source, command, environment.CreateChildEnvironment());
+                ? ConvertRawText(afterRead.source, styleName)
+                : Parse(afterRead.source, styleName, environment.CreateChildEnvironment());
 
             var source = value.Segment(commandSpan.Start, position - commandSpan.Start);
             var atom = styledFormula.RootAtom ?? new NullAtom(source);
