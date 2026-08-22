@@ -668,6 +668,142 @@ internal static class StandardCommands
         }
     }
 
+    // \hdotsfor[spacing]{n}: a run of dots across n columns of a matrix, standing in for a row of
+    // entries left unwritten.
+    private sealed class HDotsForCommand : ICommandParser
+    {
+        public static HDotsForCommand Instance { get; } = new();
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+
+            var spacing = 1.0;
+            var spacingText = TexFormulaParser.ReadElementGroupOptional(source, ref position, '[', ']')?.ToString();
+            if (spacingText != null &&
+                !double.TryParse(spacingText.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out spacing))
+                throw new TexParseException($"Invalid \\hdotsfor spacing: \"{spacingText}\".");
+
+            var afterCount = TexFormulaParser.ReadElement(source, position);
+            position = afterCount.position;
+            var countText = afterCount.source.ToString().Trim();
+            if (!int.TryParse(countText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var columns) ||
+                columns < 1)
+                throw new TexParseException($"\\hdotsfor needs a column count, not \"{countText}\".");
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+            return new CommandProcessingResult(new HDotsForAtom(atomSource, columns, spacing), position);
+        }
+    }
+
+    // Reads past a command's arguments without doing anything with them: a starred form, then an
+    // optional [...] group where the command has one, then its mandatory {...} groups.
+    private static int SkipArguments(CommandContext context, int mandatory, bool optional)
+    {
+        var source = context.CommandSource;
+        var position = context.ArgumentsStartPosition;
+        if (position < source.Length && source[position] == '*')
+            position++;
+        if (optional)
+            TexFormulaParser.ReadElementGroupOptional(source, ref position, '[', ']');
+        for (var i = 0; i < mandatory; i++)
+            position = TexFormulaParser.ReadElement(source, position).position;
+        return position;
+    }
+
+    /// <summary>
+    /// A document-level command - numbering, cross references, page breaks - read and dropped. A
+    /// formula here stands alone: there is no page to break, nothing to number and nothing to refer
+    /// to, so the command has no work left to do. Rejecting it would only make a formula lifted out
+    /// of a paper unrenderable over a detail that could never have shown up anyway.
+    /// </summary>
+    private sealed class DiscardedCommand : ICommandParser
+    {
+        public static DiscardedCommand Bare { get; } = new(0, optional: false);
+        public static DiscardedCommand BareOrOptional { get; } = new(0, optional: true);
+        public static DiscardedCommand OneArgument { get; } = new(1, optional: false);
+        public static DiscardedCommand TwoArguments { get; } = new(2, optional: false);
+        public static DiscardedCommand ThreeArguments { get; } = new(3, optional: false);
+
+        private readonly int _mandatory;
+        private readonly bool _optional;
+
+        private DiscardedCommand(int mandatory, bool optional)
+        {
+            _mandatory = mandatory;
+            _optional = optional;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context) =>
+            new(null, SkipArguments(context, _mandatory, _optional));
+    }
+
+    /// <summary>
+    /// A command whose LaTeX-level effect is page layout but whose argument is real maths -
+    /// <c>\shoveleft</c> and <c>\shoveright</c>. The layout goes; the contents stay.
+    /// </summary>
+    private sealed class TransparentCommand : ICommandParser
+    {
+        public static TransparentCommand Instance { get; } = new();
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var source = context.CommandSource;
+            var position = context.ArgumentsStartPosition;
+            var argument = ReadArgument(context, ref position);
+            var start = context.CommandNameStartPosition;
+            var atomSource = source.Segment(start, position - start);
+            return new CommandProcessingResult(argument.RootAtom ?? new NullAtom(atomSource), position);
+        }
+    }
+
+    /// <summary>
+    /// A display environment that carries nothing beyond its contents here: a formula in a markdown
+    /// document is already its own display, with no page, no equation numbers, and no margins to be
+    /// flush with. The wrapper is dropped and the body parsed in its place.
+    /// </summary>
+    private sealed class TransparentEnvironment : IEnvironmentParser
+    {
+        public static TransparentEnvironment Instance { get; } = new();
+
+        public EnvironmentProcessingResult ProcessEnvironment(EnvironmentContext context)
+        {
+            var formula = context.Parser.Parse(
+                context.EnvironmentBodySource,
+                context.Formula.TextStyle,
+                context.Environment.CreateChildEnvironment());
+            return new EnvironmentProcessingResult(
+                formula.RootAtom ?? new NullAtom(context.EnvironmentSource));
+        }
+    }
+
+    /// <summary>
+    /// An <c>alignat</c>-family environment: the alignment of <c>align</c>, preceded by a count of the
+    /// column pairs. That count exists to set inter-column spacing across a page of text, and has
+    /// nothing to govern here, so it is read and dropped.
+    /// </summary>
+    private sealed class CountedAlignEnvironment : IEnvironmentParser
+    {
+        public static CountedAlignEnvironment Instance { get; } = new();
+
+        public EnvironmentProcessingResult ProcessEnvironment(EnvironmentContext context)
+        {
+            var body = context.EnvironmentBodySource;
+            var position = 0;
+            while (position < body.Length && char.IsWhiteSpace(body[position]))
+                position++;
+
+            // The count is mandatory in LaTeX, so a leading group is always it - but a formula written
+            // by hand often leaves it out, and there is nothing here that needs it.
+            if (position < body.Length && body[position] == '{')
+                body = body.Segment(TexFormulaParser.ReadElement(body, position).position);
+
+            return MatrixCommandParser.Align.ProcessEnvironment(context with { EnvironmentBodySource = body });
+        }
+    }
+
     internal static readonly IReadOnlyDictionary<string, ICommandParser> Dictionary =
         new Dictionary<string, ICommandParser>
         {
@@ -710,6 +846,7 @@ internal static class StandardCommands
             ["overbrace"] = BraceCommand.Over,
             ["underbrace"] = BraceCommand.Under,
             ["substack"] = MatrixCommandParser.SubStack,
+            ["hdotsfor"] = HDotsForCommand.Instance,
             ["operatorname"] = new OperatorNameCommand(),
             ["boldsymbol"] = new BoldSymbolCommand(),
             ["bm"] = new BoldSymbolCommand(),
@@ -735,6 +872,25 @@ internal static class StandardCommands
             ["scriptscriptstyle"] = StyleCommand.ScriptScript,
             ["pmod"] = ParenModCommand.Pmod,
             ["pod"] = ParenModCommand.Pod,
+
+            // Numbering, cross references and page layout: read and dropped. See DiscardedCommand.
+            ["tag"] = DiscardedCommand.OneArgument,
+            ["notag"] = DiscardedCommand.Bare,
+            ["nonumber"] = DiscardedCommand.Bare,
+            ["label"] = DiscardedCommand.OneArgument,
+            ["eqref"] = DiscardedCommand.OneArgument,
+            ["numberwithin"] = DiscardedCommand.TwoArguments,
+            ["raisetag"] = DiscardedCommand.OneArgument,
+            ["intertext"] = DiscardedCommand.OneArgument,
+            ["shortintertext"] = DiscardedCommand.OneArgument,
+            ["allowdisplaybreaks"] = DiscardedCommand.BareOrOptional,
+            ["displaybreak"] = DiscardedCommand.BareOrOptional,
+            ["nobreakdash"] = DiscardedCommand.Bare,
+            ["accentedsymbol"] = DiscardedCommand.TwoArguments,
+            ["DeclareMathOperator"] = DiscardedCommand.TwoArguments,
+            ["DeclarePairedDelimiter"] = DiscardedCommand.ThreeArguments,
+            ["shoveleft"] = TransparentCommand.Instance,
+            ["shoveright"] = TransparentCommand.Instance,
             ["begin"] = new ProcessEnvironmentCommand()
         };
 
@@ -756,6 +912,23 @@ internal static class StandardCommands
             ["bmatrix"] = MatrixCommandParser.BMatrix,
             ["Bmatrix"] = MatrixCommandParser.BbMatrix,
             ["vmatrix"] = MatrixCommandParser.VMatrix,
-            ["Vmatrix"] = MatrixCommandParser.VvMatrix
+            ["Vmatrix"] = MatrixCommandParser.VvMatrix,
+
+            // The display environments. None of them mean anything more than their contents in a
+            // formula that is already a display of its own; see TransparentEnvironment.
+            ["equation"] = TransparentEnvironment.Instance,
+            ["equation*"] = TransparentEnvironment.Instance,
+            ["subequations"] = TransparentEnvironment.Instance,
+            ["multline"] = MatrixCommandParser.Gathered,
+            ["multline*"] = MatrixCommandParser.Gathered,
+            ["flalign"] = MatrixCommandParser.Align,
+            ["flalign*"] = MatrixCommandParser.Align,
+            ["alignat"] = CountedAlignEnvironment.Instance,
+            ["alignat*"] = CountedAlignEnvironment.Instance,
+            ["alignedat"] = CountedAlignEnvironment.Instance,
+            ["xalignat"] = CountedAlignEnvironment.Instance,
+            ["xalignat*"] = CountedAlignEnvironment.Instance,
+            ["xxalignat"] = CountedAlignEnvironment.Instance,
+            ["xxalignat*"] = CountedAlignEnvironment.Instance
         };
 }
