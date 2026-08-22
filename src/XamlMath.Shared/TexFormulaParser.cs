@@ -937,7 +937,7 @@ public class TexFormulaParser
     }
 
     /// <returns>New position after space skipped</returns>
-    private static int WithSkippedWhiteSpace(SourceSpan value, int position)
+    internal static int WithSkippedWhiteSpace(SourceSpan value, int position)
     {
         while (position < value.Length && IsWhiteSpace(value[position]))
             position++;

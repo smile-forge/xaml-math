@@ -22,21 +22,32 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
     internal static readonly MatrixCommandParser SmallMatrix =
         new(null, null, MatrixCellAlignment.Center, TexStyle.Script);
 
+    // \substack stacks the lines of a big operator's limit: script size like \smallmatrix, but set
+    // solid, since the lines belong to one limit rather than to separate rows of a table.
+    internal static readonly MatrixCommandParser SubStack =
+        new(null, null, MatrixCellAlignment.Center, TexStyle.Script, verticalPadding: 0.1, horizontalPadding: 0);
+
     private readonly string? _leftDelimiterSymbolName;
     private readonly string? _rightDelimiterSymbolName;
     private readonly MatrixCellAlignment _cellAlignment;
     private readonly TexStyle? _style;
+    private readonly double _verticalPadding;
+    private readonly double _horizontalPadding;
 
     private MatrixCommandParser(
         string? leftDelimiterSymbolName,
         string? rightDelimiterSymbolName,
         MatrixCellAlignment cellAlignment,
-        TexStyle? style = null)
+        TexStyle? style = null,
+        double verticalPadding = MatrixAtom.DefaultPadding,
+        double horizontalPadding = MatrixAtom.DefaultPadding)
     {
         _leftDelimiterSymbolName = leftDelimiterSymbolName;
         _rightDelimiterSymbolName = rightDelimiterSymbolName;
         _cellAlignment = cellAlignment;
         _style = style;
+        _verticalPadding = verticalPadding;
+        _horizontalPadding = horizontalPadding;
     }
 
     public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -70,7 +81,7 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
         var matrixSource = context.EnvironmentSource;
 
         var cells = ReadMatrixCells(context.Parser, context.Formula, cellsSource, context.Environment);
-        var matrix = new MatrixAtom(matrixSource, cells, _cellAlignment);
+        var matrix = new MatrixAtom(matrixSource, cells, _cellAlignment, _verticalPadding, _horizontalPadding);
 
         SymbolAtom? GetDelimiter(string? name) =>
             name == null

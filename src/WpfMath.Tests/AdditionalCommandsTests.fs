@@ -7,6 +7,7 @@ open WpfMath.Rendering
 open WpfMath.Tests.Utils
 open XamlMath
 open XamlMath.Atoms
+open XamlMath.Rendering
 
 // Tests for the LaTeX commands added on top of the JMathTeX command set:
 //   style switches : \displaystyle, \textstyle, \scriptstyle, \scriptscriptstyle
@@ -102,6 +103,51 @@ type AdditionalCommandsTests() =
         let box = (parseRoot markup).CreateBox(environment)
         Assert.Equal(0.0, box.Width)
         Assert.True(box.Height > 0.0)
+
+    [<Theory>]
+    [<InlineData(@"\overbrace{a+b}")>]
+    [<InlineData(@"\overbrace{a+b}^{n}")>]
+    [<InlineData(@"\overbrace{a+b}^n")>]
+    [<InlineData(@"\underbrace{a+b}")>]
+    [<InlineData(@"\underbrace{a+b}_{n}")>]
+    [<InlineData(@"\underbrace{\overbrace{a+b}^{n}+c}_{m}")>]
+    member _.``braces are parsed as an OverUnderDelimiter``(markup: string) =
+        Assert.IsType<OverUnderDelimiter>(parseRoot markup) |> ignore
+
+    [<Fact>]
+    member _.``a brace takes the script that follows it as its label``() =
+        // \overbrace is an operator: the "n" belongs above the brace, so the command has to read it
+        // before the parser attaches it as an ordinary superscript to the right.
+        Assert.IsType<OverUnderDelimiter>(parseRoot @"\overbrace{a+b}^{n}") |> ignore
+        Assert.IsType<OverUnderDelimiter>(parseRoot @"\underbrace{a+b}_{n}") |> ignore
+
+        // A script on the other side is not the brace's label, and stays an ordinary script.
+        Assert.IsType<ScriptsAtom>(parseRoot @"\overbrace{a+b}_{n}") |> ignore
+
+    [<Fact>]
+    member _.``a brace with no label renders``() =
+        // The delimiter can stand alone, and the script box it does not have must not be reached for.
+        let box = (parseRoot @"\overbrace{a+b}").CreateBox(environment)
+        let geometry = System.Windows.Media.GeometryGroup()
+        let renderer = GeometryElementRenderer(geometry, 1.0) :> IElementRenderer
+        renderer.RenderElement(box, 0.0, 0.0)
+        Assert.NotEmpty(geometry.Children)
+
+    [<Theory>]
+    [<InlineData(@"\substack{a \\ b}")>]
+    [<InlineData(@"\substack{i < j \\ j < k \\ k < l}")>]
+    [<InlineData(@"\sum_{\substack{i < j \\ j < k}} a_{ij}")>]
+    member _.``substack parses to a non-null root atom``(markup: string) =
+        Assert.NotNull(parseRoot markup)
+
+    [<Fact>]
+    member _.``substack stacks its lines in script size, set solid``() =
+        let atom   = Assert.IsType<StyleAtom>(parseRoot @"\substack{a \\ b}")
+        let matrix = Assert.IsType<MatrixAtom>(atom.BaseAtom)
+        Assert.Equal(TexStyle.Script, atom.TargetStyle)
+        Assert.Equal(2, matrix.MatrixCells.Count)
+        Assert.True(matrix.VerticalPadding < MatrixAtom.DefaultPadding,
+                    "substack lines should sit closer together than table rows")
 
     [<Theory>]
     [<InlineData(@"\boxed{x}")>]
