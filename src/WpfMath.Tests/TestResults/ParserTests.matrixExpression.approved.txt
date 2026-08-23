@@ -638,6 +638,8 @@
               }
             ]
           ],
+          "RowStrutDepth": 0.414,
+          "RowStrutHeight": 0.966,
           "Source": {
             "End": 88,
             "Length": 67,
@@ -647,7 +649,7 @@
           },
           "SuppressOuterPadding": true,
           "Type": "Ordinary",
-          "VerticalPadding": 0.35
+          "VerticalPadding": 0.0
         },
         "LeftDelimeter": {
           "[AtomType]": "SymbolAtom",
@@ -920,6 +922,8 @@
               }
             ]
           ],
+          "RowStrutDepth": 0.414,
+          "RowStrutHeight": 0.966,
           "Source": {
             "End": 140,
             "Length": 27,
@@ -929,7 +933,7 @@
           },
           "SuppressOuterPadding": true,
           "Type": "Ordinary",
-          "VerticalPadding": 0.35
+          "VerticalPadding": 0.0
         },
         "LeftDelimeter": {
           "[AtomType]": "SymbolAtom",
@@ -1146,6 +1150,8 @@
               }
             ]
           ],
+          "RowStrutDepth": 0.414,
+          "RowStrutHeight": 0.966,
           "Source": {
             "End": 186,
             "Length": 26,
@@ -1155,7 +1161,7 @@
           },
           "SuppressOuterPadding": true,
           "Type": "Ordinary",
-          "VerticalPadding": 0.35
+          "VerticalPadding": 0.0
         },
         "LeftDelimeter": {
           "[AtomType]": "SymbolAtom",

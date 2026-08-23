@@ -28,6 +28,27 @@ internal sealed record MatrixAtom : Atom
     /// </summary>
     public const double DefaultColumnGap = 1.0;
 
+    /// <summary>A line of type: TeX's aselineskip at the size a formula is set at.</summary>
+    private const double BaselineSkip = 1.2;
+
+    /// <summary>
+    /// TeX's <c>rraystretch</c>: how much room every row of a table is given, as a multiple of a
+    /// line. One is TeX's own default and reads tight; papers routinely open it up, and this is set
+    /// where a rendering sits beside a published one without the rows looking crowded.
+    /// </summary>
+    private const double ArrayStretch = 1.15;
+
+    /// <summary>
+    /// The least a row of a table measures above its baseline. TeX struts every row of an array with
+    /// 0.7 of a line above and 0.3 below, so rows sit a line apart whatever they hold and then abut,
+    /// rather than being padded away from each other.
+    /// </summary>
+    public const double DefaultRowStrutHeight = 0.7 * BaselineSkip * ArrayStretch;
+
+    /// <inheritdoc cref="DefaultRowStrutHeight"/>
+    public const double DefaultRowStrutDepth = 0.3 * BaselineSkip * ArrayStretch;
+
+
     public MatrixAtom(
         SourceSpan? source,
         IEnumerable<IEnumerable<Atom?>> cells,
@@ -36,7 +57,9 @@ internal sealed record MatrixAtom : Atom
         double horizontalPadding = DefaultPadding,
         ArrayColumnSpec? columnSpec = null,
         IReadOnlyCollection<int>? horizontalRules = null,
-        bool suppressOuterPadding = false) : base(source)
+        bool suppressOuterPadding = false,
+        double rowStrutHeight = 0,
+        double rowStrutDepth = 0) : base(source)
     {
         MatrixCells = ToImmutableCollection(cells.Select(ToImmutableCollection));
         MatrixCellAlignment = matrixCellAlignment;
@@ -45,6 +68,8 @@ internal sealed record MatrixAtom : Atom
         ColumnSpec = columnSpec;
         HorizontalRules = horizontalRules;
         SuppressOuterPadding = suppressOuterPadding;
+        RowStrutHeight = rowStrutHeight;
+        RowStrutDepth = rowStrutDepth;
     }
 
     /// <summary>Per-column alignment and vertical rules, for an <c>array</c>; null for everything else.</summary>
@@ -67,6 +92,13 @@ internal sealed record MatrixAtom : Atom
     /// inside the brackets of <c>\left[egin{array}...</c>.
     /// </summary>
     public bool SuppressOuterPadding { get; }
+
+    /// <summary>The least each row measures above its baseline. See <see cref="DefaultRowStrutHeight"/>.</summary>
+    public double RowStrutHeight { get; }
+
+    /// <summary>And below it.</summary>
+    public double RowStrutDepth { get; }
+
 
     protected override Box CreateBoxCore(TexEnvironment environment)
     {
@@ -100,8 +132,15 @@ internal sealed record MatrixAtom : Atom
             // tall enough for the largest ascent and deepest descent it contains, but every cell
             // sits on the same baseline rather than being vertically centred (which would raise
             // short glyphs like "a" above taller ones like "b").
-            var rowAscent = laidOut.Count > 0 ? laidOut.Max(cell => cell.Box.Height) : 0.0;
-            var rowDescent = laidOut.Count > 0 ? laidOut.Max(cell => cell.Box.Depth) : 0.0;
+            // The strut is leading between rows, so it applies where there is a neighbour to be kept
+            // away from. Above the first row and below the last there is nothing, and adding it there
+            // would only inflate the box - and with it the delimiters drawn around the whole thing.
+            var naturalAscent = laidOut.Count > 0 ? laidOut.Max(cell => cell.Box.Height) : 0.0;
+            var naturalDescent = laidOut.Count > 0 ? laidOut.Max(cell => cell.Box.Depth) : 0.0;
+            var rowAscent = r == 0 ? naturalAscent : Math.Max(naturalAscent, this.RowStrutHeight);
+            var rowDescent = r == cells.Length - 1
+                ? naturalDescent
+                : Math.Max(naturalDescent, this.RowStrutDepth);
             var halfVPadding = VerticalPadding / 2;
 
             // Column edges - where a vertical rule goes - only make sense from a row that has one

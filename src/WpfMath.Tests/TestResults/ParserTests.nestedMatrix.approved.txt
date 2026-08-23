@@ -219,6 +219,8 @@
                 }
               ]
             ],
+            "RowStrutDepth": 0.414,
+            "RowStrutHeight": 0.966,
             "Source": {
               "End": 40,
               "Length": 16,
@@ -228,7 +230,7 @@
             },
             "SuppressOuterPadding": true,
             "Type": "Ordinary",
-            "VerticalPadding": 0.35
+            "VerticalPadding": 0.0
           },
           "LeftType": "Ordinary",
           "RightType": "Ordinary",
@@ -327,6 +329,8 @@
         }
       ]
     ],
+    "RowStrutDepth": 0.414,
+    "RowStrutHeight": 0.966,
     "Source": {
       "End": 52,
       "Length": 51,
@@ -336,7 +340,7 @@
     },
     "SuppressOuterPadding": true,
     "Type": "Ordinary",
-    "VerticalPadding": 0.35
+    "VerticalPadding": 0.0
   },
   "Source": {
     "End": 52,

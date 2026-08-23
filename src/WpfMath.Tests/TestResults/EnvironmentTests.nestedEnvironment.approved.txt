@@ -191,6 +191,8 @@
                   }
                 ]
               ],
+              "RowStrutDepth": 0.414,
+              "RowStrutHeight": 0.966,
               "Source": {
                 "End": 57,
                 "Length": 33,
@@ -200,7 +202,7 @@
               },
               "SuppressOuterPadding": true,
               "Type": "Ordinary",
-              "VerticalPadding": 0.35
+              "VerticalPadding": 0.0
             },
             "LeftDelimeter": {
               "[AtomType]": "SymbolAtom",
@@ -229,6 +231,8 @@
           }
         ]
       ],
+      "RowStrutDepth": 0.414,
+      "RowStrutHeight": 0.966,
       "Source": {
         "End": 70,
         "Length": 69,
@@ -238,7 +242,7 @@
       },
       "SuppressOuterPadding": true,
       "Type": "Ordinary",
-      "VerticalPadding": 0.35
+      "VerticalPadding": 0.0
     },
     "LeftDelimeter": {
       "[AtomType]": "SymbolAtom",

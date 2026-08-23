@@ -103,6 +103,8 @@
                 }
               ]
             ],
+            "RowStrutDepth": 0.414,
+            "RowStrutHeight": 0.966,
             "Source": {
               "End": 16,
               "Length": 15,
@@ -112,7 +114,7 @@
             },
             "SuppressOuterPadding": true,
             "Type": "Ordinary",
-            "VerticalPadding": 0.35
+            "VerticalPadding": 0.0
           },
           "LeftDelimeter": {
             "[AtomType]": "SymbolAtom",
@@ -227,6 +229,8 @@
         }
       ]
     ],
+    "RowStrutDepth": 0.0,
+    "RowStrutHeight": 0.0,
     "Source": null,
     "SuppressOuterPadding": false,
     "Type": "Ordinary",

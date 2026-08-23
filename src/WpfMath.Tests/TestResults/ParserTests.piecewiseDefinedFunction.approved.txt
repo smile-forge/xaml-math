@@ -628,20 +628,10 @@
                 },
                 "Type": "Ordinary"
               }
-            ],
-            [
-              {
-                "[AtomType]": "NullAtom",
-                "Source": null,
-                "Type": "Ordinary"
-              },
-              {
-                "[AtomType]": "NullAtom",
-                "Source": null,
-                "Type": "Ordinary"
-              }
             ]
           ],
+          "RowStrutDepth": 0.414,
+          "RowStrutHeight": 0.966,
           "Source": {
             "End": 106,
             "Length": 98,
@@ -651,7 +641,7 @@
           },
           "SuppressOuterPadding": true,
           "Type": "Ordinary",
-          "VerticalPadding": 0.35
+          "VerticalPadding": 0.0
         },
         "LeftDelimeter": {
           "[AtomType]": "SymbolAtom",
