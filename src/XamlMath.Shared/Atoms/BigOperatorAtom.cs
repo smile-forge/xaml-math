@@ -26,9 +26,17 @@ internal sealed record BigOperatorAtom(
     {
         if ((this.UseVerticalLimits.HasValue && !this.UseVerticalLimits.Value) ||
             (!this.UseVerticalLimits.HasValue && environment.Style >= TexStyle.Text))
+        {
+            // An operator with nothing attached still has to be the right size. Picking the display
+            // form of the glyph happens where the scripts are set, so going straight there with no
+            // scripts would leave a lone \int at the size of the letters beside it.
+            if (this.LowerLimitAtom == null && this.UpperLimitAtom == null)
+                return CreateBoxForBaseAtom(environment).BaseBox;
+
             // Attach atoms for limits as scripts.
             return new ScriptsAtom(this.Source, this.BaseAtom, this.LowerLimitAtom, this.UpperLimitAtom)
                 .CreateBox(environment);
+        }
 
         BoxForBaseAtom boxForBaseAtom = CreateBoxForBaseAtom(environment);
         BoxesForUpperAndLowerLimits limits = CreateBoxesForUpperAndLowerLimits(environment);

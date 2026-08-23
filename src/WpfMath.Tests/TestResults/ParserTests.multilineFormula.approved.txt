@@ -265,6 +265,8 @@
         }
       ]
     ],
+    "RowStrutDepth": 0.0,
+    "RowStrutHeight": 0.0,
     "Source": null,
     "SuppressOuterPadding": false,
     "Type": "Ordinary",

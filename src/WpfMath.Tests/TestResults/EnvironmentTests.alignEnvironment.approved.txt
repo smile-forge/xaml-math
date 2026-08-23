@@ -193,6 +193,8 @@
         }
       ]
     ],
+    "RowStrutDepth": 0.0,
+    "RowStrutHeight": 0.0,
     "Source": {
       "End": 46,
       "Length": 45,

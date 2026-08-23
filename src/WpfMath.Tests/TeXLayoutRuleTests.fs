@@ -40,6 +40,32 @@ type TeXLayoutRuleTests() =
     member _.``a sum still stacks its limits``() =
         Assert.True(totalHeightOf @"\sum_{0}^{n}" > totalHeightOf @"\int_{0}^{n}")
 
+    [<Fact>]
+    member _.``an operator with no limits at all is still the display size``() =
+        // Choosing the display form of the glyph happens where the scripts are set, so an operator
+        // that has none must not take the short way out and come out at the size of the letters.
+        Assert.True(totalHeightOf @"\int" > totalHeightOf @"\textstyle\int",
+                    "a lone integral should take the display glyph")
+        // The same glyph as one carrying limits, give or take how far the limits themselves hang.
+        Assert.True(
+            totalHeightOf @"\int" > 0.95 * totalHeightOf @"\int_{0}",
+            "a lone integral should be the glyph an integral with limits uses")
+
+    // ── a row separator at the end of a matrix ───────────────────────────────────
+
+    [<Theory>]
+    [<InlineData(@"\begin{matrix} a & b \\ c & d \end{matrix}")>]
+    [<InlineData(@"\begin{pmatrix} a & b \\ c & d \end{pmatrix}")>]
+    [<InlineData(@"\begin{cases} a & b \\ c & d \end{cases}")>]
+    member _.``a trailing row separator closes the last row rather than opening another``
+        (markup: string) =
+        // "a & b \\ c & d \\" is a normal way to write a matrix out. The empty row it used to leave
+        // behind was a blank line the grid grew to fit - and the delimiters grew again to cover that,
+        // which is what left the last row sitting near the middle of its brackets.
+        let trailing = markup.Replace(@" \end", @" \\ \end")
+        Assert.Equal(heightOf markup, heightOf trailing, 6)
+        Assert.Equal(totalHeightOf markup, totalHeightOf trailing, 6)
+
     // ── a script on an accented base ─────────────────────────────────────────────
 
     [<Theory>]

@@ -10,8 +10,9 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
 {
     // An aligned block is not a table: its columns are an equation and its parts, so they keep the
     // close spacing they had rather than taking a column gap.
-    internal static readonly MatrixCommandParser Align =
-        new(null, null, MatrixCellAlignment.Aligned, horizontalPadding: MatrixAtom.DefaultPadding);
+    internal static readonly MatrixCommandParser Align = new(
+        null, null, MatrixCellAlignment.Aligned,
+        verticalPadding: MatrixAtom.DefaultPadding, horizontalPadding: MatrixAtom.DefaultPadding);
     internal static readonly MatrixCommandParser Cases = new("lbrace", null, MatrixCellAlignment.Left);
     internal static readonly MatrixCommandParser Matrix = new(null, null, MatrixCellAlignment.Center);
     internal static readonly MatrixCommandParser PMatrix = new("(", ")", MatrixCellAlignment.Center); // \pmatrix ( )
@@ -36,13 +37,14 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
     private readonly TexStyle? _style;
     private readonly double _verticalPadding;
     private readonly double _horizontalPadding;
+    private readonly bool _rowStrut;
 
     private MatrixCommandParser(
         string? leftDelimiterSymbolName,
         string? rightDelimiterSymbolName,
         MatrixCellAlignment cellAlignment,
         TexStyle? style = null,
-        double verticalPadding = MatrixAtom.DefaultPadding,
+        double verticalPadding = 0,
         double horizontalPadding = MatrixAtom.DefaultColumnGap)
     {
         _leftDelimiterSymbolName = leftDelimiterSymbolName;
@@ -51,6 +53,10 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
         _style = style;
         _verticalPadding = verticalPadding;
         _horizontalPadding = horizontalPadding;
+
+        // A table struts its rows a line apart; an aligned block and a stacked limit set theirs solid
+        // and space them with padding of their own instead.
+        _rowStrut = verticalPadding == 0;
     }
 
     public CommandProcessingResult ProcessCommand(CommandContext context)
@@ -92,7 +98,9 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
             _cellAlignment,
             _verticalPadding,
             _horizontalPadding,
-            suppressOuterPadding: _cellAlignment != MatrixCellAlignment.Aligned);
+            suppressOuterPadding: _cellAlignment != MatrixCellAlignment.Aligned,
+            rowStrutHeight: _rowStrut ? MatrixAtom.DefaultRowStrutHeight : 0,
+            rowStrutDepth: _rowStrut ? MatrixAtom.DefaultRowStrutDepth : 0);
 
         SymbolAtom? GetDelimiter(string? name) =>
             name == null
@@ -137,6 +145,12 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
 
             lastRow.Add(lastCellAtom);
         }
+
+        // "a & b \ c & d \\" is a normal way to write a matrix out, and the \ at the end closes the
+        // last row rather than opening another. An empty row left behind would be a blank line the
+        // grid grows to fit, and the delimiters around it grow again to cover that.
+        if (rows.Count > 1 && rows[rows.Count - 1].Count == 0)
+            rows.RemoveAt(rows.Count - 1);
 
         MakeRectangular(rows);
 
