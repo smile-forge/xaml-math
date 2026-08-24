@@ -1,6 +1,8 @@
 using System;
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 /// <summary>
@@ -8,6 +10,9 @@ namespace XamlMath.Atoms;
 /// </summary>
 internal sealed record Radical : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots =>
+        Parts(("degree", DegreeAtom), ("radicand", BaseAtom));
+
     private const string sqrtSymbol = "sqrt";
 
     private const double scale = 0.55;

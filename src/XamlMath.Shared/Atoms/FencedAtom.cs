@@ -1,11 +1,15 @@
 using System;
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing base atom surrounded by delimeters.
 internal sealed record FencedAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", BaseAtom));
+
     private const int delimeterFactor = 901;
     private const double delimeterShortfall = 0.5;
 

@@ -1,10 +1,14 @@
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing other atom that is underlined.
 internal sealed record UnderlinedAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", BaseAtom));
+
     public UnderlinedAtom(SourceSpan? source, Atom? baseAtom)
         : base(source)
     {

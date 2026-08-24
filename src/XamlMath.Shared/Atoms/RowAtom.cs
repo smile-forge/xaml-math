@@ -9,6 +9,10 @@ namespace XamlMath.Atoms;
 // Atom representing horizontal row of other atoms, separated by glue.
 internal sealed record RowAtom : Atom, IRow
 {
+    /// <summary>Its elements, in order. A row gives its parts no name beyond being part of it.</summary>
+    public override IReadOnlyList<FormulaSlot> Slots =>
+        Elements.Where(e => e is not null).Select(e => new FormulaSlot("element", e)).ToList();
+
     // Set of atom types that make previous atom of BinaryOperator type change to Ordinary type.
     private static readonly BitArray binaryOperatorChangeSet;
 

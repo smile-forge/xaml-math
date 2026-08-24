@@ -1,10 +1,14 @@
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing other atom with horizontal rule above it.
 internal sealed record OverlinedAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", BaseAtom));
+
     public OverlinedAtom(SourceSpan? source, Atom? baseAtom)
         : base(source)
     {

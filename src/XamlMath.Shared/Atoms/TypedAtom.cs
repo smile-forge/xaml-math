@@ -1,10 +1,14 @@
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing other atom with custom left and right types.
 internal sealed record TypedAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", Atom));
+
     public TypedAtom(SourceSpan? source, Atom? atom, TexAtomType leftType, TexAtomType rightType)
         : base(source)
     {

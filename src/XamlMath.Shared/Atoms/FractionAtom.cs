@@ -1,10 +1,15 @@
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing fraction, with or without separation line.
 internal sealed record FractionAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots =>
+        Parts(("numerator", Numerator), ("denominator", Denominator));
+
     private static TexAlignment CheckAlignment(TexAlignment alignment)
     {
         if (alignment == TexAlignment.Left || alignment == TexAlignment.Right)
