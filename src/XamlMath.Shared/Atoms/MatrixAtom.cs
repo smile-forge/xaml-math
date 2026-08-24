@@ -1,6 +1,3 @@
-#if NET462
-using XamlMath.Compatibility;
-#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;

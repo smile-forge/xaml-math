@@ -14,7 +14,13 @@ public sealed class TexParseException : TexException
     {
     }
 
-    internal TexParseException(string message, SourceSpan? at, Exception? innerException = null)
+    internal TexParseException(string message, SourceSpan? at)
+        : base(message)
+    {
+        At = at;
+    }
+
+    internal TexParseException(string message, SourceSpan? at, Exception innerException)
         : base(message, innerException)
     {
         At = at;

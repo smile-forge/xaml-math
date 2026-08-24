@@ -26,8 +26,13 @@
     </ItemGroup>
 
     <PropertyGroup Condition=" '$(MSBuildProjectExtension)' == '.csproj' ">
-        <LangVersion>11</LangVersion>
-        <Nullable Condition=" $([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1')) ">enable</Nullable>
-        <Nullable Condition=" '$(Nullable)' != 'enable' ">annotations</Nullable>
+        <LangVersion>latest</LangVersion>
+
+        <!--
+            Unconditional. It used to be enabled only for targets compatible with netstandard2.1, which
+            meant the shared project built with reference-type nullability switched OFF on .NET Framework -
+            so half of what the annotations claim was never actually checked.
+        -->
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 </Project>
