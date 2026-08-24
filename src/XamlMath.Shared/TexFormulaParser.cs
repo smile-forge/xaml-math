@@ -248,7 +248,11 @@ public class TexFormulaParser
             {
                 if (!skipWhiteSpace)
                 {
-                    formula.Add(new SpaceAtom(source), source);
+                    // The second argument is the span of the *row* being built, not of the atom being
+                    // added to it. Passing the space's own span gave the whole row that span instead, so
+                    // the row claimed a single character while holding everything parsed so far — and
+                    // every one of its children then named text the row did not contain.
+                    formula.Add(new SpaceAtom(source), value.Segment(initialPosition, position + 1 - initialPosition));
                 }
 
                 position++;
@@ -287,14 +291,20 @@ public class TexFormulaParser
                         + primeChar + "\" can't be the first character!");
                 else
                 {
-                    var scriptsAtom = this.AttachScripts(formula, value, ref position, new RowAtom(value), true, environment);
+                    // An empty base, standing where the script does. Handing it the whole of `value`
+                    // instead made it claim every character from the start of the input, which the
+                    // script's own span is then taken from — so a nested `\left(…\right)^{2}` reported a
+                    // row reaching back outside the fence holding it.
+                    var scriptsAtom = this.AttachScripts(
+                        formula, value, ref position, new RowAtom(value.Segment(position, 0)), true, environment);
                     formula.Add(scriptsAtom, value.Segment(initialPosition, position - initialPosition));
                 }
             }
             else if (ch == tieChar)
             {
-                // '~' is a tie: a non-breaking inter-word space.
-                formula.Add(new SpaceAtom(source), source);
+                // '~' is a tie: a non-breaking inter-word space. As above, the row's span rather than the
+                // tie's own — this is the one that made `\mathrm { ~ f o r ~ }` claim a single `~`.
+                formula.Add(new SpaceAtom(source), value.Segment(initialPosition, position + 1 - initialPosition));
                 position++;
             }
             else
