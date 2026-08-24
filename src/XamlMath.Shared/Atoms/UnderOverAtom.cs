@@ -1,17 +1,13 @@
 using System;
 using XamlMath.Boxes;
-#if !NET462 && !NETSTANDARD2_0
 using System.Diagnostics.CodeAnalysis;
-#endif
 
 namespace XamlMath.Atoms;
 
 // Atom representing other atom with atoms optionally over and under it.
 internal sealed record UnderOverAtom : Atom
 {
-#if !NET462 && !NETSTANDARD2_0
     [return: NotNullIfNotNull("box")]
-#endif
     private static Box? ChangeWidth(Box? box, double maxWidth)
     {
         if (box != null && Math.Abs(maxWidth - box.Width) > TexUtilities.FloatPrecision)
