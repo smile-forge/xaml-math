@@ -250,7 +250,7 @@ public class TexFormulaParser
                 else
                 {
                     var scriptsAtom = this.AttachScripts(formula, value, ref position, new RowAtom(value), true, environment);
-                    formula.Add(scriptsAtom, value.Segment(initialPosition, position));
+                    formula.Add(scriptsAtom, value.Segment(initialPosition, position - initialPosition));
                 }
             }
             else
@@ -265,7 +265,7 @@ public class TexFormulaParser
                         character,
                         skipWhiteSpace,
                         environment);
-                    formula.Add(scriptsAtom, value.Segment(initialPosition, position));
+                    formula.Add(scriptsAtom, value.Segment(initialPosition, position - initialPosition));
                 }
             }
         }
@@ -588,7 +588,10 @@ public class TexFormulaParser
         position = afterEscapeRead.position;
         var commandSpan = afterEscapeRead.source.Segment(1);
         var command = commandSpan.ToString();
-        var formulaSource = new SourceSpan(value.SourceName, value.Source, initialSrcPosition, commandSpan.End);
+        // SourceSpan's fourth argument is a length, and commandSpan.End is an absolute offset.
+        var commandStart = value.Start + initialSrcPosition;
+        var formulaSource = new SourceSpan(
+            value.SourceName, value.Source, commandStart, commandSpan.End - commandStart);
 
         if (SymbolAtom.TryGetAtom(commandSpan, out SymbolAtom? symbolAtom))
         {
@@ -672,11 +675,13 @@ public class TexFormulaParser
                         true,
                         environment);
 
+                // As above: a length is wanted here, and Source.End is an absolute offset.
+                var commandEnd = commandAtom.Source?.End ?? position;
                 var source = new SourceSpan(
                     formulaSource.SourceName,
                     formulaSource.Source,
                     formulaSource.Start,
-                    commandAtom.Source?.End ?? position);
+                    commandEnd - formulaSource.Start);
                 switch (appendMode)
                 {
                     case AtomAppendMode.Add:
