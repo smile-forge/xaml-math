@@ -2,6 +2,8 @@ using System;
 using XamlMath.Boxes;
 using XamlMath.Fonts;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 /// <summary>Atom representing big operator with optional limits.</summary>
@@ -13,6 +15,9 @@ internal sealed record BigOperatorAtom(
     Atom? UpperLimitAtom,
     bool? UseVerticalLimits = null) : Atom(Source, TexAtomType.BigOperator)
 {
+    public override IReadOnlyList<FormulaSlot> Slots =>
+        Parts(("base", BaseAtom), ("lower limit", LowerLimitAtom), ("upper limit", UpperLimitAtom));
+
     private static Box ChangeWidth(Box box, double maxWidth)
     {
         // Centre specified box in new box of specified width, if necessary.

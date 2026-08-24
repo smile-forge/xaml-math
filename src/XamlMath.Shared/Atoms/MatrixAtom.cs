@@ -10,6 +10,11 @@ namespace XamlMath.Atoms;
 /// <summary>An atom representing a tabular arrangement of atoms.</summary>
 internal sealed record MatrixAtom : Atom
 {
+    /// <summary>Every cell, row by row — what makes a block of a matrix answerable as cells.</summary>
+    public override IReadOnlyList<FormulaSlot> Slots =>
+        MatrixCells.SelectMany(row => row).Where(c => c is not null)
+            .Select(c => new FormulaSlot("cell", c!)).ToList();
+
     /// <summary>Used for grouping of align statements into several columns.</summary>
     /// <remarks>
     /// See section "Aligning several equations" of

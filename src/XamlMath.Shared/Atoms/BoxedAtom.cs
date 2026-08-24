@@ -1,10 +1,14 @@
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing a formula drawn inside a rectangular frame (\boxed).
 internal sealed record BoxedAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", BaseAtom));
+
     // LaTeX frames with \fboxrule around the content and \fboxsep of padding between the two; the ratio below is
     // the one the standard classes use (0.4pt to 3pt), expressed against the current rule thickness.
     private const double PaddingPerThickness = 7.5;

@@ -1,11 +1,15 @@
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing a base atom with a stretchy horizontal arrow drawn above or below it:
 // \overrightarrow and \overleftarrow and their leftright and \under… counterparts.
 internal sealed record OverArrowAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", BaseAtom));
+
     private readonly ArrowDecoration _decoration;
     private readonly bool _over;
 

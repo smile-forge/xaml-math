@@ -30,6 +30,13 @@ public abstract class Box
 
     public ReadOnlyCollection<Box> Children => this.childrenReadOnly;
 
+    /// <summary>
+    /// The parse-tree node this was laid out from, so a reader can ask what a drawn piece <em>is</em>
+    /// rather than only which characters produced it. Several boxes may share one — a fraction's box and
+    /// its bar both belong to the fraction — which is exactly right: they are one thing, drawn in parts.
+    /// </summary>
+    public IFormulaNode? Node { get; set; }
+
     public SourceSpan? Source
     {
         get;

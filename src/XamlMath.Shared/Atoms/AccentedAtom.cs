@@ -1,11 +1,15 @@
 using System;
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing base atom with accent above it.
 internal sealed record AccentedAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", BaseAtom));
+
     public AccentedAtom(SourceSpan? source, Atom? baseAtom, string accentName)
         : base(source)
     {

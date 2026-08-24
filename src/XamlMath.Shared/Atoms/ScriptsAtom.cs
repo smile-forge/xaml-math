@@ -1,11 +1,16 @@
 using System;
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom representing scripts to attach to other atom.
 internal sealed record ScriptsAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots =>
+        Parts(("base", BaseAtom), ("subscript", SubscriptAtom), ("superscript", SuperscriptAtom));
+
     private static readonly SpaceAtom scriptSpaceAtom = new(null, TexUnit.Point, 0.5, 0, 0);
 
     public ScriptsAtom(SourceSpan? source, Atom? baseAtom, Atom? subscriptAtom, Atom? superscriptAtom)

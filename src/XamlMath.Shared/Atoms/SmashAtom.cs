@@ -1,11 +1,15 @@
 using XamlMath.Boxes;
 
+using System.Collections.Generic;
+
 namespace XamlMath.Atoms;
 
 // Atom that renders its content but reports no height and no depth, so that nothing around it is pushed out of
 // the way (\smash). The opposite of PhantomAtom, which keeps the extent and drops the ink.
 internal sealed record SmashAtom : Atom
 {
+    public override IReadOnlyList<FormulaSlot> Slots => Parts(("base", BaseAtom));
+
     public SmashAtom(SourceSpan? source, Atom? baseAtom)
         : base(source)
     {
