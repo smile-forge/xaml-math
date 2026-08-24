@@ -261,7 +261,8 @@ public class TexFormulaParser
                     ref position,
                     allowClosingDelimiter,
                     ref closedDelimiter,
-                    environment);
+                    environment,
+                    initialPosition);
             }
             else if (ch == leftGroupChar)
             {
@@ -649,8 +650,14 @@ public class TexFormulaParser
         ref int position,
         bool allowClosingDelimiter,
         ref bool closedDelimiter,
-        ICommandEnvironment environment)
+        ICommandEnvironment environment,
+        int rowStart)
     {
+        // A row spans everything parsed into it so far. Passing only the command's own span here gave
+        // the whole row that span instead, so a subscript such as {x 	o infty} reported itself as
+        // infty — the row and its last element claiming the same characters at different places.
+        SourceSpan RowSource(int at) => value.Segment(rowStart, at - rowStart);
+
         var initialSrcPosition = position;
         var afterEscapeRead = ReadEscapeSequence(value, position);
         position = afterEscapeRead.position;
@@ -676,7 +683,7 @@ public class TexFormulaParser
                 Atom accented = new AccentedAtom(formulaSource, accentFormula.RootAtom, symbolAtom.Name);
                 formula.Add(
                     AttachScripts(formula, value, ref position, accented, true, environment),
-                    formulaSource);
+                    RowSource(position));
             }
             else if (symbolAtom.Type == TexAtomType.BigOperator)
             {
@@ -685,12 +692,12 @@ public class TexFormulaParser
                 // is there for anyone who wants the other.
                 var limits = sideLimitOperators.Contains(symbolAtom.Name) ? false : (bool?)null;
                 var opAtom = new BigOperatorAtom(formulaSource, symbolAtom, null, null, limits);
-                formula.Add(AttachScripts(formula, value, ref position, opAtom, true, environment), formulaSource);
+                formula.Add(AttachScripts(formula, value, ref position, opAtom, true, environment), RowSource(position));
             }
             else
             {
                 formula.Add(
-                    AttachScripts(formula, value, ref position, symbolAtom, true, environment), formulaSource);
+                    AttachScripts(formula, value, ref position, symbolAtom, true, environment), RowSource(position));
             }
         }
         else if (predefinedFormulas.TryGetValue(command, out var factory))
@@ -709,13 +716,13 @@ public class TexFormulaParser
                 root = new BigOperatorAtom(formulaSource, root, null, null, false);
 
             var atom = AttachScripts(formula, value, ref position, root, true, environment);
-            formula.Add(atom, formulaSource);
+            formula.Add(atom, RowSource(position));
         }
         else if (command.Equals("nbsp") || command.Equals(" "))
         {
             // A space was found: '\nbsp', or the control space '\ ' (a normal inter-word space).
             var atom = AttachScripts(formula, value, ref position, new SpaceAtom(formulaSource), true, environment);
-            formula.Add(atom, formulaSource);
+            formula.Add(atom, RowSource(position));
         }
         else if (textStyles.Contains(command))
         {
@@ -738,7 +745,7 @@ public class TexFormulaParser
             var source = value.Segment(commandSpan.Start, position - commandSpan.Start);
             var atom = styledFormula.RootAtom ?? new NullAtom(source);
             var commandAtom = AttachScripts(formula, value, ref position, atom, true, environment);
-            formula.Add(commandAtom, source);
+            formula.Add(commandAtom, RowSource(position));
         }
         else if (embeddedCommands.Contains(command)
              || environment.AvailableCommands.ContainsKey(command)
@@ -766,17 +773,28 @@ public class TexFormulaParser
                         true,
                         environment);
 
+                // A command may build its result by parsing a body it synthesised — \pmod and \bmod do —
+                // in which case its atoms carry offsets into *that* body, not into the input. Its own end
+                // offset is only meaningful when it came from the same text; otherwise the parse position
+                // is what says where the command finished.
+                var fromThisText = string.Equals(
+                    commandAtom.Source?.Source, value.Source, StringComparison.Ordinal);
+
                 // As above: a length is wanted here, and Source.End is an absolute offset.
-                var commandEnd = commandAtom.Source?.End ?? position;
+                var commandEnd = fromThisText ? commandAtom.Source!.End : position;
                 var source = new SourceSpan(
                     formulaSource.SourceName,
                     formulaSource.Source,
                     formulaSource.Start,
                     commandEnd - formulaSource.Start);
+
+                // …and give such a result the span of the command as written, so that what it draws is
+                // attributable to the characters that asked for it rather than to nothing at all.
+                if (!fromThisText) commandAtom = commandAtom with { Source = source };
                 switch (appendMode)
                 {
                     case AtomAppendMode.Add:
-                        formula.Add(commandAtom, source);
+                        formula.Add(commandAtom, RowSource(position));
                         break;
                     case AtomAppendMode.Replace:
                         formula.RootAtom = commandAtom;
