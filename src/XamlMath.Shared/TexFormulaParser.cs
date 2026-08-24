@@ -697,7 +697,11 @@ public class TexFormulaParser
         {
             // Predefined formula was found.
             var predefinedFormula = factory(formulaSource);
-            Atom root = predefinedFormula!.RootAtom!; // Nullable TODO: This might need null checking
+            // Re-source its root onto the command as written in the input. A predefined formula is parsed
+            // from its own definition text, so its atoms carry offsets into that string; left alone, \sin,
+            // \lim, \sup and the multiple integrals are attributable to no part of the input they came
+            // from, which makes them invisible to anything mapping rendered output back to source.
+            Atom root = predefinedFormula!.RootAtom! with { Source = formulaSource }; // Nullable TODO: This might need null checking
 
             // The multiple integrals are built out of \int rather than being symbols of their own, so
             // they have to be told where their limits go in the same breath.
