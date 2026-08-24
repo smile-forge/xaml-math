@@ -871,7 +871,13 @@ public class TexFormulaParser
         primesRowAtom = primesRowAtom with { Source = value.Segment(primesStart, position - primesStart) };
 
         if (primesRowAtom.Elements.Count > 0)
-            atom = new ScriptsAtom(primesRowAtom.Source, atom, null, primesRowAtom);
+        {
+            // From where the base began, as the scripts below do. Given the primes' own span instead, the
+            // atom that draws `f''` claimed only the `''` — so the f inside it named a character its own
+            // container did not.
+            var primed = BaseStartWithin(atom, value, primesStart);
+            atom = new ScriptsAtom(value.Segment(primed, position - primed), atom, null, primesRowAtom);
+        }
 
         if (position == value.Length)
             return atom;
