@@ -16,6 +16,9 @@ internal abstract class NonRecursiveEnvironment : ICommandEnvironment
 
     public IReadOnlyDictionary<string, ICommandParser> AvailableCommands { get; }
 
+    /// <summary>Whatever the environment this one wraps records into — recovery is not scoped.</summary>
+    public ICollection<TexParseDiagnostic>? Diagnostics => _environment.Diagnostics;
+
     public ICommandEnvironment CreateChildEnvironment() => _environment;
 
     public abstract bool ProcessUnknownCharacter(TexFormula formula, char character);

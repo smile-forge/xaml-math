@@ -136,6 +136,24 @@ public class TexFormulaParser
         return result;
     }
 
+    /// <summary>
+    /// What is left to read, as the part of the input to blame. At the very end there is nothing left, so
+    /// the last character stands for it — an unclosed brace is the reader's problem wherever it opened.
+    /// </summary>
+    private static SourceSpan Rest(SourceSpan value, int position)
+    {
+        var at = Math.Max(0, Math.Min(position, value.Length));
+        if (at < value.Length) return value.Segment(at, value.Length - at);
+        return value.Length > 0 ? value.Segment(value.Length - 1, 1) : value;
+    }
+
+    /// <summary>The stretch a command occupies, as the part of the input to blame.</summary>
+    private static SourceSpan Named(SourceSpan value, int start, int position)
+    {
+        var from = Math.Max(0, Math.Min(start, value.Length));
+        return value.Segment(from, Math.Max(0, Math.Min(position - from, value.Length - from)));
+    }
+
     private static bool IsSymbol(char c)
     {
         return !char.IsLetterOrDigit(c);
@@ -201,6 +219,31 @@ public class TexFormulaParser
         return Parse(value, ref position, false, textStyle, DefaultCommandEnvironment.Instance);
     }
 
+    /// <summary>
+    /// Parses as much as it can, showing whatever it cannot read rather than giving up on the whole
+    /// formula, and reporting each such stretch in <see cref="TexFormula.Diagnostics"/>.
+    /// <para>
+    /// For anything being edited this is what you want. Text under a caret is wrong far more often than
+    /// it is right — every command is invalid until its last letter — and a formula that vanishes while
+    /// you write it tells the reader nothing about where the trouble is. What comes back is a formula in
+    /// the ordinary sense, drawn and laid out, with the parts that were not understood standing as the
+    /// characters that were actually typed. Those parts carry no meaning: they were shown, not read, so
+    /// anything working structurally should trust them no further than the diagnostics allow.
+    /// </para>
+    /// </summary>
+    public TexFormula ParseWithRecovery(SourceSpan value, string? textStyle = null)
+    {
+        var environment = new RecoveringCommandEnvironment();
+        var position = 0;
+        var formula = Parse(value, ref position, false, textStyle, environment);
+        formula.Diagnostics = environment.Collected;
+        return formula;
+    }
+
+    /// <inheritdoc cref="ParseWithRecovery(SourceSpan, string?)"/>
+    public TexFormula ParseWithRecovery(string value, string? textStyle = null) =>
+        ParseWithRecovery(new SourceSpan("User input", value, 0, value.Length), textStyle);
+
     internal TexFormula Parse(SourceSpan value, string? textStyle, ICommandEnvironment environment)
     {
         int localPostion = 0;
@@ -215,14 +258,14 @@ public class TexFormulaParser
     {
         var embeddedFormula = Parse(value, ref position, true, textStyle, environment);
         if (embeddedFormula.RootAtom == null)
-            throw new TexParseException("Cannot find closing delimiter");
+            throw new TexParseException("Cannot find closing delimiter", Rest(value, position));
 
         var source = embeddedFormula.RootAtom.Source;
         var bodyRow = embeddedFormula.RootAtom as RowAtom;
         var lastAtom = bodyRow?.Elements.LastOrDefault() ?? embeddedFormula.RootAtom;
         var lastDelimiter = lastAtom as SymbolAtom;
         if (lastDelimiter == null || !lastDelimiter.IsDelimeter)
-            throw new TexParseException($"Cannot find closing delimiter; got {lastDelimiter} instead");
+            throw new TexParseException($"Cannot find closing delimiter; got {lastDelimiter} instead", Rest(value, position));
 
         Atom bodyAtom = CreateForRow(bodyRow, source);
 
@@ -242,6 +285,9 @@ public class TexFormulaParser
         var initialPosition = position;
         while (position < value.Length && !(allowClosingDelimiter && closedDelimiter))
         {
+            var resumeFrom = position;
+            try
+            {
             char ch = value[position];
             var source = value.Segment(position, 1);
             if (IsWhiteSpace(ch))
@@ -281,14 +327,14 @@ public class TexFormulaParser
             else if (ch == rightGroupChar)
             {
                 throw new TexParseException("Found a closing '" + rightGroupChar
-                    + "' without an opening '" + leftGroupChar + "'!");
+                    + "' without an opening '" + leftGroupChar + "'!", source);
             }
             else if (ch == superScriptChar || ch == subScriptChar || ch == primeChar)
             {
                 if (position == 0)
                     throw new TexParseException("Every script needs a base: \""
                         + superScriptChar + "\", \"" + subScriptChar + "\" and \""
-                        + primeChar + "\" can't be the first character!");
+                        + primeChar + "\" can't be the first character!", source);
                 else
                 {
                     // An empty base, standing where the script does. Handing it the whole of `value`
@@ -322,9 +368,50 @@ public class TexFormulaParser
                     formula.Add(scriptsAtom, value.Segment(initialPosition, position - initialPosition));
                 }
             }
+            }
+            catch (TexParseException error) when (environment.Diagnostics is not null)
+            {
+                position = Recover(formula, value, resumeFrom, initialPosition, error, environment.Diagnostics);
+            }
         }
 
         return formula;
+    }
+
+    /// <summary>
+    /// Gives up on the stretch the parser could not read, shows it as written, and carries on after it.
+    /// </summary>
+    /// <remarks>
+    /// How far to give up is the whole question, and it is what the position on the exception is for: the
+    /// parser knows which characters defeated it far better than anything downstream could guess. Failing
+    /// that — a fault that named nothing — the rest of the input goes, because there is no way to tell
+    /// where the trouble ends. Either way it must move at least one character, or the loop that called it
+    /// would meet the same fault forever.
+    /// </remarks>
+    private static int Recover(
+        TexFormula formula,
+        SourceSpan value,
+        int from,
+        int rowStart,
+        TexParseException error,
+        ICollection<TexParseDiagnostic> diagnostics)
+    {
+        var blamed = error.At is { } at
+                     && string.Equals(at.Source, value.Source, StringComparison.Ordinal)
+                     && at.End > value.Start + from
+            ? at.End - value.Start
+            : value.Length;
+
+        var to = Math.Max(from + 1, Math.Min(Math.Max(blamed, from + 1), value.Length));
+        var unread = value.Segment(from, to - from);
+        diagnostics.Add(new TexParseDiagnostic(error.Message, unread));
+
+        // Shown as the characters the reader wrote, so the formula keeps its shape around the hole rather
+        // than disappearing. Deliberately not interpreted — this is the part that could not be.
+        var shown = ConvertRawText(unread, TexUtilities.TextStyleName).RootAtom;
+        if (shown is not null) formula.Add(shown, value.Segment(rowStart, to - rowStart));
+
+        return to;
     }
 
     private void ProcessLeftGroupChar(SourceSpan value, ref int position, string? textStyle, ICommandEnvironment environment, TexFormula formula, int initialPosition)
@@ -400,7 +487,7 @@ public class TexFormulaParser
         else
         {
             if (delimiter[0] != escapeChar)
-                throw new TexParseException($"A delimiter should start from {escapeChar}, but got {delimiter}");
+                throw new TexParseException($"A delimiter should start from {escapeChar}, but got {delimiter}", delimiter);
 
             // Here goes the fancy business: for non-alphanumeric commands (e.g. \{, \\ etc.) we need to pass them
             // through GetDelimeterMapping, but for alphanumeric ones, we don't.
@@ -410,7 +497,7 @@ public class TexFormulaParser
         }
 
         if (delimiterName == null || !SymbolAtom.TryGetAtom(delimiterName, delimiterSource, out var atom) || !atom.IsDelimeter)
-            throw new TexParseException($"Cannot find delimiter {delimiter}");
+            throw new TexParseException($"Cannot find delimiter {delimiter}", delimiter);
 
         return atom;
     }
@@ -425,7 +512,7 @@ public class TexFormulaParser
         position = WithSkippedWhiteSpace(value, position);
 
         if (position == value.Length)
-            throw new TexParseException("An element is missing");
+            throw new TexParseException("An element is missing", Rest(value, position));
 
         switch (value[position])
         {
@@ -511,7 +598,7 @@ public class TexFormulaParser
                 {
                     position = WithSkippedWhiteSpace(value, position);
                     if (position == value.Length)
-                        throw new TexParseException("`left` command should be passed a delimiter");
+                        throw new TexParseException("`left` command should be passed a delimiter", Rest(value, start));
 
                     var opening = ParseDelimiter(value, start, ref position);
                     var internals = ParseUntilDelimiter(value, ref position, formula.TextStyle, environment);
@@ -537,11 +624,11 @@ public class TexFormulaParser
             case "right":
                 {
                     if (!allowClosingDelimiter)
-                        throw new TexParseException("`right` command is not allowed without `left`");
+                        throw new TexParseException("`right` command is not allowed without `left`", Named(value, start, position));
 
                     position = WithSkippedWhiteSpace(value, position);
                     if (position == value.Length)
-                        throw new TexParseException("`right` command should be passed a delimiter");
+                        throw new TexParseException("`right` command should be passed a delimiter", Rest(value, start));
 
                     var closing = ParseDelimiter(value, start, ref position);
 
@@ -617,13 +704,14 @@ public class TexFormulaParser
             var parseResult = parser.ProcessCommand(context);
             if (parseResult.NextPosition < position)
                 throw new TexParseException(
-                    $"Incorrect parser behavior for command {command}: NextPosition = {parseResult.NextPosition}, position = {position}. Parser did not made any progress.");
+                    $"Incorrect parser behavior for command {command}: NextPosition = {parseResult.NextPosition}, position = {position}. Parser did not made any progress.",
+                    Named(value, start, position));
 
             position = parseResult.NextPosition;
             return Tuple.Create(parseResult.AppendMode, parseResult.Atom);
         }
 
-        throw new TexParseException("Invalid command.");
+        throw new TexParseException("Invalid command.", Named(value, start, position));
     }
 
     /// <summary>Reads an optional square braced color model name, and then a color name.</summary>
@@ -645,12 +733,13 @@ public class TexFormulaParser
             ? _defaultColorParser
             : _colorModelParsers.TryGetValue(colorModelName, out var currentColorParser)
                 ? currentColorParser
-                : throw new TexParseException($"Unknown color model name: {colorModelName}");
+                : throw new TexParseException($"Unknown color model name: {colorModelName}", afterColor.source);
 
         var color = colorParser.Parse(colorComponents);
         if (color == null)
             throw new TexParseException(
-                $"Color {colorDefinition} could not be parsed by the {colorModelName ?? "default"} color model.");
+                $"Color {colorDefinition} could not be parsed by the {colorModelName ?? "default"} color model.",
+                afterColor.source);
 
         return color.Value;
     }
@@ -826,7 +915,9 @@ public class TexFormulaParser
         else
         {
             // Escape sequence is invalid.
-            throw new TexParseException("Unknown symbol or command or predefined TeXFormula: '" + command + "'");
+            throw new TexParseException(
+                "Unknown symbol or command or predefined TeXFormula: '" + command + "'",
+                afterEscapeRead.source);
         }
     }
 
@@ -1010,7 +1101,7 @@ public class TexFormulaParser
                 if (environment.ProcessUnknownCharacter(formula, character))
                     return null;
 
-                throw new TexParseException($"Unknown character : '{character}'");
+                throw new TexParseException($"Unknown character : '{character}'", source);
             }
 
             try
@@ -1022,7 +1113,7 @@ public class TexFormulaParser
                 throw new TexParseException("The character '"
                         + character.ToString()
                         + "' was mapped to an unknown symbol with the name '"
-                        + (string)symbolName + "'!", e);
+                        + (string)symbolName + "'!", source, e);
             }
         }
         else // Character is alpha-numeric or should be rendered as text.
@@ -1061,7 +1152,7 @@ public class TexFormulaParser
 
         var length = position - initialPosition;
         if (length <= 1)
-            throw new TexParseException($"Unfinished escape sequence (value: \"{value}\", index {position})");
+            throw new TexParseException($"Unfinished escape sequence (value: \"{value}\", index {position})", Rest(value, initialPosition));
 
         return new(
             value.Segment(initialPosition, length),
@@ -1075,7 +1166,7 @@ public class TexFormulaParser
         char closeChar)
     {
         if (position == value.Length || value[position] != openChar)
-            throw new TexParseException("missing '" + openChar + "'!");
+            throw new TexParseException("missing '" + openChar + "'!", Rest(value, position));
 
         var group = 0;
         position++;
@@ -1096,7 +1187,7 @@ public class TexFormulaParser
         if (position == value.Length)
         {
             // Reached end of formula but group has not been closed.
-            throw new TexParseException("Illegal end,  missing '" + closeChar + "'!");
+            throw new TexParseException("Illegal end,  missing '" + closeChar + "'!", Rest(value, start - 1));
         }
 
         position++;

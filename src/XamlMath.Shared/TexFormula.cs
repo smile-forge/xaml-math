@@ -24,6 +24,13 @@ public sealed class TexFormula
 
     public SourceSpan? Source { get; set; }
 
+    /// <summary>
+    /// The parts of the input that could not be read, when this came from
+    /// <see cref="TexFormulaParser.ParseWithRecovery(SourceSpan, string?)"/>. Empty for a clean parse, and
+    /// always empty for a parse that was not recovering — that one throws instead.
+    /// </summary>
+    public IReadOnlyList<TexParseDiagnostic> Diagnostics { get; internal set; } = new List<TexParseDiagnostic>();
+
     public void Add(TexFormula formula, SourceSpan? source = null)
     {
         Debug.Assert(formula != null);
