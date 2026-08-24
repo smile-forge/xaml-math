@@ -749,7 +749,11 @@ public class TexFormulaParser
                 ? ConvertRawText(afterRead.source, styleName)
                 : Parse(afterRead.source, styleName, environment.CreateChildEnvironment());
 
-            var source = value.Segment(commandSpan.Start, position - commandSpan.Start);
+            // From where the command began, as an index into `value`. `commandSpan.Start` is an offset
+            // into the whole input, and Segment adds `value.Start` to whatever it is given, so passing it
+            // counted the base twice — a `\mathrm` nested in anything reported a stretch of source well
+            // before itself.
+            var source = value.Segment(initialSrcPosition, position - initialSrcPosition);
             var atom = styledFormula.RootAtom ?? new NullAtom(source);
             var commandAtom = AttachScripts(formula, value, ref position, atom, true, environment);
             formula.Add(commandAtom, RowSource(position));
