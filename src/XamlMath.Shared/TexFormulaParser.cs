@@ -680,7 +680,14 @@ public class TexFormulaParser
                 // on the accented C, so it clears the dot. Without attaching it here the script falls
                 // through to the parser's "no base to hand" path, which hangs it off an empty box and
                 // sets it at the height of nothing at all.
-                Atom accented = new AccentedAtom(formulaSource, accentFormula.RootAtom, symbolAtom.Name);
+                // Spanning the argument as well, now that it has been read. `formulaSource` covers the
+                // command alone, which was set before there was an argument to include — so `\vec{F}`
+                // claimed the four characters of `\vec` while drawing all seven, and a node ended up
+                // naming less than the child inside it.
+                Atom accented = new AccentedAtom(
+                    value.Segment(initialSrcPosition, position - initialSrcPosition),
+                    accentFormula.RootAtom,
+                    symbolAtom.Name);
                 formula.Add(
                     AttachScripts(formula, value, ref position, accented, true, environment),
                     RowSource(position));
@@ -832,7 +839,8 @@ public class TexFormulaParser
             atom = ReadLimitControls(value, ref position, atom);
 
         // Check for prime marks.
-        var primesRowAtom = new RowAtom(new SourceSpan(value.SourceName, value.Source, position, 0));
+        var primesStart = position;
+        var primesRowAtom = new RowAtom(value.Segment(primesStart, 0));
         int i = position;
         while (i < value.Length)
         {
@@ -846,12 +854,7 @@ public class TexFormulaParser
             i++;
         }
 
-        var primesRowSource = new SourceSpan(
-            value.SourceName,
-            value.Source,
-            primesRowAtom.Source!.Start,
-            position - primesRowAtom.Source.Start);
-        primesRowAtom = primesRowAtom with { Source = primesRowSource };
+        primesRowAtom = primesRowAtom with { Source = value.Segment(primesStart, position - primesStart) };
 
         if (primesRowAtom.Elements.Count > 0)
             atom = new ScriptsAtom(primesRowAtom.Source, atom, null, primesRowAtom);
@@ -898,9 +901,17 @@ public class TexFormulaParser
         // Check whether to return Big Operator or Scripts.
         var subscriptAtom = subscriptFormula?.RootAtom;
         var superscriptAtom = superscriptFormula?.RootAtom;
+
+        // Either kind draws its base as well as its scripts, so the span has to start where the base did.
+        // `position` and `initialPosition` index into `value`; an atom's Source.Start is an offset into
+        // the whole input, so it must be brought back into value's frame before it can be used as one.
+        // Confusing the two is invisible at the top level, where value starts at zero, and wrong for every
+        // nested construct: a numerator's `x^2` reported the offsets of `\fr`.
+        var baseStart = BaseStartWithin(atom, value, initialPosition);
+        var source = value.Segment(baseStart, position - baseStart);
+
         if (atom.GetRightType() == TexAtomType.BigOperator)
         {
-            var source = value.Segment(atom.Source!.Start, position - atom.Source.Start);
             if (atom is BigOperatorAtom typedAtom)
             {
                 return new BigOperatorAtom(
@@ -913,16 +924,22 @@ public class TexFormulaParser
 
             return new BigOperatorAtom(source, atom, subscriptAtom, superscriptAtom);
         }
-        else
-        {
-            var source = new SourceSpan(
-                value.SourceName,
-                value.Source,
-                initialPosition,
-                position - initialPosition);
-            return new ScriptsAtom(source, atom, subscriptAtom, superscriptAtom);
-        }
+
+        return new ScriptsAtom(source, atom, subscriptAtom, superscriptAtom);
     }
+
+    /// <summary>
+    /// Where <paramref name="atom"/> begins as an index into <paramref name="value"/>, falling back to
+    /// <paramref name="fallback"/> when it came from somewhere else — the body of a macro, say, whose
+    /// offsets say nothing about this text.
+    /// </summary>
+    private static int BaseStartWithin(Atom atom, SourceSpan value, int fallback) =>
+        atom.Source is { } source
+        && string.Equals(source.Source, value.Source, StringComparison.Ordinal)
+        && source.Start >= value.Start
+        && source.Start <= value.Start + value.Length
+            ? source.Start - value.Start
+            : fallback;
 
     /// <summary>
     /// Reads the run of <c>\limits</c>, <c>\nolimits</c> and <c>\displaylimits</c> that may follow an
