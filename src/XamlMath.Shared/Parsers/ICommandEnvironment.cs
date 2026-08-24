@@ -11,6 +11,17 @@ namespace XamlMath.Parsers;
 /// </summary>
 internal interface ICommandEnvironment
 {
+    /// <summary>
+    /// Where to record a part of the input that could not be read, or <c>null</c> to give up on the whole
+    /// formula instead — which is what every caller but a recovering parse wants.
+    /// <para>
+    /// It rides on the environment because the environment is already threaded through every nested
+    /// parse, so a group or a fraction's numerator reports into the same list as the formula holding it
+    /// without a single signature having to change to carry it.
+    /// </para>
+    /// </summary>
+    ICollection<TexParseDiagnostic>? Diagnostics { get; }
+
     /// <summary>Commands from the current environment.</summary>
     IReadOnlyDictionary<string, ICommandParser> AvailableCommands { get; }
 
