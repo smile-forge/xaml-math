@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "RowAtom",
     "Elements": [
@@ -6,6 +7,7 @@
         "[AtomType]": "CharAtom",
         "Character": "a",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 7,
           "Length": 1,
@@ -18,6 +20,7 @@
       },
       {
         "[AtomType]": "SpaceAtom",
+        "Slots": [],
         "Source": {
           "End": 8,
           "Length": 1,
@@ -31,6 +34,7 @@
         "[AtomType]": "CharAtom",
         "Character": "b",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 9,
           "Length": 1,
@@ -43,6 +47,7 @@
       },
       {
         "[AtomType]": "SpaceAtom",
+        "Slots": [],
         "Source": {
           "End": 10,
           "Length": 1,
@@ -56,6 +61,7 @@
         "[AtomType]": "CharAtom",
         "Character": "c",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 11,
           "Length": 1,
@@ -68,6 +74,92 @@
       }
     ],
     "PreviousAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "a",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 7,
+            "Length": 1,
+            "Source": "\\text{a b c}",
+            "SourceName": "User input",
+            "Start": 6
+          },
+          "TextStyle": "text",
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "SpaceAtom",
+          "Slots": [],
+          "Source": {
+            "End": 8,
+            "Length": 1,
+            "Source": "\\text{a b c}",
+            "SourceName": "User input",
+            "Start": 7
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "b",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 9,
+            "Length": 1,
+            "Source": "\\text{a b c}",
+            "SourceName": "User input",
+            "Start": 8
+          },
+          "TextStyle": "text",
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "SpaceAtom",
+          "Slots": [],
+          "Source": {
+            "End": 10,
+            "Length": 1,
+            "Source": "\\text{a b c}",
+            "SourceName": "User input",
+            "Start": 9
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "c",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 11,
+            "Length": 1,
+            "Source": "\\text{a b c}",
+            "SourceName": "User input",
+            "Start": 10
+          },
+          "TextStyle": "text",
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      }
+    ],
     "Source": {
       "End": 11,
       "Length": 5,

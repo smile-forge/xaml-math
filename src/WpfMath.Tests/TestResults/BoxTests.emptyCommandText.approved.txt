@@ -5,13 +5,25 @@
   "Foreground": null,
   "Height": 0.0,
   "Italic": 0.0,
+  "Node": {
+    "[AtomType]": "NullAtom",
+    "Slots": [],
+    "Source": {
+      "End": 7,
+      "Length": 7,
+      "Source": "\\text{}",
+      "SourceName": "User input",
+      "Start": 0
+    },
+    "Type": "Ordinary"
+  },
   "Shift": 0.0,
   "Source": {
     "End": 7,
-    "Length": 6,
+    "Length": 7,
     "Source": "\\text{}",
     "SourceName": "User input",
-    "Start": 1
+    "Start": 0
   },
   "TotalHeight": 0.0,
   "TotalWidth": 0.0,

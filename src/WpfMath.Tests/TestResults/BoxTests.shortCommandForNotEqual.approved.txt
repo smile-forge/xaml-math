@@ -20,6 +20,21 @@
       "Foreground": null,
       "Height": 0.694445,
       "Italic": 0.0,
+      "Node": {
+        "[AtomType]": "SymbolAtom",
+        "IsDelimeter": false,
+        "IsTextSymbol": false,
+        "Name": "not",
+        "Slots": [],
+        "Source": {
+          "End": 4,
+          "Length": 3,
+          "Source": "\\not\\equals",
+          "SourceName": "User input",
+          "Start": 1
+        },
+        "Type": "Relation"
+      },
       "Shift": 0.0,
       "Source": {
         "End": 4,
@@ -39,6 +54,7 @@
       "Foreground": null,
       "Height": 0.0,
       "Italic": 0.0,
+      "Node": null,
       "Shift": 0.0,
       "Shrink": 0.0,
       "Source": null,
@@ -66,6 +82,21 @@
       "Foreground": null,
       "Height": 0.366875,
       "Italic": 0.0,
+      "Node": {
+        "[AtomType]": "SymbolAtom",
+        "IsDelimeter": false,
+        "IsTextSymbol": false,
+        "Name": "equals",
+        "Slots": [],
+        "Source": {
+          "End": 11,
+          "Length": 6,
+          "Source": "\\not\\equals",
+          "SourceName": "User input",
+          "Start": 5
+        },
+        "Type": "Relation"
+      },
       "Shift": 0.0,
       "Source": {
         "End": 11,
@@ -83,13 +114,95 @@
   "Foreground": null,
   "Height": 0.694445,
   "Italic": 0.0,
+  "Node": {
+    "[AtomType]": "RowAtom",
+    "Elements": [
+      {
+        "[AtomType]": "SymbolAtom",
+        "IsDelimeter": false,
+        "IsTextSymbol": false,
+        "Name": "not",
+        "Slots": [],
+        "Source": {
+          "End": 4,
+          "Length": 3,
+          "Source": "\\not\\equals",
+          "SourceName": "User input",
+          "Start": 1
+        },
+        "Type": "Relation"
+      },
+      {
+        "[AtomType]": "SymbolAtom",
+        "IsDelimeter": false,
+        "IsTextSymbol": false,
+        "Name": "equals",
+        "Slots": [],
+        "Source": {
+          "End": 11,
+          "Length": 6,
+          "Source": "\\not\\equals",
+          "SourceName": "User input",
+          "Start": 5
+        },
+        "Type": "Relation"
+      }
+    ],
+    "PreviousAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "SymbolAtom",
+          "IsDelimeter": false,
+          "IsTextSymbol": false,
+          "Name": "not",
+          "Slots": [],
+          "Source": {
+            "End": 4,
+            "Length": 3,
+            "Source": "\\not\\equals",
+            "SourceName": "User input",
+            "Start": 1
+          },
+          "Type": "Relation"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "SymbolAtom",
+          "IsDelimeter": false,
+          "IsTextSymbol": false,
+          "Name": "equals",
+          "Slots": [],
+          "Source": {
+            "End": 11,
+            "Length": 6,
+            "Source": "\\not\\equals",
+            "SourceName": "User input",
+            "Start": 5
+          },
+          "Type": "Relation"
+        },
+        "Role": "element"
+      }
+    ],
+    "Source": {
+      "End": 4,
+      "Length": 4,
+      "Source": "\\neq",
+      "SourceName": "User input",
+      "Start": 0
+    },
+    "Type": "Ordinary"
+  },
   "Shift": 0.0,
   "Source": {
-    "End": 15,
-    "Length": 11,
-    "Source": "\\not\\equals",
+    "End": 4,
+    "Length": 4,
+    "Source": "\\neq",
     "SourceName": "User input",
-    "Start": 4
+    "Start": 0
   },
   "TotalHeight": 0.888888,
   "TotalWidth": 0.777781,

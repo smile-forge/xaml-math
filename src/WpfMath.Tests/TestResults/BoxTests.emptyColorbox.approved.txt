@@ -5,6 +5,20 @@
   "Foreground": null,
   "Height": 0.0,
   "Italic": 0.0,
+  "Node": {
+    "[AtomType]": "RowAtom",
+    "Elements": [],
+    "PreviousAtom": null,
+    "Slots": [],
+    "Source": {
+      "End": 16,
+      "Length": 15,
+      "Source": "\\colorbox{red}{}",
+      "SourceName": "User input",
+      "Start": 1
+    },
+    "Type": "Ordinary"
+  },
   "Shift": 0.0,
   "Source": {
     "End": 16,

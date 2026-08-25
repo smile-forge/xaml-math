@@ -9,6 +9,9 @@ internal sealed class DefaultCommandEnvironment : ICommandEnvironment
     /// <summary>Nothing is recorded: without a recovering parse, a fault ends the parse.</summary>
     public ICollection<TexParseDiagnostic>? Diagnostics => null;
 
+    /// <summary>All of it is read: showing a stretch as written is an editor's request, not a parse.</summary>
+    public (int Start, int Length)? ShownAsWritten => null;
+
     public IReadOnlyDictionary<string, ICommandParser> AvailableCommands { get; } =
         new Dictionary<string, ICommandParser>();
 

@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "BigOperatorAtom",
     "BaseAtom": {
@@ -8,6 +9,7 @@
           "[AtomType]": "CharAtom",
           "Character": "m",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 9,
             "Length": 1,
@@ -22,6 +24,7 @@
           "[AtomType]": "CharAtom",
           "Character": "o",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 10,
             "Length": 1,
@@ -36,6 +39,7 @@
           "[AtomType]": "CharAtom",
           "Character": "d",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 11,
             "Length": 1,
@@ -48,6 +52,62 @@
         }
       ],
       "PreviousAtom": null,
+      "Slots": [
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "m",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 9,
+              "Length": 1,
+              "Source": "\\mathrm{mod}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 8
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "o",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 10,
+              "Length": 1,
+              "Source": "\\mathrm{mod}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 9
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "d",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 11,
+              "Length": 1,
+              "Source": "\\mathrm{mod}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 10
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        }
+      ],
       "Source": {
         "End": 11,
         "Length": 3,
@@ -58,12 +118,132 @@
       "Type": "Ordinary"
     },
     "LowerLimitAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "m",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 9,
+                "Length": 1,
+                "Source": "\\mathrm{mod}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 8
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "o",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 10,
+                "Length": 1,
+                "Source": "\\mathrm{mod}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 9
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "d",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 11,
+                "Length": 1,
+                "Source": "\\mathrm{mod}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 10
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "m",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 9,
+                  "Length": 1,
+                  "Source": "\\mathrm{mod}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 8
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "o",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 10,
+                  "Length": 1,
+                  "Source": "\\mathrm{mod}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 9
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "d",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 11,
+                  "Length": 1,
+                  "Source": "\\mathrm{mod}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 10
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 11,
+            "Length": 3,
+            "Source": "\\mathrm{mod}",
+            "SourceName": "Predefined formula fragment",
+            "Start": 8
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      }
+    ],
     "Source": {
-      "End": 11,
-      "Length": 3,
-      "Source": "\\mathrm{mod}",
-      "SourceName": "Predefined formula fragment",
-      "Start": 8
+      "End": 4,
+      "Length": 4,
+      "Source": "\\mod",
+      "SourceName": "User input",
+      "Start": 0
     },
     "Type": "BigOperator",
     "UpperLimitAtom": null,

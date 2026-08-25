@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "FencedAtom",
     "BaseAtom": {
@@ -8,6 +9,7 @@
           "[AtomType]": "CharAtom",
           "Character": "2",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 7,
             "Length": 1,
@@ -23,6 +25,7 @@
           "IsDelimeter": false,
           "IsTextSymbol": false,
           "Name": "plus",
+          "Slots": [],
           "Source": {
             "End": 8,
             "Length": 1,
@@ -36,6 +39,7 @@
           "[AtomType]": "CharAtom",
           "Character": "2",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 9,
             "Length": 1,
@@ -48,12 +52,68 @@
         }
       ],
       "PreviousAtom": null,
+      "Slots": [
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 7,
+              "Length": 1,
+              "Source": "\\left(2+2\\right)",
+              "SourceName": "User input",
+              "Start": 6
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "SymbolAtom",
+            "IsDelimeter": false,
+            "IsTextSymbol": false,
+            "Name": "plus",
+            "Slots": [],
+            "Source": {
+              "End": 8,
+              "Length": 1,
+              "Source": "\\left(2+2\\right)",
+              "SourceName": "User input",
+              "Start": 7
+            },
+            "Type": "BinaryOperator"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 9,
+              "Length": 1,
+              "Source": "\\left(2+2\\right)",
+              "SourceName": "User input",
+              "Start": 8
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        }
+      ],
       "Source": {
-        "End": 25,
-        "Length": 16,
+        "End": 16,
+        "Length": 10,
         "Source": "\\left(2+2\\right)",
         "SourceName": "User input",
-        "Start": 9
+        "Start": 6
       },
       "Type": "Ordinary"
     },
@@ -62,6 +122,7 @@
       "IsDelimeter": true,
       "IsTextSymbol": false,
       "Name": "(",
+      "Slots": [],
       "Source": {
         "End": 6,
         "Length": 5,
@@ -76,6 +137,7 @@
       "IsDelimeter": true,
       "IsTextSymbol": false,
       "Name": ")",
+      "Slots": [],
       "Source": {
         "End": 16,
         "Length": 6,
@@ -85,6 +147,126 @@
       },
       "Type": "Closing"
     },
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 7,
+                "Length": 1,
+                "Source": "\\left(2+2\\right)",
+                "SourceName": "User input",
+                "Start": 6
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "SymbolAtom",
+              "IsDelimeter": false,
+              "IsTextSymbol": false,
+              "Name": "plus",
+              "Slots": [],
+              "Source": {
+                "End": 8,
+                "Length": 1,
+                "Source": "\\left(2+2\\right)",
+                "SourceName": "User input",
+                "Start": 7
+              },
+              "Type": "BinaryOperator"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 9,
+                "Length": 1,
+                "Source": "\\left(2+2\\right)",
+                "SourceName": "User input",
+                "Start": 8
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 7,
+                  "Length": 1,
+                  "Source": "\\left(2+2\\right)",
+                  "SourceName": "User input",
+                  "Start": 6
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "SymbolAtom",
+                "IsDelimeter": false,
+                "IsTextSymbol": false,
+                "Name": "plus",
+                "Slots": [],
+                "Source": {
+                  "End": 8,
+                  "Length": 1,
+                  "Source": "\\left(2+2\\right)",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "BinaryOperator"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 9,
+                  "Length": 1,
+                  "Source": "\\left(2+2\\right)",
+                  "SourceName": "User input",
+                  "Start": 8
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 16,
+            "Length": 10,
+            "Source": "\\left(2+2\\right)",
+            "SourceName": "User input",
+            "Start": 6
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      }
+    ],
     "Source": {
       "End": 16,
       "Length": 15,

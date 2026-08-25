@@ -1,10 +1,12 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "FencedAtom",
     "BaseAtom": {
       "[AtomType]": "CharAtom",
       "Character": "a",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 7,
         "Length": 1,
@@ -20,6 +22,7 @@
       "IsDelimeter": true,
       "IsTextSymbol": false,
       "Name": "_emptyDelimiter",
+      "Slots": [],
       "Source": {
         "End": 6,
         "Length": 5,
@@ -34,6 +37,7 @@
       "IsDelimeter": true,
       "IsTextSymbol": false,
       "Name": ")",
+      "Slots": [],
       "Source": {
         "End": 14,
         "Length": 6,
@@ -43,6 +47,26 @@
       },
       "Type": "Closing"
     },
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "a",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 7,
+            "Length": 1,
+            "Source": "\\left.a\\right)",
+            "SourceName": "User input",
+            "Start": 6
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      }
+    ],
     "Source": {
       "End": 14,
       "Length": 13,

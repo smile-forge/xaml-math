@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "BigOperatorAtom",
     "BaseAtom": {
@@ -6,6 +7,7 @@
       "IsDelimeter": false,
       "IsTextSymbol": false,
       "Name": "int",
+      "Slots": [],
       "Source": {
         "End": 4,
         "Length": 3,
@@ -19,6 +21,7 @@
       "[AtomType]": "CharAtom",
       "Character": "a",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 6,
         "Length": 1,
@@ -29,6 +32,62 @@
       "TextStyle": null,
       "Type": "Ordinary"
     },
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "SymbolAtom",
+          "IsDelimeter": false,
+          "IsTextSymbol": false,
+          "Name": "int",
+          "Slots": [],
+          "Source": {
+            "End": 4,
+            "Length": 3,
+            "Source": "\\int_a^b",
+            "SourceName": "User input",
+            "Start": 1
+          },
+          "Type": "BigOperator"
+        },
+        "Role": "base"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "a",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 6,
+            "Length": 1,
+            "Source": "\\int_a^b",
+            "SourceName": "User input",
+            "Start": 5
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "lower limit"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "b",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 8,
+            "Length": 1,
+            "Source": "\\int_a^b",
+            "SourceName": "User input",
+            "Start": 7
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "upper limit"
+      }
+    ],
     "Source": {
       "End": 8,
       "Length": 8,
@@ -41,6 +100,7 @@
       "[AtomType]": "CharAtom",
       "Character": "b",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 8,
         "Length": 1,

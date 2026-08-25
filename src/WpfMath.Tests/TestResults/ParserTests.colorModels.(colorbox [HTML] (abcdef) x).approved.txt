@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "StyledAtom",
     "Background": "#FFABCDEF",
@@ -10,6 +11,7 @@
           "[AtomType]": "CharAtom",
           "Character": "x",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 27,
             "Length": 1,
@@ -22,6 +24,26 @@
         }
       ],
       "PreviousAtom": null,
+      "Slots": [
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "x",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 27,
+              "Length": 1,
+              "Source": "\\colorbox [HTML] {abcdef} x",
+              "SourceName": "User input",
+              "Start": 26
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        }
+      ],
       "Source": {
         "End": 27,
         "Length": 26,
@@ -31,6 +53,7 @@
       },
       "Type": "Ordinary"
     },
+    "Slots": [],
     "Source": {
       "End": 27,
       "Length": 26,

@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "RowAtom",
     "Elements": [
@@ -8,6 +9,7 @@
           "[AtomType]": "CharAtom",
           "Character": "x",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 10,
             "Length": 1,
@@ -23,6 +25,7 @@
           "[AtomType]": "CharAtom",
           "Character": "2",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 7,
             "Length": 1,
@@ -34,6 +37,44 @@
           "Type": "Ordinary"
         },
         "OverrideStyle": null,
+        "Slots": [
+          {
+            "Node": {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 7,
+                "Length": 1,
+                "Source": "\\frac{2}{x}123",
+                "SourceName": "User input",
+                "Start": 6
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            "Role": "numerator"
+          },
+          {
+            "Node": {
+              "[AtomType]": "CharAtom",
+              "Character": "x",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 10,
+                "Length": 1,
+                "Source": "\\frac{2}{x}123",
+                "SourceName": "User input",
+                "Start": 9
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            "Role": "denominator"
+          }
+        ],
         "Source": {
           "End": 11,
           "Length": 10,
@@ -48,6 +89,7 @@
         "[AtomType]": "CharAtom",
         "Character": "1",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 12,
           "Length": 1,
@@ -62,6 +104,7 @@
         "[AtomType]": "CharAtom",
         "Character": "2",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 13,
           "Length": 1,
@@ -76,6 +119,7 @@
         "[AtomType]": "CharAtom",
         "Character": "3",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 14,
           "Length": 1,
@@ -88,6 +132,147 @@
       }
     ],
     "PreviousAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "FractionAtom",
+          "Denominator": {
+            "[AtomType]": "CharAtom",
+            "Character": "x",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 10,
+              "Length": 1,
+              "Source": "\\frac{2}{x}123",
+              "SourceName": "User input",
+              "Start": 9
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "KeepContentStyle": false,
+          "Numerator": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 7,
+              "Length": 1,
+              "Source": "\\frac{2}{x}123",
+              "SourceName": "User input",
+              "Start": 6
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "OverrideStyle": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 7,
+                  "Length": 1,
+                  "Source": "\\frac{2}{x}123",
+                  "SourceName": "User input",
+                  "Start": 6
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "numerator"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "x",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 10,
+                  "Length": 1,
+                  "Source": "\\frac{2}{x}123",
+                  "SourceName": "User input",
+                  "Start": 9
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "denominator"
+            }
+          ],
+          "Source": {
+            "End": 11,
+            "Length": 10,
+            "Source": "\\frac{2}{x}123",
+            "SourceName": "User input",
+            "Start": 1
+          },
+          "SuppressNullDelimiterSpace": false,
+          "Type": "Inner"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "1",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 12,
+            "Length": 1,
+            "Source": "\\frac{2}{x}123",
+            "SourceName": "User input",
+            "Start": 11
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "2",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 13,
+            "Length": 1,
+            "Source": "\\frac{2}{x}123",
+            "SourceName": "User input",
+            "Start": 12
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "3",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 14,
+            "Length": 1,
+            "Source": "\\frac{2}{x}123",
+            "SourceName": "User input",
+            "Start": 13
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      }
+    ],
     "Source": {
       "End": 14,
       "Length": 14,

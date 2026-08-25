@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "TypedAtom",
     "Atom": {
@@ -8,6 +9,7 @@
         "IsDelimeter": false,
         "IsTextSymbol": false,
         "Name": "hat",
+        "Slots": [],
         "Source": null,
         "Type": "Accent"
       },
@@ -15,6 +17,7 @@
         "[AtomType]": "CharAtom",
         "Character": "T",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 7,
           "Length": 1,
@@ -25,23 +28,103 @@
         "TextStyle": null,
         "Type": "Ordinary"
       },
+      "Slots": [
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "T",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 7,
+              "Length": 1,
+              "Source": "{\\hat T}",
+              "SourceName": "User input",
+              "Start": 6
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "base"
+        }
+      ],
       "Source": {
-        "End": 5,
-        "Length": 5,
+        "End": 7,
+        "Length": 6,
         "Source": "{\\hat T}",
         "SourceName": "User input",
-        "Start": 0
+        "Start": 1
       },
       "Type": "Ordinary"
     },
     "LeftType": "Ordinary",
     "RightType": "Ordinary",
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "AccentedAtom",
+          "AccentAtom": {
+            "[AtomType]": "SymbolAtom",
+            "IsDelimeter": false,
+            "IsTextSymbol": false,
+            "Name": "hat",
+            "Slots": [],
+            "Source": null,
+            "Type": "Accent"
+          },
+          "BaseAtom": {
+            "[AtomType]": "CharAtom",
+            "Character": "T",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 7,
+              "Length": 1,
+              "Source": "{\\hat T}",
+              "SourceName": "User input",
+              "Start": 6
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "T",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 7,
+                  "Length": 1,
+                  "Source": "{\\hat T}",
+                  "SourceName": "User input",
+                  "Start": 6
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "base"
+            }
+          ],
+          "Source": {
+            "End": 7,
+            "Length": 6,
+            "Source": "{\\hat T}",
+            "SourceName": "User input",
+            "Start": 1
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      }
+    ],
     "Source": {
-      "End": 5,
-      "Length": 5,
+      "End": 7,
+      "Length": 6,
       "Source": "{\\hat T}",
       "SourceName": "User input",
-      "Start": 0
+      "Start": 1
     },
     "Type": "Ordinary"
   },

@@ -1,0 +1,6 @@
+{
+  "$comment": "Integration-only, and never to be upstreamed. Nexaflow's root global.json names Microsoft.Testing.Platform as the test runner for everything beneath it, and `dotnet test` refuses to mix runners - so from inside Nexaflow this repo's xunit/VSTest suite could not be run at all. This shadows that choice for anything run with the working directory inside the submodule. Run the tests as: dotnet test src/WpfMath.Tests/WpfMath.Tests.fsproj (from this directory).",
+  "test": {
+    "runner": "VSTest"
+  }
+}

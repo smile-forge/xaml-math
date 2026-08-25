@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "MatrixAtom",
     "ColumnSpec": null,
@@ -11,6 +12,7 @@
           "[AtomType]": "CharAtom",
           "Character": "4",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 9,
             "Length": 1,
@@ -28,6 +30,7 @@
               "[AtomType]": "CharAtom",
               "Character": "7",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 11,
                 "Length": 1,
@@ -42,6 +45,7 @@
               "[AtomType]": "CharAtom",
               "Character": "8",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 12,
                 "Length": 1,
@@ -54,6 +58,44 @@
             }
           ],
           "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "7",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 11,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 10
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "8",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 12,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 11
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
           "Source": {
             "End": 12,
             "Length": 4,
@@ -67,6 +109,7 @@
           "[AtomType]": "CharAtom",
           "Character": "3",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 14,
             "Length": 1,
@@ -83,6 +126,7 @@
           "[AtomType]": "CharAtom",
           "Character": "5",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 19,
             "Length": 1,
@@ -97,6 +141,7 @@
           "[AtomType]": "CharAtom",
           "Character": "9",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 23,
             "Length": 1,
@@ -114,6 +159,7 @@
               "[AtomType]": "CharAtom",
               "Character": "8",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 28,
                 "Length": 1,
@@ -128,6 +174,7 @@
               "[AtomType]": "CharAtom",
               "Character": "2",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 29,
                 "Length": 1,
@@ -140,6 +187,44 @@
             }
           ],
           "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "8",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 28,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 27
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 29,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 28
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
           "Source": {
             "End": 30,
             "Length": 22,
@@ -153,6 +238,250 @@
     ],
     "RowStrutDepth": 0.414,
     "RowStrutHeight": 0.966,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "4",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 9,
+            "Length": 1,
+            "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+            "SourceName": "User input",
+            "Start": 8
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      },
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "7",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 11,
+                "Length": 1,
+                "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                "SourceName": "User input",
+                "Start": 10
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "8",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 12,
+                "Length": 1,
+                "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                "SourceName": "User input",
+                "Start": 11
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "7",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 11,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 10
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "8",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 12,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 11
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 12,
+            "Length": 4,
+            "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+            "SourceName": "User input",
+            "Start": 8
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "3",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 14,
+            "Length": 1,
+            "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+            "SourceName": "User input",
+            "Start": 13
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "5",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 19,
+            "Length": 1,
+            "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+            "SourceName": "User input",
+            "Start": 18
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "9",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 23,
+            "Length": 1,
+            "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+            "SourceName": "User input",
+            "Start": 22
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      },
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "8",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 28,
+                "Length": 1,
+                "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                "SourceName": "User input",
+                "Start": 27
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 29,
+                "Length": 1,
+                "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                "SourceName": "User input",
+                "Start": 28
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "8",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 28,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 27
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 29,
+                  "Length": 1,
+                  "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+                  "SourceName": "User input",
+                  "Start": 28
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 30,
+            "Length": 22,
+            "Source": "\\matrix{4&78&3 \\\\ 5 & 9  & 82 }",
+            "SourceName": "User input",
+            "Start": 8
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      }
+    ],
     "Source": {
       "End": 31,
       "Length": 30,

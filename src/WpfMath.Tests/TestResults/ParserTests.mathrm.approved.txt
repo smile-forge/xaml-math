@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "RowAtom",
     "Elements": [
@@ -6,6 +7,7 @@
         "[AtomType]": "CharAtom",
         "Character": "s",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 9,
           "Length": 1,
@@ -20,6 +22,7 @@
         "[AtomType]": "CharAtom",
         "Character": "i",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 10,
           "Length": 1,
@@ -34,6 +37,7 @@
         "[AtomType]": "CharAtom",
         "Character": "n",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 11,
           "Length": 1,
@@ -46,6 +50,62 @@
       }
     ],
     "PreviousAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "s",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 9,
+            "Length": 1,
+            "Source": "\\mathrm{sin}",
+            "SourceName": "User input",
+            "Start": 8
+          },
+          "TextStyle": "mathrm",
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "i",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 10,
+            "Length": 1,
+            "Source": "\\mathrm{sin}",
+            "SourceName": "User input",
+            "Start": 9
+          },
+          "TextStyle": "mathrm",
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "n",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 11,
+            "Length": 1,
+            "Source": "\\mathrm{sin}",
+            "SourceName": "User input",
+            "Start": 10
+          },
+          "TextStyle": "mathrm",
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      }
+    ],
     "Source": {
       "End": 11,
       "Length": 3,

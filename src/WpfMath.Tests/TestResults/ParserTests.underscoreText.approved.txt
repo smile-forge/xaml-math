@@ -1,8 +1,10 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "CharAtom",
     "Character": "_",
     "IsTextSymbol": false,
+    "Slots": [],
     "Source": {
       "End": 7,
       "Length": 1,

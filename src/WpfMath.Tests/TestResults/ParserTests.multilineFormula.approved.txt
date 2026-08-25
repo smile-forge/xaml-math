@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "MatrixAtom",
     "ColumnSpec": null,
@@ -14,6 +15,7 @@
               "[AtomType]": "CharAtom",
               "Character": "l",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 1,
                 "Length": 1,
@@ -28,6 +30,7 @@
               "[AtomType]": "CharAtom",
               "Character": "i",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 2,
                 "Length": 1,
@@ -42,6 +45,7 @@
               "[AtomType]": "CharAtom",
               "Character": "n",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 3,
                 "Length": 1,
@@ -56,6 +60,7 @@
               "[AtomType]": "CharAtom",
               "Character": "e",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 4,
                 "Length": 1,
@@ -70,6 +75,7 @@
               "[AtomType]": "CharAtom",
               "Character": "1",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 6,
                 "Length": 1,
@@ -82,6 +88,98 @@
             }
           ],
           "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "l",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 1,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 0
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 2,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 1
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "n",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 3,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 2
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 4,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 3
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "1",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 6,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 5
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
           "Source": {
             "End": 6,
             "Length": 6,
@@ -100,6 +198,7 @@
               "[AtomType]": "CharAtom",
               "Character": "l",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 9,
                 "Length": 1,
@@ -114,6 +213,7 @@
               "[AtomType]": "CharAtom",
               "Character": "i",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 10,
                 "Length": 1,
@@ -128,6 +228,7 @@
               "[AtomType]": "CharAtom",
               "Character": "n",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 11,
                 "Length": 1,
@@ -142,6 +243,7 @@
               "[AtomType]": "CharAtom",
               "Character": "e",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 12,
                 "Length": 1,
@@ -156,6 +258,7 @@
               "[AtomType]": "CharAtom",
               "Character": "2",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 14,
                 "Length": 1,
@@ -168,6 +271,98 @@
             }
           ],
           "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "l",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 9,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 8
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 10,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 9
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "n",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 11,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 10
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 12,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 11
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 14,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 13
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
           "Source": {
             "End": 14,
             "Length": 6,
@@ -186,6 +381,7 @@
               "[AtomType]": "CharAtom",
               "Character": "l",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 17,
                 "Length": 1,
@@ -200,6 +396,7 @@
               "[AtomType]": "CharAtom",
               "Character": "i",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 18,
                 "Length": 1,
@@ -214,6 +411,7 @@
               "[AtomType]": "CharAtom",
               "Character": "n",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 19,
                 "Length": 1,
@@ -228,6 +426,7 @@
               "[AtomType]": "CharAtom",
               "Character": "e",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 20,
                 "Length": 1,
@@ -242,6 +441,7 @@
               "[AtomType]": "CharAtom",
               "Character": "3",
               "IsTextSymbol": false,
+              "Slots": [],
               "Source": {
                 "End": 22,
                 "Length": 1,
@@ -254,6 +454,98 @@
             }
           ],
           "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "l",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 17,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 16
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 18,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 17
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "n",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 19,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 18
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 20,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 19
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "3",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 22,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 21
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
           "Source": {
             "End": 22,
             "Length": 6,
@@ -267,7 +559,567 @@
     ],
     "RowStrutDepth": 0.0,
     "RowStrutHeight": 0.0,
-    "Source": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "l",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 1,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 0
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "i",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 2,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 1
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "n",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 3,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 2
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "e",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 4,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 3
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "1",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 6,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 5
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "l",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 1,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 0
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 2,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 1
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "n",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 3,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 2
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 4,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 3
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "1",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 6,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 5
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 6,
+            "Length": 6,
+            "Source": "line 1\\\\line 2\\\\line 3",
+            "SourceName": "User input",
+            "Start": 0
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      },
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "l",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 9,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 8
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "i",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 10,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 9
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "n",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 11,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 10
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "e",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 12,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 11
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 14,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 13
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "l",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 9,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 8
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 10,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 9
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "n",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 11,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 10
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 12,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 11
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 14,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 13
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 14,
+            "Length": 6,
+            "Source": "line 1\\\\line 2\\\\line 3",
+            "SourceName": "User input",
+            "Start": 8
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      },
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "l",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 17,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 16
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "i",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 18,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 17
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "n",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 19,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 18
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "e",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 20,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 19
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "3",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 22,
+                "Length": 1,
+                "Source": "line 1\\\\line 2\\\\line 3",
+                "SourceName": "User input",
+                "Start": 21
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "l",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 17,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 16
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 18,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 17
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "n",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 19,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 18
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 20,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 19
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "3",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 22,
+                  "Length": 1,
+                  "Source": "line 1\\\\line 2\\\\line 3",
+                  "SourceName": "User input",
+                  "Start": 21
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 22,
+            "Length": 6,
+            "Source": "line 1\\\\line 2\\\\line 3",
+            "SourceName": "User input",
+            "Start": 16
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "cell"
+      }
+    ],
+    "Source": {
+      "End": 22,
+      "Length": 16,
+      "Source": "line 1\\\\line 2\\\\line 3",
+      "SourceName": "User input",
+      "Start": 6
+    },
     "SuppressOuterPadding": false,
     "Type": "Ordinary",
     "VerticalPadding": 0.35

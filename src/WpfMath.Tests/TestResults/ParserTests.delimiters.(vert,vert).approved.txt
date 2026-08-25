@@ -1,10 +1,12 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "FencedAtom",
     "BaseAtom": {
       "[AtomType]": "CharAtom",
       "Character": "a",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 12,
         "Length": 1,
@@ -20,6 +22,7 @@
       "IsDelimeter": true,
       "IsTextSymbol": false,
       "Name": "vert",
+      "Slots": [],
       "Source": {
         "End": 10,
         "Length": 9,
@@ -34,6 +37,7 @@
       "IsDelimeter": true,
       "IsTextSymbol": false,
       "Name": "vert",
+      "Slots": [],
       "Source": {
         "End": 23,
         "Length": 10,
@@ -43,6 +47,26 @@
       },
       "Type": "Ordinary"
     },
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "a",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 12,
+            "Length": 1,
+            "Source": "\\left\\vert a\\right\\vert",
+            "SourceName": "User input",
+            "Start": 11
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      }
+    ],
     "Source": {
       "End": 23,
       "Length": 22,

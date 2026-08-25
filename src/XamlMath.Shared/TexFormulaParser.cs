@@ -228,18 +228,24 @@ public class TexFormulaParser
     /// anything working structurally should trust them no further than the diagnostics allow.
     /// </para>
     /// </summary>
-    public TexFormula ParseWithRecovery(SourceSpan value, string? textStyle = null)
+    /// <param name="shownAsWritten">
+    /// A stretch to set as the characters written rather than read as maths — see
+    /// <see cref="ICommandEnvironment.ShownAsWritten"/>. Null reads all of it.
+    /// </param>
+    public TexFormula ParseWithRecovery(
+        SourceSpan value, string? textStyle = null, (int Start, int Length)? shownAsWritten = null)
     {
-        var environment = new RecoveringCommandEnvironment();
+        var environment = new RecoveringCommandEnvironment(shownAsWritten);
         var position = 0;
         var formula = Parse(value, ref position, false, textStyle, environment);
         formula.Diagnostics = environment.Collected;
         return formula;
     }
 
-    /// <inheritdoc cref="ParseWithRecovery(SourceSpan, string?)"/>
-    public TexFormula ParseWithRecovery(string value, string? textStyle = null) =>
-        ParseWithRecovery(new SourceSpan("User input", value, 0, value.Length), textStyle);
+    /// <inheritdoc cref="ParseWithRecovery(SourceSpan, string?, ValueTuple{int,int}?)"/>
+    public TexFormula ParseWithRecovery(
+        string value, string? textStyle = null, (int Start, int Length)? shownAsWritten = null) =>
+        ParseWithRecovery(new SourceSpan("User input", value, 0, value.Length), textStyle, shownAsWritten);
 
     internal TexFormula Parse(SourceSpan value, string? textStyle, ICommandEnvironment environment)
     {
@@ -285,6 +291,19 @@ public class TexFormulaParser
             var resumeFrom = position;
             try
             {
+            // Asked for as written, so it is set as written — the same treatment recovery gives input it
+            // could not read, before anything tries to read this. Checked as "covers here" rather than
+            // "starts here" so a stretch whose first character the parser stepped over on its way in is
+            // still shown from wherever reading actually resumed, instead of quietly typesetting.
+            if (Shown(environment, value, position) is { } written)
+            {
+                var shownAtom = ConvertRawText(written, TexUtilities.TextStyleName).RootAtom;
+                position += written.Length;
+                if (shownAtom is not null)
+                    formula.Add(shownAtom, value.Segment(initialPosition, position - initialPosition));
+                continue;
+            }
+
             char ch = value[position];
             var source = value.Segment(position, 1);
             if (IsWhiteSpace(ch))
@@ -373,6 +392,22 @@ public class TexFormulaParser
         }
 
         return formula;
+    }
+
+    /// <summary>
+    /// The part of <see cref="ICommandEnvironment.ShownAsWritten"/> that starts here, or null when
+    /// nothing is being written at this position. Clipped to the span being parsed, so a stretch running
+    /// past the end of a group is shown as far as the group goes and the rest is met again outside it.
+    /// </summary>
+    private static SourceSpan? Shown(ICommandEnvironment environment, SourceSpan value, int position)
+    {
+        if (environment.ShownAsWritten is not { Length: > 0 } zone) return null;
+
+        var here = value.Start + position;
+        if (here < zone.Start || here >= zone.Start + zone.Length) return null;
+
+        var length = System.Math.Min(zone.Start + zone.Length - here, value.Length - position);
+        return length > 0 ? value.Segment(position, length) : null;
     }
 
     /// <summary>

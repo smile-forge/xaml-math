@@ -19,6 +19,9 @@ internal abstract class NonRecursiveEnvironment : ICommandEnvironment
     /// <summary>Whatever the environment this one wraps records into — recovery is not scoped.</summary>
     public ICollection<TexParseDiagnostic>? Diagnostics => _environment.Diagnostics;
 
+    /// <summary>Likewise the wrapped environment's — where the input is being written is not scoped either.</summary>
+    public (int Start, int Length)? ShownAsWritten => _environment.ShownAsWritten;
+
     public ICommandEnvironment CreateChildEnvironment() => _environment;
 
     public abstract bool ProcessUnknownCharacter(TexFormula formula, char character);

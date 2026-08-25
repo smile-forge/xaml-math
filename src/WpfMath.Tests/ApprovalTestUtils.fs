@@ -27,7 +27,10 @@ type private BomlessFileWriter(data: string, ?extensionWithoutDot: string) =
         File.WriteAllText(received, this.Data)
         received
 
-[<assembly: UseReporter(typeof<DiffReporter>)>]
+// Quiet rather than DiffReporter: this suite is run headlessly from inside Nexaflow, and a reporter that
+// launches a diff tool opens one window per failing test — a hundred and forty of them on a first run.
+// The .received.txt files are written either way, so nothing is lost; diff them yourself when you want to.
+[<assembly: UseReporter(typeof<QuietReporter>)>]
 [<assembly: UseApprovalSubdirectory("TestResults")>]
 do
     WriterFactory.TextWriterCreator <- Func<_, _>(fun data -> upcast BomlessFileWriter data)

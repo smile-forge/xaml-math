@@ -8,6 +8,7 @@
       "Foreground": null,
       "Height": 0.0,
       "Italic": 0.0,
+      "Node": null,
       "Shift": 0.0,
       "Source": null,
       "TotalHeight": 0.0,
@@ -19,6 +20,29 @@
   "Foreground": null,
   "Height": 0.25,
   "Italic": 0.0,
+  "Node": {
+    "[AtomType]": "MatrixAtom",
+    "ColumnSpec": null,
+    "HorizontalPadding": 1.0,
+    "HorizontalRules": null,
+    "MatrixCellAlignment": "Center",
+    "MatrixCells": [
+      []
+    ],
+    "RowStrutDepth": 0.414,
+    "RowStrutHeight": 0.966,
+    "Slots": [],
+    "Source": {
+      "End": 9,
+      "Length": 8,
+      "Source": "\\matrix{}",
+      "SourceName": "User input",
+      "Start": 1
+    },
+    "SuppressOuterPadding": true,
+    "Type": "Ordinary",
+    "VerticalPadding": 0.0
+  },
   "Shift": 0.0,
   "Source": {
     "End": 9,

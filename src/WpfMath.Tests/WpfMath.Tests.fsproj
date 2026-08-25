@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
     <PropertyGroup>
-        <TargetFrameworks>net462;net8.0-windows</TargetFrameworks>
+        <!-- Follows WpfMath, which this fork narrowed to net10.0-windows. A test project cannot target
+             frameworks the library it tests no longer builds for: the restore fails NU1201 before a
+             single test runs, which is how this suite came to be unrunnable here. -->
+        <TargetFramework>net10.0-windows</TargetFramework>
         <IsPackable>false</IsPackable>
         <UseWpf>true</UseWpf>
         <Deterministic>false</Deterministic>
@@ -20,9 +23,6 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <ProjectReference Include="../WpfMath/WpfMath.csproj" />
-    </ItemGroup>
-    <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net470'))">
-        <PackageReference Include="System.ValueTuple" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="ApprovalTestUtils.fs" />

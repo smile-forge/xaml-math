@@ -1,12 +1,37 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "Radical",
     "BaseAtom": {
-      "[AtomType]": "NullAtom",
-      "Source": null,
+      "[AtomType]": "PlaceholderAtom",
+      "Slots": [],
+      "Source": {
+        "End": 6,
+        "Length": 0,
+        "Source": "\\sqrt{}",
+        "SourceName": "User input",
+        "Start": 6
+      },
       "Type": "Ordinary"
     },
     "DegreeAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "PlaceholderAtom",
+          "Slots": [],
+          "Source": {
+            "End": 6,
+            "Length": 0,
+            "Source": "\\sqrt{}",
+            "SourceName": "User input",
+            "Start": 6
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "radicand"
+      }
+    ],
     "Source": {
       "End": 7,
       "Length": 6,

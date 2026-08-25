@@ -5,8 +5,26 @@
   "Foreground": null,
   "Height": 0.0,
   "Italic": 0.0,
+  "Node": {
+    "[AtomType]": "SpaceAtom",
+    "Slots": [],
+    "Source": {
+      "End": 2,
+      "Length": 2,
+      "Source": "\\,",
+      "SourceName": "User input",
+      "Start": 0
+    },
+    "Type": "Ordinary"
+  },
   "Shift": 0.0,
-  "Source": null,
+  "Source": {
+    "End": 2,
+    "Length": 2,
+    "Source": "\\,",
+    "SourceName": "User input",
+    "Start": 0
+  },
   "TotalHeight": 0.0,
   "TotalWidth": 0.166667166666667,
   "Width": 0.166667166666667

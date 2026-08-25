@@ -23,6 +23,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -48,6 +49,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -73,6 +75,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -98,6 +101,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -109,6 +113,7 @@
       "Foreground": null,
       "Height": 0.0,
       "Italic": 0.0,
+      "Node": null,
       "Shift": -1.450012,
       "Source": null,
       "TotalHeight": 2.400024,
@@ -122,6 +127,7 @@
       "Foreground": null,
       "Height": 0.0,
       "Italic": 0.0,
+      "Node": null,
       "Shift": 0.0,
       "Shrink": 0.0,
       "Source": null,
@@ -143,6 +149,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -159,6 +166,7 @@
                   "Foreground": null,
                   "Height": 0.0,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.0,
@@ -184,6 +192,21 @@
                   "Foreground": null,
                   "Height": 0.644444,
                   "Italic": 0.0,
+                  "Node": {
+                    "[AtomType]": "CharAtom",
+                    "Character": "2",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 10,
+                      "Length": 1,
+                      "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                      "SourceName": "User input",
+                      "Start": 9
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
                   "Shift": 0.0,
                   "Source": {
                     "End": 10,
@@ -203,6 +226,7 @@
                   "Foreground": null,
                   "Height": 0.414,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.414,
@@ -214,6 +238,7 @@
               "Foreground": null,
               "Height": 1.058444,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 1.058444,
@@ -227,6 +252,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -240,6 +266,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -256,6 +283,7 @@
                   "Foreground": null,
                   "Height": 0.0,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.0,
@@ -281,6 +309,21 @@
                   "Foreground": null,
                   "Height": 0.644444,
                   "Italic": 0.0,
+                  "Node": {
+                    "[AtomType]": "CharAtom",
+                    "Character": "2",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 14,
+                      "Length": 1,
+                      "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                      "SourceName": "User input",
+                      "Start": 13
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
                   "Shift": 0.0,
                   "Source": {
                     "End": 14,
@@ -300,6 +343,7 @@
                   "Foreground": null,
                   "Height": 0.414,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.414,
@@ -311,6 +355,7 @@
               "Foreground": null,
               "Height": 1.058444,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 1.058444,
@@ -324,6 +369,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -335,6 +381,7 @@
           "Foreground": null,
           "Height": 1.058444,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 1.058444,
@@ -351,6 +398,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -367,6 +415,7 @@
                   "Foreground": null,
                   "Height": 0.321556,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.321556,
@@ -392,6 +441,21 @@
                   "Foreground": null,
                   "Height": 0.644444,
                   "Italic": 0.0,
+                  "Node": {
+                    "[AtomType]": "CharAtom",
+                    "Character": "2",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 19,
+                      "Length": 1,
+                      "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                      "SourceName": "User input",
+                      "Start": 18
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
                   "Shift": 0.0,
                   "Source": {
                     "End": 19,
@@ -411,6 +475,7 @@
                   "Foreground": null,
                   "Height": 0.0,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.0,
@@ -422,6 +487,7 @@
               "Foreground": null,
               "Height": 0.966,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.966,
@@ -435,6 +501,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -448,6 +515,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -464,6 +532,7 @@
                   "Foreground": null,
                   "Height": 0.321556,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.321556,
@@ -489,6 +558,21 @@
                   "Foreground": null,
                   "Height": 0.644444,
                   "Italic": 0.0,
+                  "Node": {
+                    "[AtomType]": "CharAtom",
+                    "Character": "2",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 23,
+                      "Length": 1,
+                      "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                      "SourceName": "User input",
+                      "Start": 22
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
                   "Shift": 0.0,
                   "Source": {
                     "End": 23,
@@ -508,6 +592,7 @@
                   "Foreground": null,
                   "Height": 0.0,
                   "Italic": 0.0,
+                  "Node": null,
                   "Shift": 0.0,
                   "Source": null,
                   "TotalHeight": 0.0,
@@ -519,6 +604,7 @@
               "Foreground": null,
               "Height": 0.966,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.966,
@@ -532,6 +618,7 @@
               "Foreground": null,
               "Height": 0.0,
               "Italic": 0.0,
+              "Node": null,
               "Shift": 0.0,
               "Source": null,
               "TotalHeight": 0.0,
@@ -543,6 +630,7 @@
           "Foreground": null,
           "Height": 0.966,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.966,
@@ -554,6 +642,165 @@
       "Foreground": null,
       "Height": 1.262222,
       "Italic": 0.0,
+      "Node": {
+        "[AtomType]": "MatrixAtom",
+        "ColumnSpec": null,
+        "HorizontalPadding": 1.0,
+        "HorizontalRules": null,
+        "MatrixCellAlignment": "Center",
+        "MatrixCells": [
+          [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 10,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 9
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 14,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 13
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ],
+          [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 19,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 18
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 23,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 22
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            }
+          ]
+        ],
+        "RowStrutDepth": 0.414,
+        "RowStrutHeight": 0.966,
+        "Slots": [
+          {
+            "Node": {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 10,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 9
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            "Role": "cell"
+          },
+          {
+            "Node": {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 14,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 13
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            "Role": "cell"
+          },
+          {
+            "Node": {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 19,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 18
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            "Role": "cell"
+          },
+          {
+            "Node": {
+              "[AtomType]": "CharAtom",
+              "Character": "2",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 23,
+                "Length": 1,
+                "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                "SourceName": "User input",
+                "Start": 22
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            "Role": "cell"
+          }
+        ],
+        "Source": {
+          "End": 24,
+          "Length": 23,
+          "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+          "SourceName": "User input",
+          "Start": 1
+        },
+        "SuppressOuterPadding": true,
+        "Type": "Ordinary",
+        "VerticalPadding": 0.0
+      },
       "Shift": 0.0,
       "Source": {
         "End": 24,
@@ -573,6 +820,7 @@
       "Foreground": null,
       "Height": 0.0,
       "Italic": 0.0,
+      "Node": null,
       "Shift": 0.0,
       "Shrink": 0.0,
       "Source": null,
@@ -603,6 +851,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -628,6 +877,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -653,6 +903,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -678,6 +929,7 @@
           "Foreground": null,
           "Height": 0.0,
           "Italic": 0.0,
+          "Node": null,
           "Shift": 0.0,
           "Source": null,
           "TotalHeight": 0.600006,
@@ -689,6 +941,7 @@
       "Foreground": null,
       "Height": 0.0,
       "Italic": 0.0,
+      "Node": null,
       "Shift": -1.450012,
       "Source": null,
       "TotalHeight": 2.400024,
@@ -700,6 +953,358 @@
   "Foreground": null,
   "Height": 1.450012,
   "Italic": 0.0,
+  "Node": {
+    "[AtomType]": "FencedAtom",
+    "BaseAtom": {
+      "[AtomType]": "MatrixAtom",
+      "ColumnSpec": null,
+      "HorizontalPadding": 1.0,
+      "HorizontalRules": null,
+      "MatrixCellAlignment": "Center",
+      "MatrixCells": [
+        [
+          {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 10,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 9
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 14,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 13
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          }
+        ],
+        [
+          {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 19,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 18
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 23,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 22
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          }
+        ]
+      ],
+      "RowStrutDepth": 0.414,
+      "RowStrutHeight": 0.966,
+      "Slots": [
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 10,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 9
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 14,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 13
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 19,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 18
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "2",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 23,
+              "Length": 1,
+              "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+              "SourceName": "User input",
+              "Start": 22
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        }
+      ],
+      "Source": {
+        "End": 24,
+        "Length": 23,
+        "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+        "SourceName": "User input",
+        "Start": 1
+      },
+      "SuppressOuterPadding": true,
+      "Type": "Ordinary",
+      "VerticalPadding": 0.0
+    },
+    "LeftDelimeter": {
+      "[AtomType]": "SymbolAtom",
+      "IsDelimeter": true,
+      "IsTextSymbol": false,
+      "Name": "vert",
+      "Slots": [],
+      "Source": null,
+      "Type": "Ordinary"
+    },
+    "RightDelimeter": {
+      "[AtomType]": "SymbolAtom",
+      "IsDelimeter": true,
+      "IsTextSymbol": false,
+      "Name": "vert",
+      "Slots": [],
+      "Source": null,
+      "Type": "Ordinary"
+    },
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "MatrixAtom",
+          "ColumnSpec": null,
+          "HorizontalPadding": 1.0,
+          "HorizontalRules": null,
+          "MatrixCellAlignment": "Center",
+          "MatrixCells": [
+            [
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 10,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 9
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 14,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 13
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              }
+            ],
+            [
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 19,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 18
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 23,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 22
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              }
+            ]
+          ],
+          "RowStrutDepth": 0.414,
+          "RowStrutHeight": 0.966,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 10,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 9
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 14,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 13
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 19,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 18
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "2",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 23,
+                  "Length": 1,
+                  "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+                  "SourceName": "User input",
+                  "Start": 22
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            }
+          ],
+          "Source": {
+            "End": 24,
+            "Length": 23,
+            "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+            "SourceName": "User input",
+            "Start": 1
+          },
+          "SuppressOuterPadding": true,
+          "Type": "Ordinary",
+          "VerticalPadding": 0.0
+        },
+        "Role": "base"
+      }
+    ],
+    "Source": {
+      "End": 24,
+      "Length": 23,
+      "Source": "\\vmatrix{2 & 2 \\\\ 2 & 2}",
+      "SourceName": "User input",
+      "Start": 1
+    },
+    "Type": "Ordinary"
+  },
   "Shift": 0.0,
   "Source": {
     "End": 24,

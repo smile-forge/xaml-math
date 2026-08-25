@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "BigOperatorAtom",
     "BaseAtom": {
@@ -8,6 +9,7 @@
           "[AtomType]": "CharAtom",
           "Character": "l",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 9,
             "Length": 1,
@@ -22,6 +24,7 @@
           "[AtomType]": "CharAtom",
           "Character": "i",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 10,
             "Length": 1,
@@ -36,6 +39,7 @@
           "[AtomType]": "CharAtom",
           "Character": "m",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 11,
             "Length": 1,
@@ -48,13 +52,21 @@
         },
         {
           "[AtomType]": "SpaceAtom",
-          "Source": null,
+          "Slots": [],
+          "Source": {
+            "End": 13,
+            "Length": 2,
+            "Source": "\\mathrm{lim\\,sup}",
+            "SourceName": "Predefined formula fragment",
+            "Start": 11
+          },
           "Type": "Ordinary"
         },
         {
           "[AtomType]": "CharAtom",
           "Character": "s",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 14,
             "Length": 1,
@@ -69,6 +81,7 @@
           "[AtomType]": "CharAtom",
           "Character": "u",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 15,
             "Length": 1,
@@ -83,6 +96,7 @@
           "[AtomType]": "CharAtom",
           "Character": "p",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 16,
             "Length": 1,
@@ -95,6 +109,131 @@
         }
       ],
       "PreviousAtom": null,
+      "Slots": [
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "l",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 9,
+              "Length": 1,
+              "Source": "\\mathrm{lim\\,sup}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 8
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "i",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 10,
+              "Length": 1,
+              "Source": "\\mathrm{lim\\,sup}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 9
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "m",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 11,
+              "Length": 1,
+              "Source": "\\mathrm{lim\\,sup}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 10
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "SpaceAtom",
+            "Slots": [],
+            "Source": {
+              "End": 13,
+              "Length": 2,
+              "Source": "\\mathrm{lim\\,sup}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 11
+            },
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "s",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 14,
+              "Length": 1,
+              "Source": "\\mathrm{lim\\,sup}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 13
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "u",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 15,
+              "Length": 1,
+              "Source": "\\mathrm{lim\\,sup}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 14
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        },
+        {
+          "Node": {
+            "[AtomType]": "CharAtom",
+            "Character": "p",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 16,
+              "Length": 1,
+              "Source": "\\mathrm{lim\\,sup}",
+              "SourceName": "Predefined formula fragment",
+              "Start": 15
+            },
+            "TextStyle": "mathrm",
+            "Type": "Ordinary"
+          },
+          "Role": "element"
+        }
+      ],
       "Source": {
         "End": 16,
         "Length": 8,
@@ -105,12 +244,258 @@
       "Type": "Ordinary"
     },
     "LowerLimitAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "RowAtom",
+          "Elements": [
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "l",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 9,
+                "Length": 1,
+                "Source": "\\mathrm{lim\\,sup}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 8
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "i",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 10,
+                "Length": 1,
+                "Source": "\\mathrm{lim\\,sup}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 9
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "m",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 11,
+                "Length": 1,
+                "Source": "\\mathrm{lim\\,sup}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 10
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "SpaceAtom",
+              "Slots": [],
+              "Source": {
+                "End": 13,
+                "Length": 2,
+                "Source": "\\mathrm{lim\\,sup}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 11
+              },
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "s",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 14,
+                "Length": 1,
+                "Source": "\\mathrm{lim\\,sup}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 13
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "u",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 15,
+                "Length": 1,
+                "Source": "\\mathrm{lim\\,sup}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 14
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            },
+            {
+              "[AtomType]": "CharAtom",
+              "Character": "p",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 16,
+                "Length": 1,
+                "Source": "\\mathrm{lim\\,sup}",
+                "SourceName": "Predefined formula fragment",
+                "Start": 15
+              },
+              "TextStyle": "mathrm",
+              "Type": "Ordinary"
+            }
+          ],
+          "PreviousAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "l",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 9,
+                  "Length": 1,
+                  "Source": "\\mathrm{lim\\,sup}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 8
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 10,
+                  "Length": 1,
+                  "Source": "\\mathrm{lim\\,sup}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 9
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "m",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 11,
+                  "Length": 1,
+                  "Source": "\\mathrm{lim\\,sup}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 10
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "SpaceAtom",
+                "Slots": [],
+                "Source": {
+                  "End": 13,
+                  "Length": 2,
+                  "Source": "\\mathrm{lim\\,sup}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 11
+                },
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "s",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 14,
+                  "Length": 1,
+                  "Source": "\\mathrm{lim\\,sup}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 13
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "u",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 15,
+                  "Length": 1,
+                  "Source": "\\mathrm{lim\\,sup}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 14
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            },
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "p",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 16,
+                  "Length": 1,
+                  "Source": "\\mathrm{lim\\,sup}",
+                  "SourceName": "Predefined formula fragment",
+                  "Start": 15
+                },
+                "TextStyle": "mathrm",
+                "Type": "Ordinary"
+              },
+              "Role": "element"
+            }
+          ],
+          "Source": {
+            "End": 16,
+            "Length": 8,
+            "Source": "\\mathrm{lim\\,sup}",
+            "SourceName": "Predefined formula fragment",
+            "Start": 8
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      }
+    ],
     "Source": {
-      "End": 16,
-      "Length": 8,
-      "Source": "\\mathrm{lim\\,sup}",
-      "SourceName": "Predefined formula fragment",
-      "Start": 8
+      "End": 7,
+      "Length": 7,
+      "Source": "\\limsup",
+      "SourceName": "User input",
+      "Start": 0
     },
     "Type": "BigOperator",
     "UpperLimitAtom": null,

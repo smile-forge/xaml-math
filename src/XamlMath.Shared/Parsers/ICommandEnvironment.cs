@@ -22,6 +22,24 @@ internal interface ICommandEnvironment
     /// </summary>
     ICollection<TexParseDiagnostic>? Diagnostics { get; }
 
+    /// <summary>
+    /// A stretch of the input to set as the characters written rather than read as maths, or <c>null</c>
+    /// to read all of it. Offsets are into the whole input, not into whatever span is being parsed.
+    /// <para>
+    /// For an editor, where a piece of a formula is being written and so must be seen exactly as typed
+    /// while everything around it stays typeset. Recovery does the same thing for input that could not be
+    /// read; this is the same treatment asked for deliberately, and it goes through the same code — so
+    /// the characters take up room, wrap, hit-test and carry a span each, and the formula around them is
+    /// laid out knowing they are there.
+    /// </para>
+    /// <para>
+    /// It rides on the environment for the same reason the diagnostics do: the environment is already
+    /// threaded through every nested parse, so a stretch inside a fraction's numerator is honoured
+    /// without a signature having to change to carry it.
+    /// </para>
+    /// </summary>
+    (int Start, int Length)? ShownAsWritten { get; }
+
     /// <summary>Commands from the current environment.</summary>
     IReadOnlyDictionary<string, ICommandParser> AvailableCommands { get; }
 

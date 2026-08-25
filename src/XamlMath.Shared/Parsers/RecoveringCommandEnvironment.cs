@@ -15,10 +15,16 @@ internal sealed class RecoveringCommandEnvironment : ICommandEnvironment
 {
     private readonly List<TexParseDiagnostic> _diagnostics = new();
 
+    public RecoveringCommandEnvironment((int Start, int Length)? shownAsWritten = null) =>
+        ShownAsWritten = shownAsWritten;
+
     public IReadOnlyDictionary<string, ICommandParser> AvailableCommands { get; } =
         new Dictionary<string, ICommandParser>();
 
     public ICollection<TexParseDiagnostic>? Diagnostics => _diagnostics;
+
+    /// <inheritdoc/>
+    public (int Start, int Length)? ShownAsWritten { get; }
 
     /// <summary>What could not be read, in the order it was met.</summary>
     public IReadOnlyList<TexParseDiagnostic> Collected => _diagnostics;

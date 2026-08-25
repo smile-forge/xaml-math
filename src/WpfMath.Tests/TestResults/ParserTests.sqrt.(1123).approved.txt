@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "RowAtom",
     "Elements": [
@@ -8,6 +9,7 @@
           "[AtomType]": "CharAtom",
           "Character": "1",
           "IsTextSymbol": false,
+          "Slots": [],
           "Source": {
             "End": 6,
             "Length": 1,
@@ -19,6 +21,26 @@
           "Type": "Ordinary"
         },
         "DegreeAtom": null,
+        "Slots": [
+          {
+            "Node": {
+              "[AtomType]": "CharAtom",
+              "Character": "1",
+              "IsTextSymbol": false,
+              "Slots": [],
+              "Source": {
+                "End": 6,
+                "Length": 1,
+                "Source": "\\sqrt1123",
+                "SourceName": "User input",
+                "Start": 5
+              },
+              "TextStyle": null,
+              "Type": "Ordinary"
+            },
+            "Role": "radicand"
+          }
+        ],
         "Source": {
           "End": 6,
           "Length": 5,
@@ -32,6 +54,7 @@
         "[AtomType]": "CharAtom",
         "Character": "1",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 7,
           "Length": 1,
@@ -46,6 +69,7 @@
         "[AtomType]": "CharAtom",
         "Character": "2",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 8,
           "Length": 1,
@@ -60,6 +84,7 @@
         "[AtomType]": "CharAtom",
         "Character": "3",
         "IsTextSymbol": false,
+        "Slots": [],
         "Source": {
           "End": 9,
           "Length": 1,
@@ -72,6 +97,112 @@
       }
     ],
     "PreviousAtom": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "Radical",
+          "BaseAtom": {
+            "[AtomType]": "CharAtom",
+            "Character": "1",
+            "IsTextSymbol": false,
+            "Slots": [],
+            "Source": {
+              "End": 6,
+              "Length": 1,
+              "Source": "\\sqrt1123",
+              "SourceName": "User input",
+              "Start": 5
+            },
+            "TextStyle": null,
+            "Type": "Ordinary"
+          },
+          "DegreeAtom": null,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "CharAtom",
+                "Character": "1",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 6,
+                  "Length": 1,
+                  "Source": "\\sqrt1123",
+                  "SourceName": "User input",
+                  "Start": 5
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              "Role": "radicand"
+            }
+          ],
+          "Source": {
+            "End": 6,
+            "Length": 5,
+            "Source": "\\sqrt1123",
+            "SourceName": "User input",
+            "Start": 1
+          },
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "1",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 7,
+            "Length": 1,
+            "Source": "\\sqrt1123",
+            "SourceName": "User input",
+            "Start": 6
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "2",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 8,
+            "Length": 1,
+            "Source": "\\sqrt1123",
+            "SourceName": "User input",
+            "Start": 7
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "3",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 9,
+            "Length": 1,
+            "Source": "\\sqrt1123",
+            "SourceName": "User input",
+            "Start": 8
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "element"
+      }
+    ],
     "Source": {
       "End": 9,
       "Length": 9,

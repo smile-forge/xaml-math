@@ -1,10 +1,12 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "ScriptsAtom",
     "BaseAtom": {
       "[AtomType]": "CharAtom",
       "Character": "x",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 1,
         "Length": 1,
@@ -15,17 +17,74 @@
       "TextStyle": null,
       "Type": "Ordinary"
     },
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "x",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 1,
+            "Length": 1,
+            "Source": "x ^ {y} _ {z}",
+            "SourceName": "User input",
+            "Start": 0
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "z",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 12,
+            "Length": 1,
+            "Source": "x ^ {y} _ {z}",
+            "SourceName": "User input",
+            "Start": 11
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "subscript"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "y",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 6,
+            "Length": 1,
+            "Source": "x ^ {y} _ {z}",
+            "SourceName": "User input",
+            "Start": 5
+          },
+          "TextStyle": null,
+          "Type": "Ordinary"
+        },
+        "Role": "superscript"
+      }
+    ],
     "Source": {
       "End": 13,
-      "Length": 11,
+      "Length": 13,
       "Source": "x ^ {y} _ {z}",
       "SourceName": "User input",
-      "Start": 2
+      "Start": 0
     },
     "SubscriptAtom": {
       "[AtomType]": "CharAtom",
       "Character": "z",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 12,
         "Length": 1,
@@ -40,6 +99,7 @@
       "[AtomType]": "CharAtom",
       "Character": "y",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 6,
         "Length": 1,

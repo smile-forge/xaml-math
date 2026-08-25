@@ -1,10 +1,12 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "ScriptsAtom",
     "BaseAtom": {
       "[AtomType]": "CharAtom",
       "Character": "А",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 7,
         "Length": 1,
@@ -15,17 +17,56 @@
       "TextStyle": "text",
       "Type": "Ordinary"
     },
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "А",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 7,
+            "Length": 1,
+            "Source": "\\text{А}_{\\text{И}}",
+            "SourceName": "User input",
+            "Start": 6
+          },
+          "TextStyle": "text",
+          "Type": "Ordinary"
+        },
+        "Role": "base"
+      },
+      {
+        "Node": {
+          "[AtomType]": "CharAtom",
+          "Character": "И",
+          "IsTextSymbol": false,
+          "Slots": [],
+          "Source": {
+            "End": 17,
+            "Length": 1,
+            "Source": "\\text{А}_{\\text{И}}",
+            "SourceName": "User input",
+            "Start": 16
+          },
+          "TextStyle": "text",
+          "Type": "Ordinary"
+        },
+        "Role": "subscript"
+      }
+    ],
     "Source": {
       "End": 19,
-      "Length": 11,
+      "Length": 13,
       "Source": "\\text{А}_{\\text{И}}",
       "SourceName": "User input",
-      "Start": 8
+      "Start": 6
     },
     "SubscriptAtom": {
       "[AtomType]": "CharAtom",
       "Character": "И",
       "IsTextSymbol": false,
+      "Slots": [],
       "Source": {
         "End": 17,
         "Length": 1,

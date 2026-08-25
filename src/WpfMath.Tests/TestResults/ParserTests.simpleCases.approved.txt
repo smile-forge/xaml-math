@@ -1,4 +1,5 @@
 {
+  "Diagnostics": [],
   "RootAtom": {
     "[AtomType]": "FencedAtom",
     "BaseAtom": {
@@ -16,6 +17,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "x",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 8,
                   "Length": 1,
@@ -31,6 +33,7 @@
                 "IsDelimeter": false,
                 "IsTextSymbol": false,
                 "Name": "comma",
+                "Slots": [],
                 "Source": {
                   "End": 9,
                   "Length": 1,
@@ -42,6 +45,44 @@
               }
             ],
             "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "x",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 8,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 7
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "comma",
+                  "Slots": [],
+                  "Source": {
+                    "End": 9,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 8
+                  },
+                  "Type": "Punctuation"
+                },
+                "Role": "element"
+              }
+            ],
             "Source": {
               "End": 9,
               "Length": 2,
@@ -58,6 +99,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "i",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 11,
                   "Length": 1,
@@ -72,6 +114,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "f",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 12,
                   "Length": 1,
@@ -86,6 +129,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "x",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 14,
                   "Length": 1,
@@ -101,6 +145,7 @@
                 "IsDelimeter": false,
                 "IsTextSymbol": false,
                 "Name": "gt",
+                "Slots": [],
                 "Source": {
                   "End": 16,
                   "Length": 1,
@@ -114,6 +159,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "0",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 18,
                   "Length": 1,
@@ -129,6 +175,7 @@
                 "IsDelimeter": false,
                 "IsTextSymbol": false,
                 "Name": "semicolon",
+                "Slots": [],
                 "Source": {
                   "End": 19,
                   "Length": 1,
@@ -140,6 +187,116 @@
               }
             ],
             "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "i",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 11,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 10
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "f",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 12,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 11
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "x",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 14,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 13
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "gt",
+                  "Slots": [],
+                  "Source": {
+                    "End": 16,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 15
+                  },
+                  "Type": "Relation"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "0",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 18,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 17
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "semicolon",
+                  "Slots": [],
+                  "Source": {
+                    "End": 19,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 18
+                  },
+                  "Type": "Punctuation"
+                },
+                "Role": "element"
+              }
+            ],
             "Source": {
               "End": 19,
               "Length": 12,
@@ -159,6 +316,7 @@
                 "IsDelimeter": false,
                 "IsTextSymbol": false,
                 "Name": "minus",
+                "Slots": [],
                 "Source": {
                   "End": 24,
                   "Length": 1,
@@ -172,6 +330,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "x",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 25,
                   "Length": 1,
@@ -187,6 +346,7 @@
                 "IsDelimeter": false,
                 "IsTextSymbol": false,
                 "Name": "comma",
+                "Slots": [],
                 "Source": {
                   "End": 26,
                   "Length": 1,
@@ -198,6 +358,62 @@
               }
             ],
             "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "minus",
+                  "Slots": [],
+                  "Source": {
+                    "End": 24,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 23
+                  },
+                  "Type": "BinaryOperator"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "x",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 25,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 24
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "comma",
+                  "Slots": [],
+                  "Source": {
+                    "End": 26,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 25
+                  },
+                  "Type": "Punctuation"
+                },
+                "Role": "element"
+              }
+            ],
             "Source": {
               "End": 26,
               "Length": 19,
@@ -214,6 +430,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "o",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 29,
                   "Length": 1,
@@ -228,6 +445,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "t",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 30,
                   "Length": 1,
@@ -242,6 +460,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "h",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 31,
                   "Length": 1,
@@ -256,6 +475,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "e",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 32,
                   "Length": 1,
@@ -270,6 +490,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "r",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 33,
                   "Length": 1,
@@ -284,6 +505,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "w",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 34,
                   "Length": 1,
@@ -298,6 +520,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "i",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 35,
                   "Length": 1,
@@ -312,6 +535,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "s",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 36,
                   "Length": 1,
@@ -326,6 +550,7 @@
                 "[AtomType]": "CharAtom",
                 "Character": "e",
                 "IsTextSymbol": false,
+                "Slots": [],
                 "Source": {
                   "End": 37,
                   "Length": 1,
@@ -341,6 +566,7 @@
                 "IsDelimeter": false,
                 "IsTextSymbol": false,
                 "Name": "normaldot",
+                "Slots": [],
                 "Source": {
                   "End": 38,
                   "Length": 1,
@@ -352,6 +578,188 @@
               }
             ],
             "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "o",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 29,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 28
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "t",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 30,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 29
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "h",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 31,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 30
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "e",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 32,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 31
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "r",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 33,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 32
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "w",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 34,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 33
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "i",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 35,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 34
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "s",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 36,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 35
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "e",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 37,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 36
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "normaldot",
+                  "Slots": [],
+                  "Source": {
+                    "End": 38,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 37
+                  },
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              }
+            ],
             "Source": {
               "End": 38,
               "Length": 31,
@@ -365,6 +773,777 @@
       ],
       "RowStrutDepth": 0.414,
       "RowStrutHeight": 0.966,
+      "Slots": [
+        {
+          "Node": {
+            "[AtomType]": "RowAtom",
+            "Elements": [
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "x",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 8,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "SymbolAtom",
+                "IsDelimeter": false,
+                "IsTextSymbol": false,
+                "Name": "comma",
+                "Slots": [],
+                "Source": {
+                  "End": 9,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 8
+                },
+                "Type": "Punctuation"
+              }
+            ],
+            "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "x",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 8,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 7
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "comma",
+                  "Slots": [],
+                  "Source": {
+                    "End": 9,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 8
+                  },
+                  "Type": "Punctuation"
+                },
+                "Role": "element"
+              }
+            ],
+            "Source": {
+              "End": 9,
+              "Length": 2,
+              "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+              "SourceName": "User input",
+              "Start": 7
+            },
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        },
+        {
+          "Node": {
+            "[AtomType]": "RowAtom",
+            "Elements": [
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 11,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 10
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "f",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 12,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 11
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "x",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 14,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 13
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "SymbolAtom",
+                "IsDelimeter": false,
+                "IsTextSymbol": false,
+                "Name": "gt",
+                "Slots": [],
+                "Source": {
+                  "End": 16,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 15
+                },
+                "Type": "Relation"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "0",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 18,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 17
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "SymbolAtom",
+                "IsDelimeter": false,
+                "IsTextSymbol": false,
+                "Name": "semicolon",
+                "Slots": [],
+                "Source": {
+                  "End": 19,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 18
+                },
+                "Type": "Punctuation"
+              }
+            ],
+            "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "i",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 11,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 10
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "f",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 12,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 11
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "x",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 14,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 13
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "gt",
+                  "Slots": [],
+                  "Source": {
+                    "End": 16,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 15
+                  },
+                  "Type": "Relation"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "0",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 18,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 17
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "semicolon",
+                  "Slots": [],
+                  "Source": {
+                    "End": 19,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 18
+                  },
+                  "Type": "Punctuation"
+                },
+                "Role": "element"
+              }
+            ],
+            "Source": {
+              "End": 19,
+              "Length": 12,
+              "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+              "SourceName": "User input",
+              "Start": 7
+            },
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        },
+        {
+          "Node": {
+            "[AtomType]": "RowAtom",
+            "Elements": [
+              {
+                "[AtomType]": "SymbolAtom",
+                "IsDelimeter": false,
+                "IsTextSymbol": false,
+                "Name": "minus",
+                "Slots": [],
+                "Source": {
+                  "End": 24,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 23
+                },
+                "Type": "BinaryOperator"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "x",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 25,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 24
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "SymbolAtom",
+                "IsDelimeter": false,
+                "IsTextSymbol": false,
+                "Name": "comma",
+                "Slots": [],
+                "Source": {
+                  "End": 26,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 25
+                },
+                "Type": "Punctuation"
+              }
+            ],
+            "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "minus",
+                  "Slots": [],
+                  "Source": {
+                    "End": 24,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 23
+                  },
+                  "Type": "BinaryOperator"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "x",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 25,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 24
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "comma",
+                  "Slots": [],
+                  "Source": {
+                    "End": 26,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 25
+                  },
+                  "Type": "Punctuation"
+                },
+                "Role": "element"
+              }
+            ],
+            "Source": {
+              "End": 26,
+              "Length": 19,
+              "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+              "SourceName": "User input",
+              "Start": 7
+            },
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        },
+        {
+          "Node": {
+            "[AtomType]": "RowAtom",
+            "Elements": [
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "o",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 29,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 28
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "t",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 30,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 29
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "h",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 31,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 30
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 32,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 31
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "r",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 33,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 32
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "w",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 34,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 33
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "i",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 35,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 34
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "s",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 36,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 35
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "CharAtom",
+                "Character": "e",
+                "IsTextSymbol": false,
+                "Slots": [],
+                "Source": {
+                  "End": 37,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 36
+                },
+                "TextStyle": null,
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "SymbolAtom",
+                "IsDelimeter": false,
+                "IsTextSymbol": false,
+                "Name": "normaldot",
+                "Slots": [],
+                "Source": {
+                  "End": 38,
+                  "Length": 1,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 37
+                },
+                "Type": "Ordinary"
+              }
+            ],
+            "PreviousAtom": null,
+            "Slots": [
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "o",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 29,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 28
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "t",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 30,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 29
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "h",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 31,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 30
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "e",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 32,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 31
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "r",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 33,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 32
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "w",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 34,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 33
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "i",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 35,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 34
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "s",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 36,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 35
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "CharAtom",
+                  "Character": "e",
+                  "IsTextSymbol": false,
+                  "Slots": [],
+                  "Source": {
+                    "End": 37,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 36
+                  },
+                  "TextStyle": null,
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              },
+              {
+                "Node": {
+                  "[AtomType]": "SymbolAtom",
+                  "IsDelimeter": false,
+                  "IsTextSymbol": false,
+                  "Name": "normaldot",
+                  "Slots": [],
+                  "Source": {
+                    "End": 38,
+                    "Length": 1,
+                    "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                    "SourceName": "User input",
+                    "Start": 37
+                  },
+                  "Type": "Ordinary"
+                },
+                "Role": "element"
+              }
+            ],
+            "Source": {
+              "End": 38,
+              "Length": 31,
+              "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+              "SourceName": "User input",
+              "Start": 7
+            },
+            "Type": "Ordinary"
+          },
+          "Role": "cell"
+        }
+      ],
       "Source": {
         "End": 39,
         "Length": 38,
@@ -381,10 +1560,1569 @@
       "IsDelimeter": true,
       "IsTextSymbol": false,
       "Name": "lbrace",
+      "Slots": [],
       "Source": null,
       "Type": "Opening"
     },
     "RightDelimeter": null,
+    "Slots": [
+      {
+        "Node": {
+          "[AtomType]": "MatrixAtom",
+          "ColumnSpec": null,
+          "HorizontalPadding": 1.0,
+          "HorizontalRules": null,
+          "MatrixCellAlignment": "Left",
+          "MatrixCells": [
+            [
+              {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "x",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 8,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 7
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "comma",
+                    "Slots": [],
+                    "Source": {
+                      "End": 9,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 8
+                    },
+                    "Type": "Punctuation"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "x",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 8,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 7
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "comma",
+                      "Slots": [],
+                      "Source": {
+                        "End": 9,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 8
+                      },
+                      "Type": "Punctuation"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 9,
+                  "Length": 2,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "i",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 11,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 10
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "f",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 12,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 11
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "x",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 14,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 13
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "gt",
+                    "Slots": [],
+                    "Source": {
+                      "End": 16,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 15
+                    },
+                    "Type": "Relation"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "0",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 18,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 17
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "semicolon",
+                    "Slots": [],
+                    "Source": {
+                      "End": 19,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 18
+                    },
+                    "Type": "Punctuation"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "i",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 11,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 10
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "f",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 12,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 11
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "x",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 14,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 13
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "gt",
+                      "Slots": [],
+                      "Source": {
+                        "End": 16,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 15
+                      },
+                      "Type": "Relation"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "0",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 18,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 17
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "semicolon",
+                      "Slots": [],
+                      "Source": {
+                        "End": 19,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 18
+                      },
+                      "Type": "Punctuation"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 19,
+                  "Length": 12,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              }
+            ],
+            [
+              {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "minus",
+                    "Slots": [],
+                    "Source": {
+                      "End": 24,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 23
+                    },
+                    "Type": "BinaryOperator"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "x",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 25,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 24
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "comma",
+                    "Slots": [],
+                    "Source": {
+                      "End": 26,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 25
+                    },
+                    "Type": "Punctuation"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "minus",
+                      "Slots": [],
+                      "Source": {
+                        "End": 24,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 23
+                      },
+                      "Type": "BinaryOperator"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "x",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 25,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 24
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "comma",
+                      "Slots": [],
+                      "Source": {
+                        "End": 26,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 25
+                      },
+                      "Type": "Punctuation"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 26,
+                  "Length": 19,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              },
+              {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "o",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 29,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 28
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "t",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 30,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 29
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "h",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 31,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 30
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "e",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 32,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 31
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "r",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 33,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 32
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "w",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 34,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 33
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "i",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 35,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 34
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "s",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 36,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 35
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "e",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 37,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 36
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "normaldot",
+                    "Slots": [],
+                    "Source": {
+                      "End": 38,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 37
+                    },
+                    "Type": "Ordinary"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "o",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 29,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 28
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "t",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 30,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 29
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "h",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 31,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 30
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "e",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 32,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 31
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "r",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 33,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 32
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "w",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 34,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 33
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "i",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 35,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 34
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "s",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 36,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 35
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "e",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 37,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 36
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "normaldot",
+                      "Slots": [],
+                      "Source": {
+                        "End": 38,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 37
+                      },
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 38,
+                  "Length": 31,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              }
+            ]
+          ],
+          "RowStrutDepth": 0.414,
+          "RowStrutHeight": 0.966,
+          "Slots": [
+            {
+              "Node": {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "x",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 8,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 7
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "comma",
+                    "Slots": [],
+                    "Source": {
+                      "End": 9,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 8
+                    },
+                    "Type": "Punctuation"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "x",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 8,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 7
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "comma",
+                      "Slots": [],
+                      "Source": {
+                        "End": 9,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 8
+                      },
+                      "Type": "Punctuation"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 9,
+                  "Length": 2,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            },
+            {
+              "Node": {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "i",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 11,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 10
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "f",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 12,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 11
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "x",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 14,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 13
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "gt",
+                    "Slots": [],
+                    "Source": {
+                      "End": 16,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 15
+                    },
+                    "Type": "Relation"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "0",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 18,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 17
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "semicolon",
+                    "Slots": [],
+                    "Source": {
+                      "End": 19,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 18
+                    },
+                    "Type": "Punctuation"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "i",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 11,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 10
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "f",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 12,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 11
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "x",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 14,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 13
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "gt",
+                      "Slots": [],
+                      "Source": {
+                        "End": 16,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 15
+                      },
+                      "Type": "Relation"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "0",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 18,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 17
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "semicolon",
+                      "Slots": [],
+                      "Source": {
+                        "End": 19,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 18
+                      },
+                      "Type": "Punctuation"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 19,
+                  "Length": 12,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            },
+            {
+              "Node": {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "minus",
+                    "Slots": [],
+                    "Source": {
+                      "End": 24,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 23
+                    },
+                    "Type": "BinaryOperator"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "x",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 25,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 24
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "comma",
+                    "Slots": [],
+                    "Source": {
+                      "End": 26,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 25
+                    },
+                    "Type": "Punctuation"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "minus",
+                      "Slots": [],
+                      "Source": {
+                        "End": 24,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 23
+                      },
+                      "Type": "BinaryOperator"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "x",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 25,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 24
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "comma",
+                      "Slots": [],
+                      "Source": {
+                        "End": 26,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 25
+                      },
+                      "Type": "Punctuation"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 26,
+                  "Length": 19,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            },
+            {
+              "Node": {
+                "[AtomType]": "RowAtom",
+                "Elements": [
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "o",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 29,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 28
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "t",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 30,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 29
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "h",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 31,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 30
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "e",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 32,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 31
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "r",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 33,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 32
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "w",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 34,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 33
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "i",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 35,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 34
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "s",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 36,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 35
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "CharAtom",
+                    "Character": "e",
+                    "IsTextSymbol": false,
+                    "Slots": [],
+                    "Source": {
+                      "End": 37,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 36
+                    },
+                    "TextStyle": null,
+                    "Type": "Ordinary"
+                  },
+                  {
+                    "[AtomType]": "SymbolAtom",
+                    "IsDelimeter": false,
+                    "IsTextSymbol": false,
+                    "Name": "normaldot",
+                    "Slots": [],
+                    "Source": {
+                      "End": 38,
+                      "Length": 1,
+                      "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                      "SourceName": "User input",
+                      "Start": 37
+                    },
+                    "Type": "Ordinary"
+                  }
+                ],
+                "PreviousAtom": null,
+                "Slots": [
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "o",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 29,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 28
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "t",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 30,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 29
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "h",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 31,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 30
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "e",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 32,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 31
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "r",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 33,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 32
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "w",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 34,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 33
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "i",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 35,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 34
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "s",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 36,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 35
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "CharAtom",
+                      "Character": "e",
+                      "IsTextSymbol": false,
+                      "Slots": [],
+                      "Source": {
+                        "End": 37,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 36
+                      },
+                      "TextStyle": null,
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  },
+                  {
+                    "Node": {
+                      "[AtomType]": "SymbolAtom",
+                      "IsDelimeter": false,
+                      "IsTextSymbol": false,
+                      "Name": "normaldot",
+                      "Slots": [],
+                      "Source": {
+                        "End": 38,
+                        "Length": 1,
+                        "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                        "SourceName": "User input",
+                        "Start": 37
+                      },
+                      "Type": "Ordinary"
+                    },
+                    "Role": "element"
+                  }
+                ],
+                "Source": {
+                  "End": 38,
+                  "Length": 31,
+                  "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+                  "SourceName": "User input",
+                  "Start": 7
+                },
+                "Type": "Ordinary"
+              },
+              "Role": "cell"
+            }
+          ],
+          "Source": {
+            "End": 39,
+            "Length": 38,
+            "Source": "\\cases{x,&if x > 0;\\cr -x,& otherwise.}",
+            "SourceName": "User input",
+            "Start": 1
+          },
+          "SuppressOuterPadding": true,
+          "Type": "Ordinary",
+          "VerticalPadding": 0.0
+        },
+        "Role": "base"
+      }
+    ],
     "Source": {
       "End": 39,
       "Length": 38,
