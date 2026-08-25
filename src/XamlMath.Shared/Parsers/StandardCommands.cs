@@ -616,6 +616,52 @@ internal static class StandardCommands
         }
     }
 
+    /// <summary>
+    /// The braket package's Dirac notation: <c>\bra{A}</c> is ⟨A|, <c>\ket{B}</c> is |B⟩, and
+    /// <c>\braket{A|B}</c> is ⟨A|B⟩.
+    /// <para>
+    /// A fence, like every other bracketed thing, so the delimiters grow with what is between them and
+    /// the editor already knows how to select, carry and un-render one. The capitalised forms are the
+    /// package's "always stretch" variants, which is what a fence does anyway — they exist so that
+    /// copied source keeps working rather than to render differently.
+    /// </para>
+    /// <para>
+    /// The bar in <c>\braket{A|B}</c> is left where it is, as the character it already is. Splitting on
+    /// it to name the two halves would be a better parse — a bra and a ket are parts in the sense a
+    /// numerator is — but it is not what makes the notation render, and a divider that is sometimes a
+    /// separator and sometimes an ordinary bar is worth getting right on purpose rather than in passing.
+    /// </para>
+    /// </summary>
+    private sealed class BraketCommand : ICommandParser
+    {
+        public static BraketCommand Bra { get; } = new("langle", "vert");
+        public static BraketCommand Ket { get; } = new("vert", "rangle");
+        public static BraketCommand Braket { get; } = new("langle", "rangle");
+
+        private readonly string _open;
+        private readonly string _close;
+
+        private BraketCommand(string open, string close)
+        {
+            _open = open;
+            _close = close;
+        }
+
+        public CommandProcessingResult ProcessCommand(CommandContext context)
+        {
+            var position = context.ArgumentsStartPosition;
+            var body = ReadArgument(context, ref position);
+
+            var start = context.CommandNameStartPosition;
+            var atomSource = context.CommandSource.Segment(start, position - start);
+
+            var left = new SymbolAtom(atomSource, _open, TexAtomType.Opening, true);
+            var right = new SymbolAtom(atomSource, _close, TexAtomType.Closing, true);
+            return new CommandProcessingResult(
+                new FencedAtom(atomSource, body.RootAtom, left, right), position);
+        }
+    }
+
     private sealed class CancelCommand : ICommandParser
     {
         public static CancelCommand BCancel { get; } = new(StrokeBoxMode.Back);
@@ -1035,6 +1081,14 @@ internal static class StandardCommands
             ["binom"] = BinomCommand.Plain,
             ["dbinom"] = BinomCommand.Display,
             ["tbinom"] = BinomCommand.Text,
+            // The braket package. The capitalised forms are its "always stretch" variants, which is
+            // what a fence does anyway — they are here so that copied source keeps working.
+            ["bra"] = BraketCommand.Bra,
+            ["Bra"] = BraketCommand.Bra,
+            ["ket"] = BraketCommand.Ket,
+            ["Ket"] = BraketCommand.Ket,
+            ["braket"] = BraketCommand.Braket,
+            ["Braket"] = BraketCommand.Braket,
             ["cancel"] = CancelCommand.Cancel,
             ["bcancel"] = CancelCommand.BCancel,
             ["xcancel"] = CancelCommand.XCancel,
