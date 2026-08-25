@@ -550,7 +550,10 @@ public class TexFormulaParser
         }
 
         position = afterScript.position;
-        return Parse(afterScript.source, formula.TextStyle, environment.CreateChildEnvironment());
+        return WithPlaceholderIfEmpty(
+            Parse(afterScript.source, formula.TextStyle, environment.CreateChildEnvironment()),
+            value.Segment(start, position - start),
+            environment);
     }
 
     /// <remarks>May return <c>null</c> for commands that produce no atoms.</remarks>
@@ -570,18 +573,8 @@ public class TexFormulaParser
         {
             case "frac":
                 {
-                    var afterNumerator = ReadElement(value, position);
-                    position = afterNumerator.position;
-                    var numeratorFormula = Parse(
-                        afterNumerator.source,
-                        formula.TextStyle,
-                        environment.CreateChildEnvironment());
-                    var afterDenominator = ReadElement(value, position);
-                    position = afterDenominator.position;
-                    var denominatorFormula = Parse(
-                        afterDenominator.source,
-                        formula.TextStyle,
-                        environment.CreateChildEnvironment());
+                    var numeratorFormula = ReadArgumentFormula(formula, value, ref position, environment);
+                    var denominatorFormula = ReadArgumentFormula(formula, value, ref position, environment);
                     source = value.Segment(start, position - start);
                     return new Tuple<AtomAppendMode, Atom?>(
                         AtomAppendMode.Add,
@@ -651,12 +644,7 @@ public class TexFormulaParser
                             environment.CreateChildEnvironment());
                     }
 
-                    var afterSqrt = ReadElement(value, position);
-                    position = afterSqrt.position;
-                    var sqrtFormula = this.Parse(
-                        afterSqrt.source,
-                        formula.TextStyle,
-                        environment.CreateChildEnvironment());
+                    var sqrtFormula = ReadArgumentFormula(formula, value, ref position, environment);
 
                     source = value.Segment(start, position - start);
                     return new Tuple<AtomAppendMode, Atom?>(
@@ -1195,6 +1183,55 @@ public class TexFormulaParser
     }
 
     /// <returns>New position after space skipped</returns>
+    /// <summary>
+    /// An argument that parsed to nothing, standing in as a placeholder.
+    /// <para>
+    /// <c>\frac{}{}</c> is a fraction with two arguments; they are simply empty. Left as nothing it sets
+    /// as a bar with two invisible sides — a formula a reader cannot see, cannot aim at and cannot tell
+    /// from a broken one. A placeholder is a symbol in its place, so everything downstream that knows how
+    /// to find, hit-test, select, carry or replace a symbol handles the hole without knowing it is one.
+    /// </para>
+    /// <para>
+    /// It exists in the parse and never in the source, which is what makes it a hole rather than
+    /// content: nothing the reader saves, copies or solves can carry it. And because an argument that
+    /// has not been written is a formula that does not yet mean anything, each one is reported — a
+    /// caller asking "can this be read" is told no, while the picture still draws.
+    /// </para>
+    /// </summary>
+    /// <param name="parsed">The argument as it parsed.</param>
+    /// <param name="at">The characters it was read from — the braces included, since they produced it.</param>
+    /// <summary>
+    /// Reads one <c>{…}</c> argument and parses it, making a hole of it when it was left empty — see
+    /// <see cref="WithPlaceholderIfEmpty"/>. The built-in constructs read their arguments through this
+    /// so that none of them has to know a hole is a thing.
+    /// </summary>
+    private TexFormula ReadArgumentFormula(
+        TexFormula formula, SourceSpan value, ref int position, ICommandEnvironment environment)
+    {
+        var start = WithSkippedWhiteSpace(value, position);
+        var after = ReadElement(value, position);
+        position = after.position;
+
+        return WithPlaceholderIfEmpty(
+            Parse(after.source, formula.TextStyle, environment.CreateChildEnvironment()),
+            value.Segment(start, position - start),
+            environment);
+    }
+
+    internal static TexFormula WithPlaceholderIfEmpty(
+        TexFormula parsed, SourceSpan at, ICommandEnvironment environment)
+    {
+        if (parsed.RootAtom is not null) return parsed;
+
+        // The placeholder's own span is empty, and sits where the argument's contents would have
+        // begun. It stands for nothing that was written, so it covers nothing that was written — and
+        // that is also what makes typing over it put the characters inside the braces rather than
+        // instead of them. The report covers the braces, because a wave needs something to sit under.
+        parsed.RootAtom = new PlaceholderAtom(at.Segment(at.Length > 0 ? 1 : 0, 0));
+        environment.Diagnostics?.Add(new TexParseDiagnostic("Something still has to go here.", at));
+        return parsed;
+    }
+
     internal static int WithSkippedWhiteSpace(SourceSpan value, int position)
     {
         while (position < value.Length && IsWhiteSpace(value[position]))
