@@ -49,6 +49,10 @@ type private InnerPropertyContractResolver() =
             ``type``.GetProperties(BindingFlags.Public ||| BindingFlags.NonPublic ||| BindingFlags.Instance)
             |> Seq.filter(fun p -> Array.isEmpty <| p.GetIndexParameters()) // no indexers
             |> Seq.filter(fun p -> p.Name <> "EqualityContract") // no EqualityContract generated for records
+            // TexFormula.Root is a public view of RootAtom, which is serialized a few lines further down
+            // in every one of these files. Taking both would put the whole atom tree in each of them
+            // twice, for no assurance the first copy does not already give.
+            |> Seq.filter(fun p -> not (p.DeclaringType = typeof<XamlMath.TexFormula> && p.Name = "Root"))
             |> Seq.sortBy(fun p -> p.Name)
             |> Seq.map(fun p -> this.DoCreateProperty(p, memberSerialization))
 
