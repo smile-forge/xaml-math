@@ -22,6 +22,18 @@ public sealed class TexFormula
         set;
     }
 
+    /// <summary>
+    /// What this formula is made of, as a tree of named parts — or null if it is made of nothing.
+    /// <para>
+    /// <see cref="IFormulaNode"/> exists so a consumer can ask what a piece is <em>to</em> the thing
+    /// holding it, and until this was here the only way to reach one was to render the formula and take
+    /// them off the boxes as they were drawn. That put fonts, a graphics stack and a whole layout pass
+    /// between a caller and a question about the parse — which is not a question the layout answers, and
+    /// not one that should need a screen to ask.
+    /// </para>
+    /// </summary>
+    public IFormulaNode? Root => this.RootAtom;
+
     public SourceSpan? Source { get; set; }
 
     /// <summary>
