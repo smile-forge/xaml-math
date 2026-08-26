@@ -49,6 +49,7 @@
     },
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "a",
@@ -64,7 +65,8 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "base"
+        "Role": "base",
+        "Row": -1
       }
     ],
     "Source": {

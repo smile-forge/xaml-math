@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using XamlMath.Atoms;
 
 namespace XamlMath.Parsers.Matrices;
@@ -34,11 +34,11 @@ internal sealed class MatrixInternalEnvironment : NonRecursiveEnvironment
         _rows = rows;
     }
 
-    public override bool ProcessUnknownCharacter(TexFormula formula, char character)
+    public override bool ProcessUnknownCharacter(TexFormula formula, char character, SourceSpan at)
     {
         if (character == '&')
         {
-            NextRowCommand.NextCell(_rows, formula);
+            NextRowCommand.NextCell(_rows, formula, at, Placeholders);
             return true;
         }
 

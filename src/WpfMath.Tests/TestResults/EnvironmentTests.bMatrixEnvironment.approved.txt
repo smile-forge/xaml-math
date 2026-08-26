@@ -78,6 +78,7 @@
       "RowStrutHeight": 0.966,
       "Slots": [
         {
+          "Column": 0,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "a",
@@ -93,9 +94,11 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "cell"
+          "Role": "cell",
+          "Row": 0
         },
         {
+          "Column": 1,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "b",
@@ -111,9 +114,11 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "cell"
+          "Role": "cell",
+          "Row": 0
         },
         {
+          "Column": 0,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "c",
@@ -129,9 +134,11 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "cell"
+          "Role": "cell",
+          "Row": 1
         },
         {
+          "Column": 1,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "d",
@@ -147,7 +154,8 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "cell"
+          "Role": "cell",
+          "Row": 1
         }
       ],
       "Source": {
@@ -181,6 +189,7 @@
     },
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "MatrixAtom",
           "ColumnSpec": null,
@@ -257,6 +266,7 @@
           "RowStrutHeight": 0.966,
           "Slots": [
             {
+              "Column": 0,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "a",
@@ -272,9 +282,11 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "cell"
+              "Role": "cell",
+              "Row": 0
             },
             {
+              "Column": 1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "b",
@@ -290,9 +302,11 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "cell"
+              "Role": "cell",
+              "Row": 0
             },
             {
+              "Column": 0,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "c",
@@ -308,9 +322,11 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "cell"
+              "Role": "cell",
+              "Row": 1
             },
             {
+              "Column": 1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "d",
@@ -326,7 +342,8 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "cell"
+              "Role": "cell",
+              "Row": 1
             }
           ],
           "Source": {
@@ -340,7 +357,8 @@
           "Type": "Ordinary",
           "VerticalPadding": 0.0
         },
-        "Role": "base"
+        "Role": "base",
+        "Row": -1
       }
     ],
     "Source": {

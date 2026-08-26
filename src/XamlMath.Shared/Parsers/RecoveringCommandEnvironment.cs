@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace XamlMath.Parsers;
 
@@ -15,8 +15,12 @@ internal sealed class RecoveringCommandEnvironment : ICommandEnvironment
 {
     private readonly List<TexParseDiagnostic> _diagnostics = new();
 
-    public RecoveringCommandEnvironment((int Start, int Length)? shownAsWritten = null) =>
+    public RecoveringCommandEnvironment(
+        (int Start, int Length)? shownAsWritten = null, bool placeholders = true)
+    {
         ShownAsWritten = shownAsWritten;
+        Placeholders = placeholders;
+    }
 
     public IReadOnlyDictionary<string, ICommandParser> AvailableCommands { get; } =
         new Dictionary<string, ICommandParser>();
@@ -26,10 +30,13 @@ internal sealed class RecoveringCommandEnvironment : ICommandEnvironment
     /// <inheritdoc/>
     public (int Start, int Length)? ShownAsWritten { get; }
 
+    /// <inheritdoc/>
+    public bool Placeholders { get; }
+
     /// <summary>What could not be read, in the order it was met.</summary>
     public IReadOnlyList<TexParseDiagnostic> Collected => _diagnostics;
 
     public ICommandEnvironment CreateChildEnvironment() => this;
 
-    public bool ProcessUnknownCharacter(TexFormula formula, char character) => false;
+    public bool ProcessUnknownCharacter(TexFormula formula, char character, SourceSpan at) => false;
 }

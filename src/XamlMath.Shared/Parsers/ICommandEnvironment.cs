@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace XamlMath.Parsers;
 
@@ -40,6 +40,18 @@ internal interface ICommandEnvironment
     /// </summary>
     (int Start, int Length)? ShownAsWritten { get; }
 
+    /// <summary>
+    /// Whether an argument or a table cell left empty should be given a placeholder to stand in it.
+    /// <para>
+    /// An editing affordance, and only that. A hole is drawn so a reader can see there is something
+    /// still to write and can aim at it; a formula being set for presentation has no such reader, and
+    /// a box in the middle of a published equation would simply be wrong. So the parse that an editor
+    /// asks for produces them and the parse a renderer asks for does not - it is the same source either
+    /// way, read for a different purpose.
+    /// </para>
+    /// </summary>
+    bool Placeholders { get; }
+
     /// <summary>Commands from the current environment.</summary>
     IReadOnlyDictionary<string, ICommandParser> AvailableCommands { get; }
 
@@ -55,5 +67,7 @@ internal interface ICommandEnvironment
     /// Should return <c>true</c> if the character was processed by this method. Otherwise, parser will throw an
     /// exception.
     /// </returns>
-    bool ProcessUnknownCharacter(TexFormula formula, char character);
+    /// <param name="at">Where the character is in the input, so anything the environment builds in its
+    /// place can say where it came from - a matrix's empty cell is a hole standing at its separator.</param>
+    bool ProcessUnknownCharacter(TexFormula formula, char character, SourceSpan at);
 }

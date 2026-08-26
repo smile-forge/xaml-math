@@ -30,6 +30,7 @@
       },
       "Slots": [
         {
+          "Column": -1,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "T",
@@ -45,7 +46,8 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "base"
+          "Role": "base",
+          "Row": -1
         }
       ],
       "Source": {
@@ -61,6 +63,7 @@
     "RightType": "Ordinary",
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "AccentedAtom",
           "AccentAtom": {
@@ -89,6 +92,7 @@
           },
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "T",
@@ -104,7 +108,8 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "base"
+              "Role": "base",
+              "Row": -1
             }
           ],
           "Source": {
@@ -116,7 +121,8 @@
           },
           "Type": "Ordinary"
         },
-        "Role": "base"
+        "Role": "base",
+        "Row": -1
       }
     ],
     "Source": {

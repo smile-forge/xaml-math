@@ -26,6 +26,7 @@
       "PreviousAtom": null,
       "Slots": [
         {
+          "Column": -1,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "x",
@@ -41,7 +42,8 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "element"
+          "Role": "element",
+          "Row": -1
         }
       ],
       "Source": {

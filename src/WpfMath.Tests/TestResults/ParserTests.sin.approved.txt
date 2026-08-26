@@ -57,6 +57,7 @@
           "PreviousAtom": null,
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "s",
@@ -72,9 +73,11 @@
                 "TextStyle": "mathrm",
                 "Type": "Ordinary"
               },
-              "Role": "element"
+              "Role": "element",
+              "Row": -1
             },
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "i",
@@ -90,9 +93,11 @@
                 "TextStyle": "mathrm",
                 "Type": "Ordinary"
               },
-              "Role": "element"
+              "Role": "element",
+              "Row": -1
             },
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "n",
@@ -108,7 +113,8 @@
                 "TextStyle": "mathrm",
                 "Type": "Ordinary"
               },
-              "Role": "element"
+              "Role": "element",
+              "Row": -1
             }
           ],
           "Source": {
@@ -123,6 +129,7 @@
         "LowerLimitAtom": null,
         "Slots": [
           {
+            "Column": -1,
             "Node": {
               "[AtomType]": "RowAtom",
               "Elements": [
@@ -175,6 +182,7 @@
               "PreviousAtom": null,
               "Slots": [
                 {
+                  "Column": -1,
                   "Node": {
                     "[AtomType]": "CharAtom",
                     "Character": "s",
@@ -190,9 +198,11 @@
                     "TextStyle": "mathrm",
                     "Type": "Ordinary"
                   },
-                  "Role": "element"
+                  "Role": "element",
+                  "Row": -1
                 },
                 {
+                  "Column": -1,
                   "Node": {
                     "[AtomType]": "CharAtom",
                     "Character": "i",
@@ -208,9 +218,11 @@
                     "TextStyle": "mathrm",
                     "Type": "Ordinary"
                   },
-                  "Role": "element"
+                  "Role": "element",
+                  "Row": -1
                 },
                 {
+                  "Column": -1,
                   "Node": {
                     "[AtomType]": "CharAtom",
                     "Character": "n",
@@ -226,7 +238,8 @@
                     "TextStyle": "mathrm",
                     "Type": "Ordinary"
                   },
-                  "Role": "element"
+                  "Role": "element",
+                  "Row": -1
                 }
               ],
               "Source": {
@@ -238,9 +251,11 @@
               },
               "Type": "Ordinary"
             },
-            "Role": "base"
+            "Role": "base",
+            "Row": -1
           },
           {
+            "Column": -1,
             "Node": {
               "[AtomType]": "CharAtom",
               "Character": "n",
@@ -256,7 +271,8 @@
               "TextStyle": null,
               "Type": "Ordinary"
             },
-            "Role": "upper limit"
+            "Role": "upper limit",
+            "Row": -1
           }
         ],
         "Source": {
@@ -303,6 +319,7 @@
     "PreviousAtom": null,
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "BigOperatorAtom",
           "BaseAtom": {
@@ -357,6 +374,7 @@
             "PreviousAtom": null,
             "Slots": [
               {
+                "Column": -1,
                 "Node": {
                   "[AtomType]": "CharAtom",
                   "Character": "s",
@@ -372,9 +390,11 @@
                   "TextStyle": "mathrm",
                   "Type": "Ordinary"
                 },
-                "Role": "element"
+                "Role": "element",
+                "Row": -1
               },
               {
+                "Column": -1,
                 "Node": {
                   "[AtomType]": "CharAtom",
                   "Character": "i",
@@ -390,9 +410,11 @@
                   "TextStyle": "mathrm",
                   "Type": "Ordinary"
                 },
-                "Role": "element"
+                "Role": "element",
+                "Row": -1
               },
               {
+                "Column": -1,
                 "Node": {
                   "[AtomType]": "CharAtom",
                   "Character": "n",
@@ -408,7 +430,8 @@
                   "TextStyle": "mathrm",
                   "Type": "Ordinary"
                 },
-                "Role": "element"
+                "Role": "element",
+                "Row": -1
               }
             ],
             "Source": {
@@ -423,6 +446,7 @@
           "LowerLimitAtom": null,
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "RowAtom",
                 "Elements": [
@@ -475,6 +499,7 @@
                 "PreviousAtom": null,
                 "Slots": [
                   {
+                    "Column": -1,
                     "Node": {
                       "[AtomType]": "CharAtom",
                       "Character": "s",
@@ -490,9 +515,11 @@
                       "TextStyle": "mathrm",
                       "Type": "Ordinary"
                     },
-                    "Role": "element"
+                    "Role": "element",
+                    "Row": -1
                   },
                   {
+                    "Column": -1,
                     "Node": {
                       "[AtomType]": "CharAtom",
                       "Character": "i",
@@ -508,9 +535,11 @@
                       "TextStyle": "mathrm",
                       "Type": "Ordinary"
                     },
-                    "Role": "element"
+                    "Role": "element",
+                    "Row": -1
                   },
                   {
+                    "Column": -1,
                     "Node": {
                       "[AtomType]": "CharAtom",
                       "Character": "n",
@@ -526,7 +555,8 @@
                       "TextStyle": "mathrm",
                       "Type": "Ordinary"
                     },
-                    "Role": "element"
+                    "Role": "element",
+                    "Row": -1
                   }
                 ],
                 "Source": {
@@ -538,9 +568,11 @@
                 },
                 "Type": "Ordinary"
               },
-              "Role": "base"
+              "Role": "base",
+              "Row": -1
             },
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "n",
@@ -556,7 +588,8 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "upper limit"
+              "Role": "upper limit",
+              "Row": -1
             }
           ],
           "Source": {
@@ -584,9 +617,11 @@
           },
           "UseVerticalLimits": false
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "x",
@@ -602,7 +637,8 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       }
     ],
     "Source": {

@@ -52,6 +52,7 @@
     "PreviousAtom": null,
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "а",
@@ -67,9 +68,11 @@
           "TextStyle": "text",
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "б",
@@ -85,9 +88,11 @@
           "TextStyle": "text",
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "в",
@@ -103,7 +108,8 @@
           "TextStyle": "text",
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       }
     ],
     "Source": {

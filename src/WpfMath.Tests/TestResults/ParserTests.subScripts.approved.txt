@@ -30,6 +30,7 @@
       },
       "Slots": [
         {
+          "Column": -1,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "a",
@@ -45,7 +46,8 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "base"
+          "Role": "base",
+          "Row": -1
         }
       ],
       "Source": {
@@ -59,6 +61,7 @@
     },
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "AccentedAtom",
           "AccentAtom": {
@@ -87,6 +90,7 @@
           },
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "a",
@@ -102,7 +106,8 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "base"
+              "Role": "base",
+              "Row": -1
             }
           ],
           "Source": {
@@ -114,9 +119,11 @@
           },
           "Type": "Ordinary"
         },
-        "Role": "base"
+        "Role": "base",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "RowAtom",
           "Elements": [
@@ -154,6 +161,7 @@
           "PreviousAtom": null,
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "b",
@@ -169,9 +177,11 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "element"
+              "Role": "element",
+              "Row": -1
             },
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "SymbolAtom",
                 "IsDelimeter": false,
@@ -187,7 +197,8 @@
                 },
                 "Type": "Ordinary"
               },
-              "Role": "element"
+              "Role": "element",
+              "Row": -1
             }
           ],
           "Source": {
@@ -199,7 +210,8 @@
           },
           "Type": "Ordinary"
         },
-        "Role": "subscript"
+        "Role": "subscript",
+        "Row": -1
       }
     ],
     "Source": {
@@ -246,6 +258,7 @@
       "PreviousAtom": null,
       "Slots": [
         {
+          "Column": -1,
           "Node": {
             "[AtomType]": "CharAtom",
             "Character": "b",
@@ -261,9 +274,11 @@
             "TextStyle": null,
             "Type": "Ordinary"
           },
-          "Role": "element"
+          "Role": "element",
+          "Row": -1
         },
         {
+          "Column": -1,
           "Node": {
             "[AtomType]": "SymbolAtom",
             "IsDelimeter": false,
@@ -279,7 +294,8 @@
             },
             "Type": "Ordinary"
           },
-          "Role": "element"
+          "Role": "element",
+          "Row": -1
         }
       ],
       "Source": {

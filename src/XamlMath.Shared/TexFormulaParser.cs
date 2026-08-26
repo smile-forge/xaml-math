@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using XamlMath.Atoms;
@@ -232,10 +232,16 @@ public class TexFormulaParser
     /// A stretch to set as the characters written rather than read as maths — see
     /// <see cref="ICommandEnvironment.ShownAsWritten"/>. Null reads all of it.
     /// </param>
+    /// <param name="placeholders">
+    /// Whether an empty argument or table cell is given a hole to stand in - see
+    /// <see cref="ICommandEnvironment.Placeholders"/>. Off unless asked for: a hole is an editing
+    /// affordance, and setting a formula to be read is what this library is mostly for.
+    /// </param>
     public TexFormula ParseWithRecovery(
-        SourceSpan value, string? textStyle = null, (int Start, int Length)? shownAsWritten = null)
+        SourceSpan value, string? textStyle = null, (int Start, int Length)? shownAsWritten = null,
+        bool placeholders = false)
     {
-        var environment = new RecoveringCommandEnvironment(shownAsWritten);
+        var environment = new RecoveringCommandEnvironment(shownAsWritten, placeholders);
         var position = 0;
         var formula = Parse(value, ref position, false, textStyle, environment);
         formula.Diagnostics = environment.Collected;
@@ -244,8 +250,10 @@ public class TexFormulaParser
 
     /// <inheritdoc cref="ParseWithRecovery(SourceSpan, string?, ValueTuple{int,int}?)"/>
     public TexFormula ParseWithRecovery(
-        string value, string? textStyle = null, (int Start, int Length)? shownAsWritten = null) =>
-        ParseWithRecovery(new SourceSpan("User input", value, 0, value.Length), textStyle, shownAsWritten);
+        string value, string? textStyle = null, (int Start, int Length)? shownAsWritten = null,
+        bool placeholders = false) =>
+        ParseWithRecovery(
+            new SourceSpan("User input", value, 0, value.Length), textStyle, shownAsWritten, placeholders);
 
     internal TexFormula Parse(SourceSpan value, string? textStyle, ICommandEnvironment environment)
     {
@@ -1118,7 +1126,7 @@ public class TexFormulaParser
             var symbolName = symbols.ElementAtOrDefault(character);
             if (string.IsNullOrEmpty(symbolName))
             {
-                if (environment.ProcessUnknownCharacter(formula, character))
+                if (environment.ProcessUnknownCharacter(formula, character, source))
                     return null;
 
                 throw new TexParseException($"Unknown character : '{character}'", source);
@@ -1257,6 +1265,7 @@ public class TexFormulaParser
         TexFormula parsed, SourceSpan at, ICommandEnvironment environment)
     {
         if (parsed.RootAtom is not null) return parsed;
+        if (!environment.Placeholders) return parsed;
 
         // The placeholder's own span is empty, and sits where the argument's contents would have
         // begun. It stands for nothing that was written, so it covers nothing that was written — and

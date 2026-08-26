@@ -19,6 +19,7 @@
     },
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "А",
@@ -34,9 +35,11 @@
           "TextStyle": "text",
           "Type": "Ordinary"
         },
-        "Role": "base"
+        "Role": "base",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "И",
@@ -52,7 +55,8 @@
           "TextStyle": "text",
           "Type": "Ordinary"
         },
-        "Role": "subscript"
+        "Role": "subscript",
+        "Row": -1
       }
     ],
     "Source": {

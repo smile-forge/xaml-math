@@ -10,10 +10,22 @@ namespace XamlMath.Atoms;
 /// <summary>An atom representing a tabular arrangement of atoms.</summary>
 internal sealed record MatrixAtom : Atom
 {
-    /// <summary>Every cell, row by row — what makes a block of a matrix answerable as cells.</summary>
+    /// <summary>
+    /// Every cell, row by row, each saying which row and column it is — what makes a block of a matrix
+    /// answerable as cells, and a single cell answerable as "the one in the second column".
+    /// <para>
+    /// The coordinates are the point. A flat run of "cell" says a matrix is made of cells and nothing
+    /// more, so anything wanting to move a column, insert a row or even name what the reader had picked
+    /// had to work it out again from where the cells were drawn — geometry standing in for structure the
+    /// parse already knew.
+    /// </para>
+    /// </summary>
     public override IReadOnlyList<FormulaSlot> Slots =>
-        MatrixCells.SelectMany(row => row).Where(c => c is not null)
-            .Select(c => new FormulaSlot("cell", c!)).ToList();
+        MatrixCells
+            .SelectMany((row, r) => row.Select((cell, c) => (Cell: cell, Row: r, Column: c)))
+            .Where(x => x.Cell is not null)
+            .Select(x => new FormulaSlot("cell", x.Cell!, x.Row, x.Column))
+            .ToList();
 
     /// <summary>Used for grouping of align statements into several columns.</summary>
     /// <remarks>

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using XamlMath.Atoms;
 using XamlMath.Exceptions;
@@ -137,13 +137,21 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
         // be extracted here.
         var environment = new MatrixInternalEnvironment(parentEnvironment, rows);
         var lastCellAtom = parser.Parse(source, formula.TextStyle, environment).RootAtom;
-        if (lastCellAtom != null)
         {
             var lastRow = rows.LastOrDefault();
             if (lastRow == null)
                 rows.Add(lastRow = new List<Atom>());
 
-            lastRow.Add(lastCellAtom);
+            // A cell with nothing in it is still a cell, so a trailing `&` leaves a hole to write into
+            // rather than nothing at all — the last cell was the one position in a matrix where it did.
+            //
+            // But only where a row is actually being closed. A trailing `\\` opens a row that is not a
+            // row, and the rule just below drops it for being empty; putting a hole in it would keep it,
+            // and "a & b \\" would set as a matrix with a blank line hanging under it.
+            if (lastCellAtom != null) lastRow.Add(lastCellAtom);
+            else if (lastRow.Count > 0)
+                lastRow.Add(NextRowCommand.Hole(
+                    source.Segment(source.Length, 0), parentEnvironment.Placeholders));
         }
 
         // "a & b \ c & d \\" is a normal way to write a matrix out, and the \ at the end closes the
@@ -152,18 +160,27 @@ internal sealed class MatrixCommandParser : ICommandParser, IEnvironmentParser
         if (rows.Count > 1 && rows[rows.Count - 1].Count == 0)
             rows.RemoveAt(rows.Count - 1);
 
-        MakeRectangular(rows);
+        MakeRectangular(rows, source, parentEnvironment.Placeholders);
 
         return rows;
     }
 
-    private static void MakeRectangular(List<List<Atom>> rowAtoms)
+    /// <summary>
+    /// Squares off a ragged matrix. The cells that were never written are holes like any other empty one,
+    /// standing at the end of the row they complete - so every position in the grid is a node with a
+    /// place, and "the third column" means something in every row.
+    /// </summary>
+    private static void MakeRectangular(List<List<Atom>> rowAtoms, SourceSpan source, bool placeholders)
     {
         var maxRowLength = rowAtoms.Max(r => r.Count);
         foreach (var row in rowAtoms.Where(r => r.Count < maxRowLength))
         {
+            var end = row.LastOrDefault()?.Source is { } last
+                ? last.Segment(last.Length, 0)
+                : source.Segment(source.Length, 0);
+
             while (row.Count < maxRowLength)
-                row.Add(new NullAtom());
+                row.Add(NextRowCommand.Hole(end, placeholders));
         }
     }
 }

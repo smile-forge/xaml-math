@@ -151,6 +151,7 @@
     "PreviousAtom": null,
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "SymbolAtom",
           "IsDelimeter": false,
@@ -166,9 +167,11 @@
           },
           "Type": "Relation"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "SymbolAtom",
           "IsDelimeter": false,
@@ -184,7 +187,8 @@
           },
           "Type": "Relation"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       }
     ],
     "Source": {

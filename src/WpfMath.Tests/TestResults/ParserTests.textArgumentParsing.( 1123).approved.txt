@@ -67,6 +67,7 @@
     "PreviousAtom": null,
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "1",
@@ -82,9 +83,11 @@
           "TextStyle": "text",
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "1",
@@ -100,9 +103,11 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "2",
@@ -118,9 +123,11 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "3",
@@ -136,7 +143,8 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       }
     ],
     "Source": {

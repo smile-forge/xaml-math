@@ -12,7 +12,18 @@ namespace XamlMath;
 /// anything counting would silently read the wrong one.
 /// </param>
 /// <param name="Node">The part itself.</param>
-public readonly record struct FormulaSlot(string Role, IFormulaNode Node);
+/// <param name="Row">
+/// Which row of a table this part is in, or <c>-1</c> where the holder is not a table.
+/// <para>
+/// The exception the note above anticipates. For every other construct a position means nothing on its
+/// own, which is why the parts are named; for a table the position <em>is</em> the name — the third cell
+/// of the second row is what that cell is to the matrix holding it, and there is nothing else to call it.
+/// Without this a matrix's cells came back as a flat run of "cell", so nothing downstream could say which
+/// column it was looking at, and a reader could not be offered "insert a row above this one".
+/// </para>
+/// </param>
+/// <param name="Column">Which column of a table this part is in, or <c>-1</c>.</param>
+public readonly record struct FormulaSlot(string Role, IFormulaNode Node, int Row = -1, int Column = -1);
 
 /// <summary>
 /// A node of the parse tree, in as much of it as a reader of a formula needs: where it came from, and

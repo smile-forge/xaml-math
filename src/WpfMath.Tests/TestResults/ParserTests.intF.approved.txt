@@ -23,6 +23,7 @@
         "LowerLimitAtom": null,
         "Slots": [
           {
+            "Column": -1,
             "Node": {
               "[AtomType]": "SymbolAtom",
               "IsDelimeter": false,
@@ -38,7 +39,8 @@
               },
               "Type": "BigOperator"
             },
-            "Role": "base"
+            "Role": "base",
+            "Row": -1
           }
         ],
         "Source": {
@@ -71,6 +73,7 @@
     "PreviousAtom": null,
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "BigOperatorAtom",
           "BaseAtom": {
@@ -91,6 +94,7 @@
           "LowerLimitAtom": null,
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "SymbolAtom",
                 "IsDelimeter": false,
@@ -106,7 +110,8 @@
                 },
                 "Type": "BigOperator"
               },
-              "Role": "base"
+              "Role": "base",
+              "Row": -1
             }
           ],
           "Source": {
@@ -120,9 +125,11 @@
           "UpperLimitAtom": null,
           "UseVerticalLimits": false
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "f",
@@ -138,7 +145,8 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       }
     ],
     "Source": {

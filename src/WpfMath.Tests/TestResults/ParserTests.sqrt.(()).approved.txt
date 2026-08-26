@@ -3,33 +3,23 @@
   "RootAtom": {
     "[AtomType]": "Radical",
     "BaseAtom": {
-      "[AtomType]": "PlaceholderAtom",
+      "[AtomType]": "NullAtom",
       "Slots": [],
-      "Source": {
-        "End": 6,
-        "Length": 0,
-        "Source": "\\sqrt{}",
-        "SourceName": "User input",
-        "Start": 6
-      },
+      "Source": null,
       "Type": "Ordinary"
     },
     "DegreeAtom": null,
     "Slots": [
       {
+        "Column": -1,
         "Node": {
-          "[AtomType]": "PlaceholderAtom",
+          "[AtomType]": "NullAtom",
           "Slots": [],
-          "Source": {
-            "End": 6,
-            "Length": 0,
-            "Source": "\\sqrt{}",
-            "SourceName": "User input",
-            "Start": 6
-          },
+          "Source": null,
           "Type": "Ordinary"
         },
-        "Role": "radicand"
+        "Role": "radicand",
+        "Row": -1
       }
     ],
     "Source": {

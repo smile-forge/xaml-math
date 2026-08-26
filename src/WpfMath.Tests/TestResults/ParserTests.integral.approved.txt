@@ -34,6 +34,7 @@
     },
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "SymbolAtom",
           "IsDelimeter": false,
@@ -49,9 +50,11 @@
           },
           "Type": "BigOperator"
         },
-        "Role": "base"
+        "Role": "base",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "a",
@@ -67,9 +70,11 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "lower limit"
+        "Role": "lower limit",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "b",
@@ -85,7 +90,8 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "upper limit"
+        "Role": "upper limit",
+        "Row": -1
       }
     ],
     "Source": {

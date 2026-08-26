@@ -41,6 +41,7 @@
           "OverrideStyle": null,
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "2",
@@ -56,9 +57,11 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "numerator"
+              "Role": "numerator",
+              "Row": -1
             },
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "CharAtom",
                 "Character": "x",
@@ -74,7 +77,8 @@
                 "TextStyle": null,
                 "Type": "Ordinary"
               },
-              "Role": "denominator"
+              "Role": "denominator",
+              "Row": -1
             }
           ],
           "Source": {
@@ -119,6 +123,7 @@
         },
         "Slots": [
           {
+            "Column": -1,
             "Node": {
               "[AtomType]": "FractionAtom",
               "Denominator": {
@@ -155,6 +160,7 @@
               "OverrideStyle": null,
               "Slots": [
                 {
+                  "Column": -1,
                   "Node": {
                     "[AtomType]": "CharAtom",
                     "Character": "2",
@@ -170,9 +176,11 @@
                     "TextStyle": null,
                     "Type": "Ordinary"
                   },
-                  "Role": "numerator"
+                  "Role": "numerator",
+                  "Row": -1
                 },
                 {
+                  "Column": -1,
                   "Node": {
                     "[AtomType]": "CharAtom",
                     "Character": "x",
@@ -188,7 +196,8 @@
                     "TextStyle": null,
                     "Type": "Ordinary"
                   },
-                  "Role": "denominator"
+                  "Role": "denominator",
+                  "Row": -1
                 }
               ],
               "Source": {
@@ -201,7 +210,8 @@
               "SuppressNullDelimiterSpace": true,
               "Type": "Inner"
             },
-            "Role": "base"
+            "Role": "base",
+            "Row": -1
           }
         ],
         "Source": {
@@ -262,6 +272,7 @@
     "PreviousAtom": null,
     "Slots": [
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "FencedAtom",
           "BaseAtom": {
@@ -300,6 +311,7 @@
             "OverrideStyle": null,
             "Slots": [
               {
+                "Column": -1,
                 "Node": {
                   "[AtomType]": "CharAtom",
                   "Character": "2",
@@ -315,9 +327,11 @@
                   "TextStyle": null,
                   "Type": "Ordinary"
                 },
-                "Role": "numerator"
+                "Role": "numerator",
+                "Row": -1
               },
               {
+                "Column": -1,
                 "Node": {
                   "[AtomType]": "CharAtom",
                   "Character": "x",
@@ -333,7 +347,8 @@
                   "TextStyle": null,
                   "Type": "Ordinary"
                 },
-                "Role": "denominator"
+                "Role": "denominator",
+                "Row": -1
               }
             ],
             "Source": {
@@ -378,6 +393,7 @@
           },
           "Slots": [
             {
+              "Column": -1,
               "Node": {
                 "[AtomType]": "FractionAtom",
                 "Denominator": {
@@ -414,6 +430,7 @@
                 "OverrideStyle": null,
                 "Slots": [
                   {
+                    "Column": -1,
                     "Node": {
                       "[AtomType]": "CharAtom",
                       "Character": "2",
@@ -429,9 +446,11 @@
                       "TextStyle": null,
                       "Type": "Ordinary"
                     },
-                    "Role": "numerator"
+                    "Role": "numerator",
+                    "Row": -1
                   },
                   {
+                    "Column": -1,
                     "Node": {
                       "[AtomType]": "CharAtom",
                       "Character": "x",
@@ -447,7 +466,8 @@
                       "TextStyle": null,
                       "Type": "Ordinary"
                     },
-                    "Role": "denominator"
+                    "Role": "denominator",
+                    "Row": -1
                   }
                 ],
                 "Source": {
@@ -460,7 +480,8 @@
                 "SuppressNullDelimiterSpace": true,
                 "Type": "Inner"
               },
-              "Role": "base"
+              "Role": "base",
+              "Row": -1
             }
           ],
           "Source": {
@@ -472,9 +493,11 @@
           },
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "1",
@@ -490,9 +513,11 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "2",
@@ -508,9 +533,11 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       },
       {
+        "Column": -1,
         "Node": {
           "[AtomType]": "CharAtom",
           "Character": "3",
@@ -526,7 +553,8 @@
           "TextStyle": null,
           "Type": "Ordinary"
         },
-        "Role": "element"
+        "Role": "element",
+        "Row": -1
       }
     ],
     "Source": {
